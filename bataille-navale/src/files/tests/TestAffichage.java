@@ -6,9 +6,6 @@ package files.tests;
 
 import files.Affichage;
 
-import java.util.Scanner;
-
-
 /**
  * 
  * @author INFO1 Semestre 2

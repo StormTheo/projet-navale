@@ -21,7 +21,7 @@ public class Affichage {
 			+ "------------------------------------------------------------------\n";
 
 	/**
-	 * Liste des options possibles (charactères) pour le menu principal
+	 * Liste des options possibles (caractères) pour le menu principal
 	 */
 	private static final char[] OPTION_MENU_PRINCIPAL = { 'j', 'a', 'q'};
 
