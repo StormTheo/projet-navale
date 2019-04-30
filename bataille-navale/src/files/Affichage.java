@@ -51,14 +51,14 @@ public class Affichage {
 	 */
 	public static final String AIDE = 
 			"\n------------------------------------------------------------------------\n\n"
-					+ "======== Bienvenue dans notre jeu de Bataille navale ! =========\n\n"
-					+ "Le but du jeu est de couler les différents bateaux présents \n"
-					+ "sur le plateau en entrant des coordonnées à chaque tour.\n\n"
-					+ "Il existe différents types de bateaux qui ont des tailles \n"
-					+ "différentes. Ils se situent au minimum à une case l'un de l'autre\n"
-					+ "A chaque tour sont affichées les différentes informations sur la partie\n"
-					+ "en cours.\n"
-					+ "------------------------------------------------------------------------\n";
+			+ "======== Bienvenue dans notre jeu de Bataille navale ! =========\n\n"
+			+ "Le but du jeu est de couler les différents bateaux présents \n"
+			+ "sur le plateau en entrant des coordonnées à chaque tour.\n\n"
+			+ "Il existe différents types de bateaux qui ont des tailles \n"
+			+ "différentes. Ils se situent au minimum à une case l'un de l'autre\n"
+			+ "A chaque tour sont affichées les différentes informations sur la partie\n"
+			+ "en cours.\n"
+			+ "------------------------------------------------------------------------\n";
 
 	/**
 	 * Option disponible pour l'aide
