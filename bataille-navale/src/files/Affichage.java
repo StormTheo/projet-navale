@@ -46,16 +46,39 @@ public class Affichage {
 	/**
 	 * méthode contenant la String pour l'aide
 	 */
-	public static final String AIDE = "fkjheizufhef";
+	public static final String AIDE = 
+			"\n------------------------------------------------------------------------\n\n"
+			+ "======== Bienvenue dans notre jeu de Bataille navale ! =========\n\n"
+			+ "Le but du jeu est de couler les différents bateaux présents \n"
+			+ "sur la map en entrant des coordonnées à chaque tour.\n\n"
+			+ "Il existe différents types de bateaux qui ont des tailles \n"
+			+ "différentes. Ils se situent au minimum à une case l'un de l'autre\n"
+			+ "A chaque tour est affiché les différentes informations sur la partie\n"
+			+ "en cours.\n"
+			+ "------------------------------------------------------------------------\n";
 	
+	/**
+	 * Option disponible pour l'aide
+	 */
+	private static final char[] OPTION_AIDE = { 'j', 'q'};
+
+	/**
+	 * Liste des options possible (textes) pour le menu principal
+	 */
+	private static final String[] LIBELLE_AIDE = {"Jouer",
+												  "Quitter"};
 	/**
 	 * Affichage de l'aide
 	 */
 	public static void afficherAide() {
 		System.out.println(AIDE);
+		
+		// on affiche toutes les options et les libellés
+        for(int i = 0; i < OPTION_AIDE.length; i++) {
+            System.out.print("   => " + OPTION_AIDE[i] 
+                             + " - " + LIBELLE_AIDE[i] + "\n");
+        }
+        System.out.print("\n       ====> ");
 	}
 	
-    public static void main(String[] args) {
-    	 menuPrincipale();
-    }
 }

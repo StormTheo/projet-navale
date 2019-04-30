@@ -17,8 +17,18 @@ import java.util.Scanner;
  */
 public class TestAffichage {
     
+	/**
+	 * Test unitaire de l'affichage du menu.
+	 */
     public static void testMenuPrincipale() {
     	Affichage.menuPrincipale();
+    }
+    
+    /**
+     * test unitaire de l'affichage de l'aide
+     */
+    public static void testAfficherAide() {
+    	Affichage.afficherAide();
     }
     /**
      * Programme principal. Point d'entrée pour lancer les tests
@@ -29,5 +39,6 @@ public class TestAffichage {
                 + "     TESTS DE LA CLASSE  Affichage   \n"
                 + "-----------------------------------------------\n");
         testMenuPrincipale();
+        testAfficherAide();
     }
 }
