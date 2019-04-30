@@ -1,0 +1,29 @@
+/*
+ * Affichage.java                                 30/04
+ */
+
+
+/**
+ * 
+ * @author INFO1
+ * @version 1.0
+ *
+ */
+public class Affichage {
+	
+	/**
+     * Texte de titre pour le menu principal
+     */
+    private static final String TITRE_MENU_PRINCIPAL = 
+            "------------------------------------------------------------------\n"
+            + "|                      MENU PRINCIPAL                            |\n"
+            + "------------------------------------------------------------------\n";
+    
+	/**
+    * Liste des options possibles pour le menu principal
+    */
+    private static final char[] OPTION_MENU_PRINCIPAL = { 'c', 'a', '?', 'q'};
+	
+	public static void MenuPrincipale ();
+     
+}
