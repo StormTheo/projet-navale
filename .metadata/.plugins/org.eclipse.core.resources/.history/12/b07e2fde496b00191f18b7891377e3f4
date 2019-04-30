@@ -29,12 +29,9 @@ public class Affichage {
 	 * Liste des options possible (textes) pour le menu principal
 	 */
 	private static final String[] LIBELLE_MENU_PRINCIPAL = {"Jouer",
-								"Aide",
-								"Quitter"};
+															"Aide",
+															"Quitter"};
 
-	/**
-	 * Affichage du menu principal
-	 */
 	public static void menuPrincipal() {
 		System.out.println(TITRE_MENU_PRINCIPAL);
 
@@ -56,7 +53,7 @@ public class Affichage {
 					+ "sur le plateau en entrant des coordonnées à chaque tour.\n\n"
 					+ "Il existe différents types de bateaux qui ont des tailles \n"
 					+ "différentes. Ils se situent au minimum à une case l'un de l'autre\n"
-					+ "A chaque tour sont affichées les différentes informations sur la partie\n"
+					+ "A chaque tour est affiché les différentes informations sur la partie\n"
 					+ "en cours.\n"
 					+ "------------------------------------------------------------------------\n";
 
@@ -69,7 +66,7 @@ public class Affichage {
 	 * Liste des options possible (textes) pour le menu principal
 	 */ 
 	private static final String[] LIBELLE_AIDE = {"Jouer",
-						      "Quitter"};
+												  "Quitter"};
 	
 	/**
 	 * Affichage de l'aide

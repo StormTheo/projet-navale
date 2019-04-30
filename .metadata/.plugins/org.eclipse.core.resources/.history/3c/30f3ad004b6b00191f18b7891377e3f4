@@ -32,9 +32,6 @@ public class Affichage {
 								"Aide",
 								"Quitter"};
 
-	/**
-	 * Affichage du menu principal
-	 */
 	public static void menuPrincipal() {
 		System.out.println(TITRE_MENU_PRINCIPAL);
 

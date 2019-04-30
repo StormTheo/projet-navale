@@ -20,8 +20,8 @@ public class TestAffichage {
 	/**
 	 * Test unitaire de l'affichage du menu.
 	 */
-    public static void testMenuPrincipal() {
-    	Affichage.menuPrincipal();
+    public static void testMenuPrincipale() {
+    	Affichage.menuPrincipale();
     }
     
     /**
@@ -38,7 +38,7 @@ public class TestAffichage {
         System.out.println("-----------------------------------------------\n"
                 + "     TESTS DE LA CLASSE  Affichage   \n"
                 + "-----------------------------------------------\n");
-        testMenuPrincipal();
+        testMenuPrincipale();
         testAfficherAide();
     }
 }
