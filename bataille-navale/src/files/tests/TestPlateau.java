@@ -21,7 +21,7 @@ import java.util.Scanner;
  * @author Nicolas Couffin
  */
 public class TestPlateau {
-	// TODO Vérification général avant de le rendre
+	// TODO Vérification générale avant de le rendre
 	/* ***************** Méthodes outils pour gérer les tests ******************** */
 	
     /** Objet Scanner pour effectuer les saisies au clavier */
@@ -31,7 +31,7 @@ public class TestPlateau {
      * Demande à l'utilisateur d'appuyer sur entrée pour continuer
      */
     private static void continuer() {
-        System.out.println("\n\n\nAppuyer sur entrée pour continuer les tests.") ;
+        System.out.println("\n\n\nAppuyez sur entrée pour continuer les tests.") ;
         entree.nextLine();
         System.out.println("\n\n");
     }
@@ -50,8 +50,8 @@ public class TestPlateau {
 	};
 	
 	/** Couples de dimensions valides
-	 * (la dimension par défaut (13*13) est homise pour vérifier
-	 * si les dimensions sont considéré comme valide)
+	 * (la dimension par défaut (13*13) est omise pour vérifier
+	 * si les dimensions sont considérées comme valides)
 	 */
 	public static final int [][] DIM_VALIDE = {
 			{13,25},
@@ -68,26 +68,26 @@ public class TestPlateau {
 	 */
 	public static void testPlateauDefaut() {
 		System.out.println("------------------------------------------------------\n"
-			               + "Test de la méthode Plateau (initialisation par défaut)\n"
-			               + "------------------------------------------------------\n\n");
+			         + "Test de la méthode Plateau (initialisation par défaut)\n"
+			         + "------------------------------------------------------\n\n");
 		
 		String[][] plateau;	// plateau à afficher
 		Plateau jeu = new Plateau();
 		plateau = jeu.constructPlateau(); 
 		
 		/* affichage du plateau créer */
-		System.out.println("Un plateau de 13*13 doit être afficher :\n"
-							+ "- La première case doit être vide\n"
-							+ "- La première ligne va de A à L\n"
-							+ "- La première colonne va de 1 à 12\n"
-							+ "- Les autres cases doivent être vides\n"
-							+ "- L'affichage du plateau est clair (pas de colonne décalé)"
-							+ "\n\n");
+		System.out.println("Un plateau de 13*13 doit être affiché :\n"
+				 + "- La première case doit être vide\n"
+				 + "- La première ligne va de A à L\n"
+				 + "- La première colonne va de 1 à 12\n"
+				 + "- Les autres cases doivent être vides\n"
+				 + "- L'affichage du plateau est clair (pas de colonne décalée)"
+				 + "\n\n");
 		continuer();
 		for (int i = 0; i < plateau.length; i++) {
 			for (String v : plateau[i]) {
 				if (i < 10 && v.charAt(0) <= '9' && v.charAt(0) != ' ') {
-					System.out.print("| " + v + "|");							// Rajout d'un espace avant le chiffre pour lisibilité du plateau
+					System.out.print("| " + v + "|");// Rajout d'un espace avant le chiffre pour lisibilité du plateau
 				} else {
 					System.out.print("|" + v + "|");
 				}
@@ -113,9 +113,9 @@ public class TestPlateau {
 		String[][] plateau; // plateau à afficher
 		
 		System.out.println("---- Tests avec dimensions valides ----\n"
-							+ "Le test doit afficher 6 plateaux aux dimensions valides indiquées\n"
-							+ "Si un plateau a une dimension de 13*13 (= dimension par défaut),"
-							+ " il y a une erreur : La dimension a alors été considérée comme invalide.\n");
+				+ "Le test doit afficher 6 plateaux aux dimensions valides indiquées.\n"
+				+ "Si un plateau a une dimension de 13*13 (= dimension par défaut), "
+				+ "il y a une erreur : La dimension a alors été considérée comme invalide.\n");
 		continuer();
 		for (int i = 0; i < DIM_VALIDE.length; i++) {
 			Plateau jeu = new Plateau(DIM_VALIDE[i][0],DIM_VALIDE[i][1]);
@@ -127,7 +127,7 @@ public class TestPlateau {
 			for (int j = 0; j < plateau.length; j++) {
 				for (String v : plateau[j]) {
 					if (j < 10 && v.charAt(0) <= '9' && v.charAt(0) != ' ') {
-						System.out.print("| " + v + "|");							// Rajout d'un espace avant le chiffre pour lisibilité du plateau
+						System.out.print("| " + v + "|"); // Rajout d'un espace avant le chiffre pour lisibilité du plateau
 					} else {
 						System.out.print("|" + v + "|");
 					}
@@ -143,16 +143,16 @@ public class TestPlateau {
 	/**
 	 * Test du constructeur pour l'initialisation à partir d'argument (Plateau(int,int))
 	 * et la construction du plateau (constructPlateau())
-	 * Test avec dimension invalide.
+	 * Test avec dimensions invalides.
 	 */	
-    public static void testPlateauInvalide() {
+        public static void testPlateauInvalide() {
 		System.out.println("-----------------------------------------------------------------\n"
-	               + "Test de la méthode Plateau (initialisation par argument invalide)\n"
+	               + "Test de la méthode Plateau (initialisation par arguments invalides)\n"
 	               + "-----------------------------------------------------------------\n\n");
 
 		System.out.println("---- Tests avec dimensions invalides ----\n"
 				+ "Le test doit afficher uniquement des plateau de 13*13.\n"
-				+ "(Rappel : un plateau de 13*13 est le plateau par défaut créer si les "
+				+ "(Rappel : un plateau de 13*13 est le plateau par défaut créé si les "
 				+ "dimensions sont invalides)\n");
 		
 		/* Tests avec dimensions invalides */
@@ -161,14 +161,14 @@ public class TestPlateau {
 		for (int i = 0; i < DIM_INVALIDE.length; i++) {
 			Plateau jeu = new Plateau(DIM_INVALIDE[i][0],DIM_INVALIDE[i][1]);		
 			System.out.println("La dimension " + DIM_INVALIDE[i][0]
-								+ "*" + DIM_INVALIDE[i][1] + " est considéré comme invalide"
+								+ "*" + DIM_INVALIDE[i][1] + " est considérée comme invalide"
 								+ " et doit afficher un tableau de 13*13");
 			plateau = jeu.constructPlateau();
 			/* Affichage du plateau */
 			for (int j = 0; j < plateau.length; j++) {
 				for (String v : plateau[j]) {
 					if (j < 10 && v.charAt(0) <= '9' && v.charAt(0) != ' ') {
-						System.out.print("| " + v + "|");							// Rajout d'un espace avant le chiffre pour lisibilité du plateau
+						System.out.print("| " + v + "|"); // Rajout d'un espace avant le chiffre pour lisibilité du plateau
 					} else {
 						System.out.print("|" + v + "|");
 					}
