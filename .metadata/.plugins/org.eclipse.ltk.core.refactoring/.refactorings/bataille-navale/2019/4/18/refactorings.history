@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;files.tests.TestGestionInterface&apos; to &apos;TestAffichage&apos;&#x0D;&#x0A;- Original project: &apos;bataille-navale&apos;&#x0D;&#x0A;- Original element: &apos;files.tests.TestGestionInterface&apos;&#x0D;&#x0A;- Renamed element: &apos;files.tests.TestAffichage&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;TestGestionInterface&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;files.tests{TestGestionInterface.java[TestGestionInterface" matchStrategy="1" name="TestAffichage" qualified="false" references="true" similarDeclarations="false" stamp="1556614177333" textual="false" version="1.0"/>
-</session>
