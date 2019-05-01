@@ -23,16 +23,16 @@ package files;
 public class Plateau {
 	
 	/** 
-	 * Dimension par défaut attribué aux dimensions en abscisse et
+	 * Dimension par défaut attribuée aux dimensions en abscisse et
 	 * en ordonnée.
 	 */
 	private static final int DIM_DEFAUT = 13;
 	
-	/** Dimension minimal */
-	private static final int DIM_MIN = 2; // Minimum requis pour faire avoir au moins une case de jeu sur le plateau.
+	/** Dimension minimale */
+	private static final int DIM_MIN = 2; // Minimum requis pour avoir au moins une case de jeu sur le plateau.
 	
-	/** Dimension maximal */
-	private static final int DIM_MAX = 27;  // Maximum par rapport au nombre de lettre dans l'alphabet + la première case vide
+	/** Dimension maximale */
+	private static final int DIM_MAX = 27;  // Maximum par rapport au nombre de lettres dans l'alphabet + la première case vide
 	
 	/** Dimension en abscisse */
 	private int dimX;
@@ -51,7 +51,7 @@ public class Plateau {
 	
 	/**
 	 * Constructeur pour initialiser avec les valeurs en arguments.
-	 * @param xDim entier contenant la dimension en absisse
+	 * @param xDim entier contenant la dimension en abscisse
 	 * @param yDim entier contenant la dimension en ordonnée
 	 */
 	public Plateau(int xDim, int yDim) {
@@ -94,7 +94,7 @@ public class Plateau {
 		
 	/**
 	 * Accesseur sur la dimension en abscisse
-	 * @return un entier égale à la dimension en abscisse
+	 * @return un entier égal à la dimension en abscisse
 	 */
 	public int getDimX() {
 		return this.dimX;
@@ -102,7 +102,7 @@ public class Plateau {
 	
 	/**
 	 * Accesseur sur la dimension en ordonnée
-	 * @return un entier égale à la dimension en ordonnée
+	 * @return un entier égal à la dimension en ordonnée
 	 */
 	public int getDimY() {
 		return this.dimY;
