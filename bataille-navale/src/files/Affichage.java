@@ -43,9 +43,30 @@ public class Affichage {
 			System.out.print("   => " + OPTION_MENU_PRINCIPAL[i] 
 					+ " - " + LIBELLE_MENU_PRINCIPAL[i] + "\n");
 		}
-		System.out.print("\n       ====> ");
 	}
 
+	/**
+	 * @param aTester 
+	 * @return un boolean vrai si le character est valide, faux sinon.
+	 */
+	public static boolean reponseValide(String aTester) {
+	    boolean valide;
+	    
+	    //  la réponse ne contient pas un caractère unique ==> true
+	    valide = !(aTester == null || aTester.length() != 1);  
+	    if (valide) {
+	        /* Pour la premiere itération de la boucle */
+	        valide = false; 
+	        
+	        for (int index = 0; index < OPTION_MENU_PRINCIPAL.length 
+	                && !valide; index++) {
+	            valide = aTester.charAt(0) == OPTION_MENU_PRINCIPAL[index];
+	        }
+	        
+	    }
+	    return valide;
+	}
+	
 	/**
 	 * méthode contenant la String pour l'aide
 	 */
@@ -82,7 +103,6 @@ public class Affichage {
 			System.out.print("   => " + OPTION_AIDE[i] 
 					+ " - " + LIBELLE_AIDE[i] + "\n");
 		}
-		System.out.print("\n       ====> ");
 	}
 
 }
