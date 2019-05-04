@@ -92,7 +92,8 @@ public class BatailleNavale {
     
     /**
      * récupération des coordonnées qu'entre 
-     * le joueur et placement de celles-ci dans deux variables x et y.
+     * le joueur et placement de celles-ci dans deux variables
+     *  x et y de type String.
      */
     public static void recupCoord() {
         String coordonnees;
