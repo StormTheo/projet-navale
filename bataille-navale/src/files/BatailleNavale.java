@@ -94,15 +94,17 @@ public class BatailleNavale {
      * récupération des coordonnées qu'entre 
      * le joueur et placement de celles-ci dans deux variables
      *  x et y de type String.
+     * @param plateauJeu 
      */
-    public static void recupCoord() {
+    public static void recupCoord(Plateau plateauJeu) {
         String coordonnees;
         /* coordonnées séparés en 
          * abscisse et ordonnée */
-        String x = null;
-        String y = null;
-        
-        System.out.print("Entrez les coordonnés");
+        char x = '0';
+        int y;
+        String chaineY = null;
+         
+        System.out.print("Entrez les coordonnés sous la forme : caractère, nombre (ex : A, 11)");
         coordonnees = entreeUtilisateur();
         for (int placement = 0; placement < coordonnees.length(); placement++) {
             /* on cherche le caractère minuscule ou majuscule */
@@ -112,18 +114,30 @@ public class BatailleNavale {
                 && coordonnees.charAt(placement) <= 'Z')) {
                 
                 /* x = morceau de chaîne avec le caractère */
-                x = coordonnees.substring(placement, placement+1); 
+                x = coordonnees.charAt(placement); 
             }
             if (coordonnees.charAt(placement) >= '1' && coordonnees.charAt(placement) <= '9') {
                 /* y = valeur numérique */
-                if (y == null) {
-                    y = coordonnees.substring(placement, placement+1);
+                if (chaineY == null) {
+                    chaineY = coordonnees.substring(placement, placement+1);
                 } else {
-                    y += coordonnees.substring(placement, placement+1);
+                    chaineY += coordonnees.substring(placement, placement+1);
                 }
             }
         }
-        System.out.println(x + " = x\n" + y + " = y");
+        /* Si x et y sont existant dans le plateau. */
+        y = Integer.parseInt(chaineY);
+        if ( ( ( x <= plateauJeu.getDimX()+ 'A' && x >= 'A') 
+              || (x <= plateauJeu.getDimX()+ 'a' && x >= 'a') )
+             && (y > 0 && y <= plateauJeu.getDimY() ) ) {
+            
+            // TODO lancer recherche par rapport aux bateaux.
+            
+        } else {
+            System.out.println("Coordonnées incorrect, votre plateau a une dimension x = "
+                                + plateauJeu.getDimX() + " y = " + plateauJeu.getDimY());
+            recupCoord(plateauJeu);
+        }
     }
     
     /**
@@ -140,7 +154,7 @@ public class BatailleNavale {
         // TODO afficher nombre de bateaux et types / longueurs
         // TODO afficher informations de la partie en cours avant 
         // la demande des coordonnées -> méthode.
-        recupCoord();
+        recupCoord(plateauJeu);
     }
 
 }
