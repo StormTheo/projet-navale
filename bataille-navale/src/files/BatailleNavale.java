@@ -4,9 +4,8 @@
  */
 
 package files;
+import java.util.Random;
 import java.util.Scanner;
-import files.Affichage;
-import files.Plateau;
 
 /**
  * Classe principale du jeu
@@ -91,6 +90,30 @@ public class BatailleNavale {
     }
     
     /**
+     * Effectue le placement d'un nombre donné de bateaux de taille aléatoire
+     * (comprise entre 1 et 4) sur le plateau de jeu.
+     * @param plateau le plateau sur lequel placer les bateaux
+     * @param nombreBateaux le nombre de bateaux à placer
+     */
+    public static void placement(Plateau plateau, int nombreBateaux) {
+        Random random = new Random();
+        Bateau bateau;
+        int coordBateauX;
+        int coordBateauY;
+        int direction; //direction du bateau comprise entre 1 et 4
+                       // 1 = haut; 2 = gauche; 3 = bas; 4 = droite
+        
+        for (int i = 0; i < nombreBateaux; i++) {
+            // génération aléatoire des positions x et y des bateaux
+            coordBateauX = random.nextInt(plateau.getDimX()) +1;
+            System.out.println(coordBateauX);
+            coordBateauY = random.nextInt(plateau.getDimY()) +1;
+            System.out.println(coordBateauY);
+            // placer le bateau i; PENSER A LA DIRECTION !
+        }
+    }
+    
+    /**
      * récupération des coordonnées qu'entre 
      * le joueur et placement de celles-ci dans deux variables
      *  x et y de type String.
@@ -150,6 +173,7 @@ public class BatailleNavale {
         Plateau plateauJeu;
         plateauJeu = new Plateau();
         System.out.println(plateauJeu.toString());
+        placement(plateauJeu, 4);
         // TODO placer les bateaux
         // TODO afficher nombre de bateaux et types / longueurs
         // TODO afficher informations de la partie en cours avant 
