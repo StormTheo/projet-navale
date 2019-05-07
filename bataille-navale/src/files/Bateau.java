@@ -5,6 +5,8 @@
 
 package files;
 
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Classe Bateau permettant de créer des bateaux de 
  * @author Théo Bouchouieff
@@ -26,17 +28,22 @@ public class Bateau {
 
     /** Positions du bateau */
     int pos[];
+    
 
-
+    /** Liste contenant tous les bateaux, composant une flotte */
+    static List<Bateau> flotte = new ArrayList<Bateau>();
+    
     /**
      * TODO commenter le rôle de ce constructeur
      */
     public Bateau() {
+        
         vie = taille;
         nbTouche = 0;
         i = 0;
         j = 0;
         pos = new int[taille];
+        flotte.add(this);
     }
 
     /**
@@ -52,6 +59,7 @@ public class Bateau {
         i = 0;
         j = 0;
         pos = new int[taille];
+        flotte.add(this);
     }
 
     /**
@@ -125,5 +133,14 @@ public class Bateau {
     public int[] getPositions() {
         return pos;
     }
-
+    
+    /**
+     * TODO commenter le rôle de cette méthode
+     * 
+     * @return flotte
+     */
+    public static List<Bateau> getFlotte() {
+        return new ArrayList<>(flotte);
+    }
+    
 }
