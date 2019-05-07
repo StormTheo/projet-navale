@@ -13,21 +13,27 @@ import java.util.List;
  * Version 3
  */
 public class Bateau {
-
-    /** Nom du bateau (ex : Charles De Gaulle. Ou porte-avions, destroyer etc...) */
-    String nom;
+    
+    /** nom par défaut d'un navire */
+    private static final String NOM_DEFAUT =  "Vedette";
+    
+    /** taille par défaut de ce navire */
+    private static final int TAILLE_DEFAUT = 2;
+    
+    /** Nom du bateau (ex : Sous-marin, porte-avions, destroyer etc...) */
+    private String nom;
 
     /** Taille du bateau */
-    int taille;
+    private int taille;
 
     /** Vie restante du bateau */
-    int vie;
+    private int vie;
 
     /** Nombre de touches sur le bateau */
-    int nbTouche;
+    private int nbTouche;
 
     /** Positions du bateau */
-    int pos[];
+    private int pos[];
     
 
     /** Liste contenant tous les bateaux, composant une flotte */
@@ -37,12 +43,13 @@ public class Bateau {
      * TODO commenter le rôle de ce constructeur
      */
     public Bateau() {
-        
-        vie = taille;
-        nbTouche = 0;
-        i = 0;
-        j = 0;
-        pos = new int[taille];
+        this.nom = NOM_DEFAUT;
+        this.taille = TAILLE_DEFAUT;
+        this.vie = taille;
+        this.nbTouche = 0;
+        this.i = 0;
+        this.j = 0;
+        this.pos = new int[taille];
         flotte.add(this);
     }
 
@@ -54,11 +61,11 @@ public class Bateau {
     public Bateau(String nom, int taille) {
         this.nom = nom;
         this.taille = taille;
-        vie = taille;
-        nbTouche = 0;
-        i = 0;
-        j = 0;
-        pos = new int[taille];
+        this.vie = taille;
+        this.nbTouche = 0;
+        this.i = 0;
+        this.j = 0;
+        this.pos = new int[taille];
         flotte.add(this);
     }
 
@@ -79,12 +86,12 @@ public class Bateau {
     }
 
     /**
-     * Ajoute une touche au bateau et teste s'il est "touché" ou "coulé"
+     * Ajoute une touche au bateau et teste s'il est seulement "touché" ou "coulé"
      * Retourne true s'il est coulé ou faux (false) s'il est simplement touché
      * @return true ou false
      */
     public boolean ajoutTouche() {
-        nbTouche ++;
+        this.nbTouche ++;
         if (nbTouche == vie) {
             return true;
         } else {
@@ -92,7 +99,8 @@ public class Bateau {
         }
     }
 
-
+    
+    
     /** Servira pour placer les bateaux et parcourir horizontalement la mer */
     static int i;
     /** Servira pour placer les bateaux et parcourir verticalement la mer */
