@@ -24,8 +24,10 @@ public class TestBateau {
      */
     private static void continuer() {
         System.out.println("\n\n\nAppuyez sur entrée pour continuer les tests.") ;
+        Bateau.clearFlotte();
         entree.nextLine();
         System.out.println("\n\n");
+        
     }
 
     /** TODO commenter le rôle du champ (attribut, rôle associatif...) */
@@ -63,6 +65,34 @@ public class TestBateau {
                 + "\n");
         continuer();
     }
+    
+    /**
+     * test la méthode qui vérifie quand le bateau est touché si il 
+     * est touché ou coulé.
+     */
+    public static void testAjoutTouche() {
+        new Bateau("Test", 4);
+        new Bateau();
+        /* Le nombre de bateau dans la liste */
+        for (int nbateau = 0; nbateau < Bateau.getFlotte().size(); nbateau++) {
+            System.out.println("bateau : " + Bateau.getFlotte().get(nbateau).getNom()
+                                + " taille : " + Bateau.getFlotte().get(nbateau).getTaille());
+            /* la taille de chacun ( leur vies restante ) */
+            for (int nbvie = 0;
+                     nbvie < Bateau.getFlotte().get(nbateau).getTaille();
+                     nbvie++) {
+                /* si le bateau est coulé */
+                if (Bateau.getFlotte().get(nbateau).ajoutTouche()) {
+                   System.out.println("coulé !\n"); 
+                }
+                /* si il est seulement touché */
+                else {
+                    System.out.println("touché !\n");
+                }
+                
+            }
+        }
+    }
 
     /**
      * TODO commenter le rôle de cette méthode
@@ -71,5 +101,6 @@ public class TestBateau {
     public static void main(String[] args) {
         /* System.out.println(Bateau.getFlotte().get(0).getTaille()); */
         testConstructeur();
+        testAjoutTouche();
     }
 }

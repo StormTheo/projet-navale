@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * Classe Bateau permettant de créer des bateaux de 
- * @author Théo Bouchouieff
- * Version 3
+ * @author INFO 1
  */
 public class Bateau {
     
@@ -34,6 +33,12 @@ public class Bateau {
 
     /** Positions du bateau */
     private int pos[];
+    
+    /** Servira pour placer les bateaux et parcourir horizontalement la mer */
+    static int i;
+    /** Servira pour placer les bateaux et parcourir verticalement la mer */
+    static int j;
+ 
     
 
     /** Liste contenant tous les bateaux, composant une flotte */
@@ -99,43 +104,41 @@ public class Bateau {
         }
     }
 
-    
-    
-    /** Servira pour placer les bateaux et parcourir horizontalement la mer */
-    static int i;
-    /** Servira pour placer les bateaux et parcourir verticalement la mer */
-    static int j;
-
     /**
-     * Fixe la position du navire
-     * @param position
+     * Place un point donné dans le tableau 
+     * contenant les positions de ce bateau.
+     * Ici le point x ( abscisse ).
+     * @param position Un point contenant d'abcisse du bateau 
      */
     public void SetPositionHorizontale(int position) {
-        if(i < vie)
-        {
+        if (i < vie) {
             pos[i] = position;
             i++;
         }
-        if(i == vie) i = 0;
+        if (i >= vie) {
+            i = 0;
+        }
     }
 
     /**
-     * Fixe la position du navire
+     * Place un point donné dans le tableau 
+     * contenant les positions de ce bateau.
+     * Ici le point y ( ordonnée ).
      * @param position
      */
     public void SetPositionVerticale(int position) {
+        /* Le nombre de point doit être inférieur à la taille du bateau */
         if(j < vie) {
             pos[j] = position;
             j++;
         }
-
-        if(j == vie) {
+        if(j >= vie) {
             j = 0;
         }
     }
 
     /**
-     * Retourne le tableau des differentes positions des cases du bateau
+     * Retourne le tableau des différentes positions des cases du bateau
      * @return pos
      */
     public int[] getPositions() {
@@ -143,12 +146,19 @@ public class Bateau {
     }
     
     /**
-     * TODO commenter le rôle de cette méthode
+     * retourne la liste contenant tout les objets Bateau créés
      * 
      * @return flotte
      */
     public static List<Bateau> getFlotte() {
         return new ArrayList<>(flotte);
+    }
+    
+    /**
+     * vide la liste des objets créés
+     */
+    public static void clearFlotte() {
+        flotte.clear();
     }
     
 }
