@@ -165,7 +165,7 @@ public class Bateau {
      * Renvoie une chaine de caractère avec le nom et 
      * la taille de ce bateau
      */
-    Public String toString() {
+    public String toString() {
         return "Nom : " + this.getNom() 
                 + "Taille : " + this.getTaille() + "\n";  
     }
