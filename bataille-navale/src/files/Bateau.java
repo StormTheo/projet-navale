@@ -168,6 +168,6 @@ public class Bateau {
     public String toString() {
         return "Nom : " + this.getNom() 
                 + "Taille : " + this.getTaille() + "\n";  
-    }
+    } 
     
 }
