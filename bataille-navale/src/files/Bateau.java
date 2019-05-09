@@ -8,15 +8,15 @@ package files;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * Classe Bateau permettant de créer des bateaux de 
+ * Classe Bateau permettant de crÃ©er des bateaux de 
  * @author INFO 1
  */
 public class Bateau {
     
-    /** nom par défaut d'un navire */
+    /** nom par dÃ©faut d'un navire */
     private static final String NOM_DEFAUT =  "Vedette";
     
-    /** taille par défaut de ce navire */
+    /** taille par dÃ©faut de ce navire */
     private static final int TAILLE_DEFAUT = 2;
     
     /** Nom du bateau (ex : Sous-marin, porte-avions, destroyer etc...) */
@@ -45,7 +45,7 @@ public class Bateau {
     static List<Bateau> flotte = new ArrayList<Bateau>();
     
     /**
-     * TODO commenter le rôle de ce constructeur
+     * TODO commenter le rÃ´le de ce constructeur
      */
     public Bateau() {
         this.nom = NOM_DEFAUT;
@@ -59,7 +59,7 @@ public class Bateau {
     }
 
     /**
-     * TODO idem que le précédent, commenter le rôle de ce constructeur
+     * TODO idem que le prÃ©cÃ©dent, commenter le rÃ´le de ce constructeur
      * @param nom
      * @param taille
      */
@@ -91,8 +91,8 @@ public class Bateau {
     }
 
     /**
-     * Ajoute une touche au bateau et teste s'il est seulement "touché" ou "coulé"
-     * Retourne true s'il est coulé ou faux (false) s'il est simplement touché
+     * Ajoute une touche au bateau et teste s'il est seulement "touchÃ©" ou "coulÃ©"
+     * Retourne true s'il est coulÃ© ou faux (false) s'il est simplement touchÃ©
      * @return true ou false
      */
     public boolean ajoutTouche() {
@@ -105,7 +105,7 @@ public class Bateau {
     }
 
     /**
-     * Place un point donné dans le tableau 
+     * Place un point donnÃ© dans le tableau 
      * contenant les positions de ce bateau.
      * Ici le point x ( abscisse ).
      * @param position Un point contenant d'abcisse du bateau 
@@ -121,13 +121,13 @@ public class Bateau {
     }
 
     /**
-     * Place un point donné dans le tableau 
+     * Place un point donnÃ© dans le tableau 
      * contenant les positions de ce bateau.
-     * Ici le point y ( ordonnée ).
+     * Ici le point y ( ordonnÃ©e ).
      * @param position
      */
     public void SetPositionVerticale(int position) {
-        /* Le nombre de point doit être inférieur à la taille du bateau */
+        /* Le nombre de point doit Ãªtre infÃ©rieur Ã  la taille du bateau */
         if(j < vie) {
             pos[j] = position;
             j++;
@@ -138,7 +138,7 @@ public class Bateau {
     }
 
     /**
-     * Retourne le tableau des différentes positions des cases du bateau
+     * Retourne le tableau des diffÃ©rentes positions des cases du bateau
      * @return pos
      */
     public int[] getPositions() {
@@ -146,7 +146,7 @@ public class Bateau {
     }
     
     /**
-     * retourne la liste contenant tout les objets Bateau créés
+     * retourne la liste contenant tout les objets Bateau crÃ©Ã©s
      * 
      * @return flotte
      */
@@ -155,10 +155,19 @@ public class Bateau {
     }
     
     /**
-     * vide la liste des objets créés
+     * vide la liste des objets crÃ©Ã©s
      */
     public static void clearFlotte() {
         flotte.clear();
+    }
+    
+    /**
+     * Renvoie une chaine de caractÃ¨re avec le nom et 
+     * la taille de ce bateau
+     */
+    Public String toString() {
+        return "Nom : " + this.getNom() 
+                + "Taille : " + this.getTaille() + "\n";  
     }
     
 }
