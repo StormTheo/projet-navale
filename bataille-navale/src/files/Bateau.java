@@ -8,15 +8,15 @@ package files;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * Classe Bateau permettant de crÃ©er des bateaux de 
+ * Classe Bateau permettant de créer des bateaux de 
  * @author INFO 1
  */
 public class Bateau {
     
-    /** nom par dÃ©faut d'un navire */
+    /** nom par défaut d'un navire */
     private static final String NOM_DEFAUT =  "Vedette";
     
-    /** taille par dÃ©faut de ce navire */
+    /** taille par défaut de ce navire */
     private static final int TAILLE_DEFAUT = 2;
     
     /** Nom du bateau (ex : Sous-marin, porte-avions, destroyer etc...) */
@@ -32,7 +32,7 @@ public class Bateau {
     private int nbTouche;
 
     /** Positions du bateau */
-    private int pos[];
+    private String pos[][];
     
     /** Servira pour placer les bateaux et parcourir horizontalement la mer */
     static int i;
@@ -45,7 +45,7 @@ public class Bateau {
     static List<Bateau> flotte = new ArrayList<Bateau>();
     
     /**
-     * TODO commenter le rÃ´le de ce constructeur
+     * TODO commenter le rôle de ce constructeur
      */
     public Bateau() {
         this.nom = NOM_DEFAUT;
@@ -54,12 +54,12 @@ public class Bateau {
         this.nbTouche = 0;
         this.i = 0;
         this.j = 0;
-        this.pos = new int[taille];
+        this.pos = new String[taille][taille];
         flotte.add(this);
     }
 
     /**
-     * TODO idem que le prÃ©cÃ©dent, commenter le rÃ´le de ce constructeur
+     * TODO idem que le précédent, commenter le rôle de ce constructeur
      * @param nom
      * @param taille
      */
@@ -70,16 +70,37 @@ public class Bateau {
         this.nbTouche = 0;
         this.i = 0;
         this.j = 0;
-        this.pos = new int[taille];
+        this.pos = new String[taille][taille];
         flotte.add(this);
     }
 
+    /**
+     * TODO commenter l'état initial atteint
+     * @param nom
+     * @param taille
+     * @param x
+     * @param y
+     */
+    public Bateau(String nom, int taille, char x, String y) {
+        this.nom = nom;
+        this.taille = taille;
+        this.vie = taille;
+        this.nbTouche = 0;
+        this.i = 0;
+        this.j = 0;
+        String chaineX = Integer.toString(x);
+        this.pos = new String[2][taille];
+        this.pos[0][i] = chaineX;
+        this.pos[1][j] = y;
+        flotte.add(this);
+    }
+    
     /**
      * Retourne le nom du bateau
      * @return nom
      */
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 
     /**
@@ -87,17 +108,17 @@ public class Bateau {
      * @return taille
      */
     public int getTaille() {
-        return taille;
+        return this.taille;
     }
 
     /**
-     * Ajoute une touche au bateau et teste s'il est seulement "touchÃ©" ou "coulÃ©"
-     * Retourne true s'il est coulÃ© ou faux (false) s'il est simplement touchÃ©
+     * Ajoute une touche au bateau et teste s'il est seulement "touché" ou "coulé"
+     * Retourne true s'il est coulé ou faux (false) s'il est simplement touché
      * @return true ou false
      */
     public boolean ajoutTouche() {
-        this.nbTouche ++;
-        if (nbTouche == vie) {
+        if (this.nbTouche+1 == this.vie) {
+            this.nbTouche ++;
             return true;
         } else {
             return false;
@@ -105,14 +126,14 @@ public class Bateau {
     }
 
     /**
-     * Place un point donnÃ© dans le tableau 
+     * Place un point donné dans le tableau 
      * contenant les positions de ce bateau.
      * Ici le point x ( abscisse ).
      * @param position Un point contenant d'abcisse du bateau 
      */
-    public void SetPositionHorizontale(int position) {
+    public void SetPositionHorizontale(char position) {
         if (i < vie) {
-            pos[i] = position;
+            pos[0][i] = Integer.toString(position);
             i++;
         }
         if (i >= vie) {
@@ -127,9 +148,9 @@ public class Bateau {
      * @param position
      */
     public void SetPositionVerticale(int position) {
-        /* Le nombre de point doit Ãªtre infÃ©rieur Ã  la taille du bateau */
+        /* Le nombre de point doit être inférieur à la taille du bateau */
         if(j < vie) {
-            pos[j] = position;
+            pos[1][j] = Integer.toString(position);
             j++;
         }
         if(j >= vie) {
@@ -138,15 +159,15 @@ public class Bateau {
     }
 
     /**
-     * Retourne le tableau des diffÃ©rentes positions des cases du bateau
+     * Retourne le tableau des différentes positions des cases du bateau
      * @return pos
      */
-    public int[] getPositions() {
-        return pos;
+    public String[][] getPositions() {
+        return this.pos;
     }
     
     /**
-     * retourne la liste contenant tout les objets Bateau crÃ©Ã©s
+     * retourne la liste contenant tout les objets Bateau créés
      * 
      * @return flotte
      */
@@ -155,19 +176,19 @@ public class Bateau {
     }
     
     /**
-     * vide la liste des objets crÃ©Ã©s
+     * vide la liste des objets créés
      */
     public static void clearFlotte() {
         flotte.clear();
     }
     
     /**
-     * Renvoie une chaine de caractÃ¨re avec le nom et 
+     * Renvoie une chaîne de caractère avec le nom et 
      * la taille de ce bateau
      */
     public String toString() {
         return "Nom : " + this.getNom() 
-                + "Taille : " + this.getTaille() + "\n";  
+                + ", Taille : " + this.getTaille() + "\n";  
     } 
     
 }

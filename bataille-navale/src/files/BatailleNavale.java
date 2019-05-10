@@ -7,6 +7,10 @@ package files;
 import java.util.Random;
 import java.util.Scanner;
 
+import files.Affichage;
+import files.Bateau;
+import files.Plateau;
+
 /**
  * Classe principale du jeu
  * @author IUT INFO1 groupe 1
@@ -32,10 +36,10 @@ public class BatailleNavale {
         if (reponse.charAt(0) == 'a') {
             aide();
         } else if (reponse.charAt(0) == 'q') {
-            // arrêt du programme
+            System.exit(0);
         }
     }
-    
+
     
     /**
      * Affiche l'aide et effectue l'action appropriée
@@ -93,9 +97,9 @@ public class BatailleNavale {
      * Effectue le placement d'un nombre donné de bateaux de taille aléatoire
      * (comprise entre 1 et 4) sur le plateau de jeu.
      * @param plateau le plateau sur lequel placer les bateaux
-     * @param nombreBateaux le nombre de bateaux à placer
+     * @param nombreBateaux le nombre de bateaux à placer-
      */
-    public static void placement(Plateau plateau, int nombreBateaux) {
+    /* public static void placement(Plateau plateau, int nombreBateaux) {
         Random random = new Random();
         Bateau bateau;
         int coordBateauX;
@@ -111,7 +115,7 @@ public class BatailleNavale {
             System.out.println(coordBateauY);
             // placer le bateau i; PENSER A LA DIRECTION !
         }
-    }
+    } */
     
     /**
      * récupération des coordonnées qu'entre 
@@ -127,7 +131,8 @@ public class BatailleNavale {
         int y;
         String chaineY = null;
          
-        System.out.print("Entrez les coordonnés sous la forme : caractère, nombre (ex : A, 11)");
+        System.out.print("\nEntrez les coordonnés sous la forme : caractère,"
+                        + " nombre (ex : A, 11 ou A11)");
         coordonnees = entreeUtilisateur();
         for (int placement = 0; placement < coordonnees.length(); placement++) {
             /* on cherche le caractère minuscule ou majuscule */
@@ -148,19 +153,79 @@ public class BatailleNavale {
                 }
             }
         }
-        /* Si x et y sont existant dans le plateau. */
-        y = Integer.parseInt(chaineY);
-        if ( ( ( x <= plateauJeu.getDimX()+ 'A' && x >= 'A') 
-              || (x <= plateauJeu.getDimX()+ 'a' && x >= 'a') )
-             && (y > 0 && y <= plateauJeu.getDimY() ) ) {
+        if (x != '0' && chaineY != null) {
+            /* Si x et y sont existant dans le plateau. */
+            y = Integer.parseInt(chaineY); // passage de la valeur en String.
+            if ( ( ( x <= plateauJeu.getDimX()+ 'A' && x >= 'A') 
+                    || (x <= plateauJeu.getDimX()+ 'a' && x >= 'a') )
+                    && (y > 0 && y <= plateauJeu.getDimY() ) ) {
             
-            // TODO lancer recherche par rapport aux bateaux.
-            
+                System.out.println("x = " + x + "\ny = " + y); 
+                tir(x,y);
+            }
         } else {
             System.out.println("Coordonnées incorrect, votre plateau a une dimension x = "
                                 + plateauJeu.getDimX() + " y = " + plateauJeu.getDimY());
             recupCoord(plateauJeu);
         }
+    }
+    
+    /**
+     * Cherche à verifier si les coordonnées entrées correspondent 
+     * à l'emplacement d'un bateau.
+     * @param x coordonnée entrée par l'utilisateur pour l'abscisse
+     * @param y coordonnée entrée par l'utilisateur pour l'ordonnée
+     * @return 0 si le bateau n'est pas touché, 
+     *         1 si il est touché, 
+     *         2 si il est coulé.
+     */
+    public static int tir(char x, int y) {
+        int etat = 0;
+        Bateau elementBateau;
+        String[][] posBateau;
+        /* parcours des coordonnées */
+        int parcoursC;
+        /* permet la sortie de la boucle */
+        boolean toucher = false;
+        
+        for (int parcoursB = 0;parcoursB<Bateau.getFlotte().size() && !toucher; parcoursB++) {
+            
+            /* l'objet bateau actuellement vérifié */
+            elementBateau = Bateau.getFlotte().get(parcoursB);
+            
+            /* le tableau contenant les coordonnées de ce bateau */
+            posBateau = elementBateau.getPositions();
+            /*
+             * tant que la taille est définie, et que les coordonnées
+             * ne correspondent pas, on fait tourner.
+             */
+            for (parcoursC = 0; parcoursC<posBateau[0].length 
+                     && posBateau[0][0] != null
+                     && (x != posBateau[0][0].charAt(0)
+                     && y != Integer.parseInt(posBateau[0][0]));
+                     parcoursC++);
+            /* si touché seulement */
+            if (parcoursC == 1 && elementBateau.ajoutTouche()) {
+                System.out.println("Toucher !");
+                toucher = true;
+                etat = 1;
+            /* si couler */
+            } else if (parcoursC == 1 && !elementBateau.ajoutTouche()) {
+                System.out.println("Couler !");
+                toucher = true;
+                etat = 2;
+            }
+            /* 
+             * sinon,message que rien n'a été touché après que tout ait
+             * été vérifié
+             */
+            
+        }
+        if (etat == 0) {
+            System.out.println("Aucun bateau touché à cet emplacement");
+        }
+        return etat;
+        //TODO recommencer l'affichage des infos, et saisie des coord
     }
     
     /**
@@ -170,12 +235,26 @@ public class BatailleNavale {
      */
     public static void main(String[] args) {
         Menu();
+        
+        /*création du plateau de jeu */
         Plateau plateauJeu;
         plateauJeu = new Plateau();
-        System.out.println(plateauJeu.toString());
-        placement(plateauJeu, 4);
+        
+        /* création de 4 objets bateau */
+        new Bateau("Chocapic", 4);
+        new Bateau("sous-marineLePen", 3);
+        new Bateau();
+        new Bateau("aeroglisseur", 2);
+        /* affichage des infos du plateau pour le joueur */
+        System.out.println("\n" + plateauJeu.toString() + "\n");
+        //placement(plateauJeu, 4);
         // TODO placer les bateaux
-        // TODO afficher nombre de bateaux et types / longueurs
+        
+        /* affichage des infos de chaque bateau pour le joueur */
+        for (int aAfficher = 0; aAfficher < Bateau.getFlotte().size(); aAfficher++) {
+            System.out.printf("%d) %s", aAfficher+1,
+                               Bateau.getFlotte().get(aAfficher).toString());
+        }
         // TODO afficher informations de la partie en cours avant 
         // la demande des coordonnées -> méthode.
         recupCoord(plateauJeu);
