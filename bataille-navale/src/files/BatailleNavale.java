@@ -97,26 +97,59 @@ public class BatailleNavale {
      * Effectue le placement d'un nombre donné de bateaux de taille aléatoire
      * (comprise entre 1 et 4) sur le plateau de jeu.
      * @param plateau le plateau sur lequel placer les bateaux
-     * @param nombreBateaux le nombre de bateaux à placer-
+     * @param bateauxAPlacer liste des bateaux a placer
+     * @throws IllegalArgumentException si il est impossible de placer les bateaux (ex: plateau trop petit)
      */
-    /* public static void placement(Plateau plateau, int nombreBateaux) {
+    public static void placement(Plateau plateau, Bateau[] bateauxAPlacer) throws IllegalArgumentException{
         Random random = new Random();
-        Bateau bateau;
         int coordBateauX;
         int coordBateauY;
         int direction; //direction du bateau comprise entre 1 et 4
                        // 1 = haut; 2 = gauche; 3 = bas; 4 = droite
         
-        for (int i = 0; i < nombreBateaux; i++) {
+        for (int i = 0; i < bateauxAPlacer.length; i++) {
             // génération aléatoire des positions x et y des bateaux
-            coordBateauX = random.nextInt(plateau.getDimX()) +1;
-            System.out.println(coordBateauX);
-            coordBateauY = random.nextInt(plateau.getDimY()) +1;
-            System.out.println(coordBateauY);
+            coordBateauX = random.nextInt(plateau.getDimX()) + 1;
+            System.out.println(coordBateauX); //DEBUG
+            coordBateauY = random.nextInt(plateau.getDimY()) + 1;
+            System.out.println(coordBateauY); //DEBUG
+            // direction du bateau aléatoire
+            direction = random.nextInt(4) + 1;
+            System.out.println(direction); //debug
             // placer le bateau i; PENSER A LA DIRECTION !
+            switch(direction) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                if (coordBateauY + bateauxAPlacer[i].getTaille() <= plateau.getDimY()) {
+                    placementBas(bateauxAPlacer[i], coordBateauX, coordBateauY);
+                }
+                break;
+            case 4:
+                break;
+            }
+            bateauxAPlacer[i].afficherPositions();
         }
-    } */
+    }
     
+    /**
+     * Effectue le placement d'un bateau dans le plateau.
+     * Partant de (coordBateauX, coordBateauY) jusqu'a 
+     * (coordBateauX, coordBateauY + bateau.getTaille())
+     * @param bateau le bateau à placer
+     * @param coordBateauX la coordonnée en abscisse du bateau a placer
+     * @param coordBateauY la coordonnée en ordonnée du bateau a placer
+     */
+    private static void placementBas(Bateau bateau, int coordBateauX, int coordBateauY) {
+            //bateau.SetPositionHorizontale((char) coordBateauX);
+            //bateau.SetPositionVerticale(coordBateauY);
+        bateau.getFlotte().get(2).SetPositionHorizontale((char) coordBateauX);
+        bateau.getFlotte().get(2).SetPositionVerticale(coordBateauY);
+    }
+
+
     /**
      * récupération des coordonnées qu'entre 
      * le joueur et placement de celles-ci dans deux variables
@@ -240,14 +273,14 @@ public class BatailleNavale {
         Plateau plateauJeu;
         plateauJeu = new Plateau();
         
-        /* création de 4 objets bateau */
-        new Bateau("Chocapic", 4);
-        new Bateau("sous-marineLePen", 3);
-        new Bateau();
-        new Bateau("aeroglisseur", 2);
+        /* Liste des bateaux à placer sur le plateau */
+        Bateau[] listeBateaux = {new Bateau("Chocapic", 4),
+                                 new Bateau("sous-marineLePen", 3),
+                                 new Bateau(),
+                                 new Bateau("aeroglisseur", 2)};
         /* affichage des infos du plateau pour le joueur */
         System.out.println("\n" + plateauJeu.toString() + "\n");
-        //placement(plateauJeu, 4);
+        placement(plateauJeu, listeBateaux);
         // TODO placer les bateaux
         
         /* affichage des infos de chaque bateau pour le joueur */
