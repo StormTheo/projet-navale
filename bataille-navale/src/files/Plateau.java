@@ -118,5 +118,7 @@ public class Plateau {
 				+ "\nDimension en ordonnée (dimY) : " + this.dimY;
 	}
 	
+	//TODO rework la classe afin qu'elle utilise un tableau de Bateau pour stocker les bateaux
+	
 }
 
