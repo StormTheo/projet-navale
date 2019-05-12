@@ -142,9 +142,9 @@ public class Bateau {
     }
 
     /**
-     * Place un point donnÃ© dans le tableau 
+     * Place un point donné dans le tableau 
      * contenant les positions de ce bateau.
-     * Ici le point y ( ordonnÃ©e ).
+     * Ici le point y ( ordonnée ).
      * @param position
      */
     public void SetPositionVerticale(int position) {
@@ -174,12 +174,21 @@ public class Bateau {
         for (int x = 0; x < pos.length; x++) {
             for (int y = 0; y < pos[x].length; y++) {
                 System.out.print(pos[x][y] + ',');
+<<<<<<< HEAD
+                //if(x == pos.length - 1) {
+                    //System.out.println();
+                //}
+            }
+        }
+        System.out.println("\nfin\n");
+=======
                 if(x == pos.length - 1) {
                     System.out.println();
                 }
             }
         }
         System.out.println("fin");
+>>>>>>> 0b68e56267f09a97d429ba115b84abbc7d435e1d
     }
     
     /**

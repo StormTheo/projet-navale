@@ -97,17 +97,29 @@ public class BatailleNavale {
      * Effectue le placement d'un nombre donné de bateaux de taille aléatoire
      * (comprise entre 1 et 4) sur le plateau de jeu.
      * @param plateau le plateau sur lequel placer les bateaux
+<<<<<<< HEAD
+     * @throws IllegalArgumentException si il est impossible de placer les bateaux (ex: plateau trop petit)
+     */
+    public static void placement(Plateau plateau) throws IllegalArgumentException{
+=======
      * @param bateauxAPlacer liste des bateaux a placer
      * @throws IllegalArgumentException si il est impossible de placer les bateaux (ex: plateau trop petit)
      */
     public static void placement(Plateau plateau, Bateau[] bateauxAPlacer) throws IllegalArgumentException{
+>>>>>>> 0b68e56267f09a97d429ba115b84abbc7d435e1d
         Random random = new Random();
         int coordBateauX;
         int coordBateauY;
         int direction; //direction du bateau comprise entre 1 et 4
                        // 1 = haut; 2 = gauche; 3 = bas; 4 = droite
+<<<<<<< HEAD
+        int nbBateau = Bateau.getFlotte().size();
+        for (int i = 0; i < nbBateau; i++) {
+            Bateau bateauxAPlacer = Bateau.getFlotte().get(i);
+=======
         
         for (int i = 0; i < bateauxAPlacer.length; i++) {
+>>>>>>> 0b68e56267f09a97d429ba115b84abbc7d435e1d
             // génération aléatoire des positions x et y des bateaux
             coordBateauX = random.nextInt(plateau.getDimX()) + 1;
             System.out.println(coordBateauX); //DEBUG
@@ -123,14 +135,23 @@ public class BatailleNavale {
             case 2:
                 break;
             case 3:
+<<<<<<< HEAD
+                if (coordBateauY + bateauxAPlacer.getTaille() <= plateau.getDimY()) {
+                    placementBas(i, coordBateauX, coordBateauY);
+=======
                 if (coordBateauY + bateauxAPlacer[i].getTaille() <= plateau.getDimY()) {
                     placementBas(bateauxAPlacer[i], coordBateauX, coordBateauY);
+>>>>>>> 0b68e56267f09a97d429ba115b84abbc7d435e1d
                 }
                 break;
             case 4:
                 break;
             }
+<<<<<<< HEAD
+            bateauxAPlacer.afficherPositions();
+=======
             bateauxAPlacer[i].afficherPositions();
+>>>>>>> 0b68e56267f09a97d429ba115b84abbc7d435e1d
         }
     }
     
@@ -138,6 +159,17 @@ public class BatailleNavale {
      * Effectue le placement d'un bateau dans le plateau.
      * Partant de (coordBateauX, coordBateauY) jusqu'a 
      * (coordBateauX, coordBateauY + bateau.getTaille())
+<<<<<<< HEAD
+     * @param index l'index du bateau dans la liste
+     * @param coordBateauX la coordonnée en abscisse du bateau a placer
+     * @param coordBateauY la coordonnée en ordonnée du bateau a placer
+     */
+    private static void placementBas(int index, int coordBateauX, int coordBateauY) {
+            //bateau.SetPositionHorizontale((char) coordBateauX);
+            //bateau.SetPositionVerticale(coordBateauY);
+        Bateau.getFlotte().get(index).SetPositionHorizontale((char) coordBateauX);
+        Bateau.getFlotte().get(index).SetPositionVerticale(coordBateauY);
+=======
      * @param bateau le bateau à placer
      * @param coordBateauX la coordonnée en abscisse du bateau a placer
      * @param coordBateauY la coordonnée en ordonnée du bateau a placer
@@ -147,6 +179,7 @@ public class BatailleNavale {
             //bateau.SetPositionVerticale(coordBateauY);
         bateau.getFlotte().get(2).SetPositionHorizontale((char) coordBateauX);
         bateau.getFlotte().get(2).SetPositionVerticale(coordBateauY);
+>>>>>>> 0b68e56267f09a97d429ba115b84abbc7d435e1d
     }
 
 
@@ -274,6 +307,15 @@ public class BatailleNavale {
         plateauJeu = new Plateau();
         
         /* Liste des bateaux à placer sur le plateau */
+<<<<<<< HEAD
+        new Bateau("Chocapic", 4);
+        new Bateau("sous-marineLePen", 3);
+        new Bateau();
+        new Bateau("aeroglisseur", 2);
+        /* affichage des infos du plateau pour le joueur */
+        System.out.println("\n" + plateauJeu.toString() + "\n");
+        placement(plateauJeu);
+=======
         Bateau[] listeBateaux = {new Bateau("Chocapic", 4),
                                  new Bateau("sous-marineLePen", 3),
                                  new Bateau(),
@@ -281,6 +323,7 @@ public class BatailleNavale {
         /* affichage des infos du plateau pour le joueur */
         System.out.println("\n" + plateauJeu.toString() + "\n");
         placement(plateauJeu, listeBateaux);
+>>>>>>> 0b68e56267f09a97d429ba115b84abbc7d435e1d
         // TODO placer les bateaux
         
         /* affichage des infos de chaque bateau pour le joueur */
