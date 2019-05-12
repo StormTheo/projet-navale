@@ -174,21 +174,12 @@ public class Bateau {
         for (int x = 0; x < pos.length; x++) {
             for (int y = 0; y < pos[x].length; y++) {
                 System.out.print(pos[x][y] + ',');
-<<<<<<< HEAD
                 //if(x == pos.length - 1) {
                     //System.out.println();
                 //}
             }
         }
         System.out.println("\nfin\n");
-=======
-                if(x == pos.length - 1) {
-                    System.out.println();
-                }
-            }
-        }
-        System.out.println("fin");
->>>>>>> 0b68e56267f09a97d429ba115b84abbc7d435e1d
     }
     
     /**
