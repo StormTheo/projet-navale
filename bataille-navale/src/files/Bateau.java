@@ -54,7 +54,7 @@ public class Bateau {
         this.nbTouche = 0;
         this.i = 0;
         this.j = 0;
-        this.pos = new String[taille][taille];
+        this.pos = new String[2][taille];
         flotte.add(this);
     }
 
@@ -70,7 +70,7 @@ public class Bateau {
         this.nbTouche = 0;
         this.i = 0;
         this.j = 0;
-        this.pos = new String[taille][taille];
+        this.pos = new String[2][taille];
         flotte.add(this);
     }
 
@@ -133,7 +133,7 @@ public class Bateau {
      */
     public void SetPositionHorizontale(char position) {
         if (i < vie) {
-            pos[0][i] = Integer.toString(position);
+            pos[0][i] = Character.toString(position);
             i++;
         }
         if (i >= vie) {
