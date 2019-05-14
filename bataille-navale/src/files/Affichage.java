@@ -60,7 +60,8 @@ public class Affichage {
 	        
 	        for (int index = 0; index < OPTION_MENU_PRINCIPAL.length 
 	                && !valide; index++) {
-	            valide = aTester.charAt(0) == OPTION_MENU_PRINCIPAL[index];
+	            valide = aTester.charAt(0) == OPTION_MENU_PRINCIPAL[index]
+	                     || aTester.charAt(0)+32 == OPTION_MENU_PRINCIPAL[index];
 	        }
 	        
 	    }
