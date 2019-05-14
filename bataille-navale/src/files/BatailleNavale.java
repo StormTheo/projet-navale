@@ -128,8 +128,14 @@ public class BatailleNavale {
             // placer le bateau i; PENSER A LA DIRECTION !
             switch(direction) {
             case 1:
+            	if (coordBateauY - bateauxAPlacer.getTaille() >= plateau.getDimY()) {
+                    placementHaut(i, coordBateauX, coordBateauY);
+                }
                 break;
             case 2:
+                if (coordBateauX + bateauxAPlacer.getTaille() <= plateau.getDimX()) {
+                    placementDroite(i, coordBateauX, coordBateauY);
+                }
                 break;
             case 3:
                 if (coordBateauY + bateauxAPlacer.getTaille() <= plateau.getDimY()) {
@@ -137,7 +143,7 @@ public class BatailleNavale {
                 }
                 break;
             case 4:
-                if (coordBateauX - bateauxAPlacer.getTaille() >= plateau.getDimY()) {
+                if (coordBateauX - bateauxAPlacer.getTaille() >= plateau.getDimX()) {
                     placementGauche(i, coordBateauX, coordBateauY);
                 }
                 break;
@@ -145,6 +151,51 @@ public class BatailleNavale {
             bateauxAPlacer.afficherPositions();
         }
     }
+    
+    
+    /**
+     * Effectue le placement d'un bateau dans le plateau.
+     * Partant de (coordBateauX, coordBateauY) jusqu'a 
+     * (coordBateauX, coordBateauY - bateau.getTaille())
+     * @param index l'index du bateau dans la liste
+     * @param coordBateauX la coordonnée en abscisse du bateau a placer
+     * @param coordBateauY la coordonnée en ordonnée du bateau a placer
+     */
+    private static void placementHaut(int index, char coordBateauX, int coordBateauY) {
+    	Bateau bateauActuel;
+        bateauActuel = Bateau.getFlotte().get(index);
+        bateauActuel.SetPositionHorizontale(coordBateauX);
+        bateauActuel.SetPositionVerticale(coordBateauY);
+        /* placement des coordonnées décrémentant y pour allez vers le haut */
+        for (int iterat = 1; iterat < bateauActuel.getTaille(); iterat++) {
+            System.out.println("char à placer : " + (char) (coordBateauY - iterat));
+            bateauActuel.SetPositionHorizontale((char) (coordBateauX));
+            bateauActuel.SetPositionVerticale(coordBateauY - iterat);
+        }
+    }
+    
+    
+    /**
+     * Effectue le placement d'un bateau dans le plateau.
+     * Partant de (coordBateauX, coordBateauY) jusqu'a 
+     * (coordBateauX + bateau.getTaille(), coordBateauY)
+     * @param index l'index du bateau dans la liste
+     * @param coordBateauX la coordonnée en abscisse du bateau a placer
+     * @param coordBateauY la coordonnée en ordonnée du bateau a placer
+     */
+    private static void placementDroite(int index, char coordBateauX, int coordBateauY) {
+        Bateau bateauActuel;
+        bateauActuel = Bateau.getFlotte().get(index);
+        bateauActuel.SetPositionHorizontale(coordBateauX);
+        bateauActuel.SetPositionVerticale(coordBateauY);
+        /* placement des coordonnées incrémentant x pour allez vers la droite */
+        for (int iterat = 1; iterat < bateauActuel.getTaille(); iterat++) {
+            System.out.println("char à placer : " + (char) (coordBateauX + iterat));
+            bateauActuel.SetPositionHorizontale((char) (coordBateauX + iterat));
+            bateauActuel.SetPositionVerticale(coordBateauY);
+        }
+    }
+    
     
     /**
      * Effectue le placement d'un bateau dans le plateau.
@@ -155,13 +206,23 @@ public class BatailleNavale {
      * @param coordBateauY la coordonnée en ordonnée du bateau a placer
      */
     private static void placementBas(int index, char coordBateauX, int coordBateauY) {
-        Bateau.getFlotte().get(index).SetPositionHorizontale(coordBateauX);
-        Bateau.getFlotte().get(index).SetPositionVerticale(coordBateauY);
+    	Bateau bateauActuel;
+    	bateauActuel = Bateau.getFlotte().get(index);
+    	bateauActuel.SetPositionHorizontale(coordBateauX);
+    	bateauActuel.SetPositionVerticale(coordBateauY);
+    	/* placement des coordonnées incrémentant y pour allez vers le bas */
+    	for (int iterat = 1; iterat < bateauActuel.getTaille(); iterat++) {
+    		System.out.println("char à placer : " + (char) (coordBateauY + iterat));
+    		bateauActuel.SetPositionHorizontale((char) (coordBateauX));
+    		bateauActuel.SetPositionVerticale(coordBateauY + iterat);
+    	}
     }
+    
     
     /**
      * Effectue le placement d'un bateau dans le plateau.
-     * En partant d'une coordonnée random en partant vers la gauche du plateau
+     * Partant de (coordBateauX, coordBateauY) jusqu'a 
+     * (coordBateauX - bateau.getTaille(), coordBateauY)
      * @param index l'index du bateau dans la liste
      * @param coordBateauX la coordonnée en abscisse du bateau a placer
      * @param coordBateauY la coordonnée en ordonnée du bateau a placer
@@ -171,15 +232,15 @@ public class BatailleNavale {
         bateauActuel = Bateau.getFlotte().get(index);
         bateauActuel.SetPositionHorizontale(coordBateauX);
         bateauActuel.SetPositionVerticale(coordBateauY);
-        /* placement des coordonnée décrémentant x pour allez vers la gauche */
+        /* placement des coordonnées décrémentant x pour allez vers la gauche */
         for (int iterat = 1; iterat < bateauActuel.getTaille(); iterat++) {
-            System.out.println("char à placer : " + (char) (coordBateauX-iterat));
-            bateauActuel.SetPositionHorizontale((char) (coordBateauX-iterat));
+            System.out.println("char à placer : " + (char) (coordBateauX - iterat));
+            bateauActuel.SetPositionHorizontale((char) (coordBateauX - iterat));
             bateauActuel.SetPositionVerticale(coordBateauY);
         }
     }
-
-
+    
+    
     /**
      * récupération des coordonnées qu'entre 
      * le joueur et placement de celles-ci dans deux variables
@@ -210,7 +271,7 @@ public class BatailleNavale {
                 /* mise en majuscule du caractère */
                 x = (char) (x >= 'a'?(x - 32):x);
             }
-            if (coordonnees.charAt(placement) >= '1' && coordonnees.charAt(placement) <= '9') {
+            if (coordonnees.charAt(placement) >= '0' && coordonnees.charAt(placement) <= '9') {
                 /* y = valeur numérique */
                 if (chaineY == null) {
                     chaineY = coordonnees.substring(placement, placement+1);
