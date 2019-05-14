@@ -22,7 +22,7 @@ public class BatailleNavale {
      * Affiche le Menu principal et en fonction du choix,
      * renvoie à la méthode appropriée
      */
-    public static void Menu() {
+    public static void menu() {
         
         boolean nok;
         String reponse;
@@ -267,7 +267,7 @@ public class BatailleNavale {
      * @param args non utilisé
      */
     public static void main(String[] args) {
-        Menu();
+        menu();
         
         /*création du plateau de jeu */
         Plateau plateauJeu;
