@@ -316,7 +316,7 @@ public class BatailleNavale {
         Bateau bateauActuel = null;
         String[][] posBateau;
         Bateau bateauTouche = null;
-        int verification;
+        int verification = 0;
         int indexBateau;
         boolean coordTrouve =  false;
         int etat = 0;
@@ -350,10 +350,13 @@ public class BatailleNavale {
             System.out.println("Aucun bateau n'a été touché :(");
             etat = 0;
         }
-        for (verification = 0; verification <Bateau.getFlotte().size()
-                               && Bateau.getFlotte().get(verification).getVie() != 0 
-                             ; verification++);
-        if (verification != 0 ) {
+        for (int indexVie = 0; indexVie <Bateau.getFlotte().size()
+                             ; indexVie++) {
+            if (Bateau.getFlotte().get(indexVie).getVie() > 0) {
+                verification++;
+            }
+        }
+        if (verification > 0 ) {
             recupCoord(plateauJeu);
         } else {
             System.out.println("jeu fini, tout les bateaux ont été coulés");
