@@ -27,3 +27,5 @@ hs_err_pid*
 
 .settings/
 bataille-navale/src/files/tests/BatailleNavaleTest.java
+bataille-navale/src/files/tests/Bateau.java
+bataille-navale/src/files/tests/Plateau.java
