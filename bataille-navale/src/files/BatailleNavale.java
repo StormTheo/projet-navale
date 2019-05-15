@@ -7,18 +7,17 @@ package files;
 import java.util.Random;
 import java.util.Scanner;
 
-import files.Affichage; 
+import files.Affichage;
 import files.Bateau;
 import files.Plateau;
 
 /**
- * Lancement du main, création des objets,
- * réalisation d'une partie de batailleNavale.  
+ * Classe principale du jeu
  * @author IUT INFO1 groupe 1
  *
  */
 public class BatailleNavale {
-
+    
     /** Plateau du joueur */
     private static Plateau plateauJeu;
 
@@ -39,10 +38,14 @@ public class BatailleNavale {
         } while(!nok);
         reponseChar = reponse.charAt(0);
         reponseChar = (char) (reponseChar>='a'?reponseChar-32:reponseChar);
-        if (reponseChar == 'A' ) {
-            aide();
-        } else if (reponseChar == 'Q') {
-            System.exit(0);
+        switch (reponseChar) {
+            case 'A':
+                aide();
+                break;
+            case 'Q':
+                System.out.println("Vous avez quitter le jeu.");
+                System.exit(0);
+                break;
         }
     }
 
@@ -54,19 +57,22 @@ public class BatailleNavale {
     public static void aide() {
         String reponse;
         boolean nok;
-
+        char reponseChar;
         Affichage.afficherAide(); 
         /* saisie du choix de l'utilisateur */
         do {
             reponse = entreeUtilisateur();
             nok = Affichage.reponseValide(reponse);
         } while(!nok);
-
-        if (reponse.charAt(0) == 'A') {
+        reponseChar = reponse.charAt(0);
+        reponseChar = (char) (reponseChar>='a'?reponseChar-32:reponseChar);
+        if (reponseChar == 'A') {
             aide();
-        } else if (reponse.charAt(0) == 'Q') {
-            // arrêt du programme
+        } else if (reponseChar == 'Q') {
+            System.out.println("Vous avez quitter le jeu.");
+            System.exit(0);
         }  
+        
         // else lance le jeu dans le main
     }
 
@@ -306,60 +312,31 @@ public class BatailleNavale {
     }
 
     /**
-     * Cherche à verifier si les coordonnées entrées correspondent 
-     * à l'emplacement d'un bateau.
+     * Lance la vérification des coordonnées entrées, et affiche 
+     * le résultat du tir.
      * @param x coordonnée entrée par l'utilisateur pour l'abscisse
      * @param y coordonnée entrée par l'utilisateur pour l'ordonnée
      * 
      */
     public static void tir(char x, int y) {
-        Bateau bateauActuel = null;
-        String[][] posBateau;
-        Bateau bateauTouche = null;
-        int verification = 0;
         int indexBateau;
-        boolean coordTrouve =  false;
-        int etat = 0;
-        /* récupère chaque bateau un à un */
-        for (indexBateau = 0; !coordTrouve && indexBateau < Bateau.getFlotte().size(); indexBateau++) {
+        Bateau bateauActuel;
+        indexBateau = Bateau.verifTir(x, y);
+           
+        if (indexBateau >= 0) {
             bateauActuel = Bateau.getFlotte().get(indexBateau);
-            posBateau = bateauActuel.getPositions();
-            coordTrouve = false;
-            /* compare chaque position à l'argument */
-            for (int indexPos = 0; !coordTrouve && indexPos < posBateau[0].length
-                    ; indexPos++) {
-                /* si coordonnées correspondent */
-                if ( (x == posBateau[0][indexPos].charAt(0))
-                        && ( y == Integer.parseInt(posBateau[1][indexPos]) ) ) {
-                    coordTrouve = true;
-                }
-            }
-            
-        }
-        if (coordTrouve) {
-            if (bateauActuel.ajoutTouche()) {
-                /* bateau coulé */
-                System.out.println("Bateau : " + bateauActuel.getNom() + " coulé !");
-                etat = 2;
+            if (bateauActuel.toucher()) {
+                System.out.println("Bateau : " + bateauActuel.getNom() +" coulé !");
             } else {
-                /* bateau touché */
-                System.out.println("touché ! ");
-                etat = 1;
+                System.out.println("touché !");
             }
         } else {
-            System.out.println("Aucun bateau n'a été touché :(");
-            etat = 0;
+            System.out.println("aucun bateau touché :(");
         }
-        for (int indexVie = 0; indexVie <Bateau.getFlotte().size()
-                             ; indexVie++) {
-            if (Bateau.getFlotte().get(indexVie).getVie() > 0) {
-                verification++;
-            }
-        }
-        if (verification > 0 ) {
+        if (Bateau.bateauRestant()) {
             recupCoord(plateauJeu);
         } else {
-            System.out.println("jeu fini, tout les bateaux ont été coulés");
+            System.out.println("\n====>Partie terminée ! tous les bateaux ont été coulés !");
         }
     }
 

@@ -82,7 +82,7 @@ public class TestBateau {
                      nbvie < Bateau.getFlotte().get(nbateau).getTaille();
                      nbvie++) {
                 /* si le bateau est coulé */
-                if (Bateau.getFlotte().get(nbateau).ajoutTouche()) {
+                if (Bateau.getFlotte().get(nbateau).toucher()) {
                    System.out.println("coulé !\n"); 
                 }
                 /* si il est seulement touché */

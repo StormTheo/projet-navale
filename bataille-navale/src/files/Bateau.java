@@ -28,8 +28,6 @@ public class Bateau {
     /** Vie restante du bateau */
     private int vie;
 
-    /** Nombre de touches sur le bateau */
-    private int nbTouche;
 
     /** Positions du bateau */
     private String pos[][];
@@ -38,6 +36,9 @@ public class Bateau {
     private static int i;
     /** Servira pour placer les bateaux et parcourir verticalement la mer */
     private static int j;
+    
+    /** true si le bateau est en vie, false si sa vie <= 0 */
+    private boolean etat;
  
     
 
@@ -45,21 +46,21 @@ public class Bateau {
     private static List<Bateau> flotte = new ArrayList<Bateau>();
     
     /**
-     * TODO commenter le rôle de ce constructeur
+     * constructeurs de l'objet bateau avec les informations par défaut.
      */
     public Bateau() {
         this.nom = NOM_DEFAUT;
         this.taille = TAILLE_DEFAUT;
         this.vie = taille;
-        this.nbTouche = 0;
         this.i = 0;
         this.j = 0;
         this.pos = new String[2][taille];
         flotte.add(this);
+        this.etat = true;
     }
 
     /**
-     * TODO idem que le précédent, commenter le rôle de ce constructeur
+     *  constructeur de l'objet bateau, avec les informations nom et taille
      * @param nom
      * @param taille
      */
@@ -67,11 +68,11 @@ public class Bateau {
         this.nom = nom;
         this.taille = taille;
         this.vie = taille;
-        this.nbTouche = 0;
         this.i = 0;
         this.j = 0;
         this.pos = new String[2][taille];
         flotte.add(this);
+        this.etat = true;
     }
 
     /**
@@ -85,7 +86,6 @@ public class Bateau {
         this.nom = nom;
         this.taille = taille;
         this.vie = taille;
-        this.nbTouche = 0;
         this.i = 0;
         this.j = 0;
         String chaineX = Integer.toString(x);
@@ -112,21 +112,50 @@ public class Bateau {
     }
 
     /**
-     * Ajoute une touche au bateau et teste s'il est seulement "touché" ou "coulé"
-     * @return true s'il est coulé ou false s'il est simplement touché
-     */
-    public boolean ajoutTouche() {
-        this.vie--;
-        return this.vie <= 0;
-    }
-
-    /**
      * Renvoie le nombre de point de vie restant d'un bateau.
      * @return un int représentant le nbr de points de vie.
      */
     public int getVie() {
         return this.vie;
     }
+    
+    
+    /**
+     * @return la valeur de état
+     */
+    public boolean getEtat() {
+        return this.etat;
+    }
+
+    /**
+     * @param etat la nouvelle valeur de etat
+     */
+    public void setEtat(boolean etat) {
+        this.etat = etat;
+    }
+
+    /**
+     * Ajoute une touche au bateau et teste s'il est seulement "touché" ou "coulé"
+     * @return true s'il est coulé ou false s'il est simplement touché
+     */
+    public boolean toucher() {
+        /* n'est pas sur le point d'être détruit */
+        if (this.vie >= 2) {
+            this.vie--;
+        }
+        /* vas être détruit */
+        else if(this.vie == 1 && this.getEtat()) {
+            /* 
+             * on enlève sa dernière vie et on "l'élimine" 
+             * en passant son état à false
+             */
+            this.vie--;
+            this.setEtat(false);
+        }
+        return this.vie == 0;
+    }
+
+    
     /**
      * Place un point donné dans le tableau 
      * contenant les positions de ce bateau.
@@ -182,6 +211,62 @@ public class Bateau {
             }
         }
         System.out.println("\nfin\n");
+    }
+    
+    /**
+     * verifie si les coordonnées arguments correspondent 
+     * aux coordonnées d'un bateau
+     * @param x char coordonnée
+     * @param y int coordonnée
+     * @return indexBateau, l'index du bateau qui a été touché, 
+     *                      -1 si aucun bateau n'a été touché.
+     */
+    public static int verifTir(char x, int y) {
+        Bateau bateauActuel = null;
+        String[][] posBateau = null;
+        boolean coordTrouve = false;
+        int indexBateau;
+        /* récupère chaque bateau un à un */
+        for (indexBateau = 0; !coordTrouve && indexBateau < flotte.size(); indexBateau++) {
+            bateauActuel = flotte.get(indexBateau);
+            posBateau = bateauActuel.getPositions();
+            coordTrouve = false;
+            /* compare chaque position à l'argument */
+            for (int indexPos = 0; !coordTrouve && indexPos < posBateau[0].length
+                    ; indexPos++) {
+                /* si coordonnées correspondent */
+                if ( posBateau[0][indexPos] != null
+                        && (x == posBateau[0][indexPos].charAt(0))
+                        && ( y == Integer.parseInt(posBateau[1][indexPos]) )
+                        && bateauActuel.getEtat()) {
+                    
+                    coordTrouve = true;
+                    /* coordonnées modifiées pour éviter de repasser dans la boucle
+                     * ou de retomber sur ces coordonnées.
+                     */
+                    posBateau[0][indexPos] = null;
+                    posBateau[1][indexPos] = null;
+                }
+            }
+        }
+        /* si pas de correspondance */
+        if (!(coordTrouve && bateauActuel.getEtat())) {
+            indexBateau = 0;
+        }
+        /* -1 de décalage par rapport à l'incrémentation de la boucle */
+        return indexBateau-1;
+    }
+    
+    /**
+     * recherche si il reste dans bateau étant encore en vie ( vie > 0 )
+     * @return true si il reste des bateaux, false sinon
+     */
+    public static boolean bateauRestant() {
+        boolean reste = false;
+        for (int index = 0; !reste && index < flotte.size(); index++) {
+            reste = flotte.get(index).getEtat();
+        }
+        return reste;
     }
     
     /**
