@@ -7,12 +7,13 @@ package files;
 import java.util.Random;
 import java.util.Scanner;
 
-import files.Affichage;
+import files.Affichage; 
 import files.Bateau;
 import files.Plateau;
 
 /**
- * Classe principale du jeu
+ * Lancement du main, création des objets,
+ * réalisation d'une partie de batailleNavale.  
  * @author IUT INFO1 groupe 1
  *
  */
@@ -111,8 +112,7 @@ public class BatailleNavale {
          */
         String coordPossible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         char coordBateauX;
-        /* sauvegarde du nombre affecté à une lettre */
-        int nbrRandX;
+        int nbrRandX; // sauvegarde du nombre affecté à une lettre
         int coordBateauY;
         int direction; //direction du bateau comprise entre 1 et 4
         // 1 = haut; 2 = gauche; 3 = bas; 4 = droite
@@ -179,7 +179,7 @@ public class BatailleNavale {
         Bateau bateauActuel;
         bateauActuel = Bateau.getFlotte().get(index);
 
-        /* placement des coordonnées décrémentant y pour allez vers le haut */
+        /* placement des coordonnées en décrémentant y pour allez vers le haut */
         for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
             System.out.println("char à placer : " + (coordBateauY - iterat));
             bateauActuel.SetPositionHorizontale((char) (coordBateauX));
@@ -199,7 +199,7 @@ public class BatailleNavale {
     private static void placementDroite(int index, char coordBateauX, int coordBateauY) {
         Bateau bateauActuel;
         bateauActuel = Bateau.getFlotte().get(index);
-        /* placement des coordonnées incrémentant x pour allez vers la droite */
+        /* placement des coordonnées en incrémentant x pour allez vers la droite */
         for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
             System.out.println("char à placer : " + (char) (coordBateauX + iterat));
             bateauActuel.SetPositionHorizontale((char) (coordBateauX + iterat));
@@ -219,7 +219,7 @@ public class BatailleNavale {
     private static void placementBas(int index, char coordBateauX, int coordBateauY) {
         Bateau bateauActuel;
         bateauActuel = Bateau.getFlotte().get(index);
-        /* placement des coordonnées incrémentant y pour allez vers le bas */
+        /* placement des coordonnées en incrémentant y pour allez vers le bas */
         for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
             System.out.println("char à placer : " + (coordBateauY + iterat));
             bateauActuel.SetPositionHorizontale((char) (coordBateauX));
@@ -239,7 +239,7 @@ public class BatailleNavale {
     private static void placementGauche(int index, char coordBateauX, int coordBateauY) {
         Bateau bateauActuel;
         bateauActuel = Bateau.getFlotte().get(index);
-        /* placement des coordonnées décrémentant x pour allez vers la gauche */
+        /* placement des coordonnées en décrémentant x pour allez vers la gauche */
         for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
             System.out.println("char à placer : " + (char) (coordBateauX - iterat));
             bateauActuel.SetPositionHorizontale((char) (coordBateauX - iterat));
@@ -326,7 +326,7 @@ public class BatailleNavale {
             posBateau = bateauActuel.getPositions();
             coordTrouve = false;
             /* compare chaque position à l'argument */
-            for (int indexPos = 0; !coordTrouve && indexPos < posBateau[0].length && !coordTrouve
+            for (int indexPos = 0; !coordTrouve && indexPos < posBateau[0].length
                     ; indexPos++) {
                 /* si coordonnées correspondent */
                 if ( (x == posBateau[0][indexPos].charAt(0))
@@ -350,8 +350,8 @@ public class BatailleNavale {
             System.out.println("Aucun bateau n'a été touché :(");
             etat = 0;
         }
-        for (verification = 0; Bateau.getFlotte().get(verification).getVie() != 0 
-                               && verification <Bateau.getFlotte().size()
+        for (verification = 0; verification <Bateau.getFlotte().size()
+                               && Bateau.getFlotte().get(verification).getVie() != 0 
                              ; verification++);
         if (verification != 0 ) {
             recupCoord(plateauJeu);
