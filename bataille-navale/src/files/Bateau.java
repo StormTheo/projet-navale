@@ -5,8 +5,8 @@
 
 package files;
 
-import java.util.ArrayList;
-import java.util.List;
+import files.Plateau;
+
 /**
  * Classe Bateau permettant de créer des bateaux de 
  * @author INFO 1
@@ -33,17 +33,13 @@ public class Bateau {
     private String pos[][];
     
     /** Servira pour placer les bateaux et parcourir horizontalement la mer */
-    private static int i;
+    private int i;
     /** Servira pour placer les bateaux et parcourir verticalement la mer */
-    private static int j;
+    private int j;
     
     /** true si le bateau est en vie, false si sa vie <= 0 */
     private boolean etat;
  
-    
-
-    /** Liste contenant tous les bateaux, composant une flotte */
-    private static List<Bateau> flotte = new ArrayList<Bateau>();
     
     /**
      * constructeurs de l'objet bateau avec les informations par défaut.
@@ -55,7 +51,7 @@ public class Bateau {
         this.i = 0;
         this.j = 0;
         this.pos = new String[2][taille];
-        flotte.add(this);
+        Plateau.setFlotte(this);
         this.etat = true;
     }
 
@@ -71,29 +67,11 @@ public class Bateau {
         this.i = 0;
         this.j = 0;
         this.pos = new String[2][taille];
-        flotte.add(this);
+        Plateau.setFlotte(this);
         this.etat = true;
     }
 
-    /**
-     * TODO commenter l'état initial atteint
-     * @param nom
-     * @param taille
-     * @param x
-     * @param y
-     */
-    public Bateau(String nom, int taille, char x, String y) {
-        this.nom = nom;
-        this.taille = taille;
-        this.vie = taille;
-        this.i = 0;
-        this.j = 0;
-        String chaineX = Integer.toString(x);
-        this.pos = new String[2][taille];
-        this.pos[0][i] = chaineX;
-        this.pos[1][j] = y;
-        flotte.add(this);
-    }
+
     
     /**
      * Retourne le nom du bateau
@@ -227,8 +205,8 @@ public class Bateau {
         boolean coordTrouve = false;
         int indexBateau;
         /* récupère chaque bateau un à un */
-        for (indexBateau = 0; !coordTrouve && indexBateau < flotte.size(); indexBateau++) {
-            bateauActuel = flotte.get(indexBateau);
+        for (indexBateau = 0; !coordTrouve && indexBateau < Plateau.getFlotte().size(); indexBateau++) {
+            bateauActuel = Plateau.getFlotte().get(indexBateau);
             posBateau = bateauActuel.getPositions();
             coordTrouve = false;
             /* compare chaque position à l'argument */
@@ -263,27 +241,13 @@ public class Bateau {
      */
     public static boolean bateauRestant() {
         boolean reste = false;
-        for (int index = 0; !reste && index < flotte.size(); index++) {
-            reste = flotte.get(index).getEtat();
+        for (int index = 0; !reste && index < Plateau.getFlotte().size(); index++) {
+            reste = Plateau.getFlotte().get(index).getEtat();
         }
         return reste;
     }
     
-    /**
-     * retourne la liste contenant tout les objets Bateau créés
-     * 
-     * @return flotte
-     */
-    public static List<Bateau> getFlotte() {
-        return new ArrayList<>(flotte);
-    }
     
-    /**
-     * vide la liste des objets créés
-     */
-    public static void clearFlotte() {
-        flotte.clear();
-    }
     
     /**
      * Renvoie une chaîne de caractère avec le nom et 
@@ -291,7 +255,7 @@ public class Bateau {
      */
     public String toString() {
         return "Nom : " + this.getNom() 
-                + ", Taille : " + this.getTaille() + "\n";  
+        		+ ", Taille : " + this.getTaille() + "\n";  
     } 
     
 }

@@ -122,9 +122,9 @@ public class BatailleNavale {
         int coordBateauY;
         int direction; //direction du bateau comprise entre 1 et 4
         // 1 = haut; 2 = gauche; 3 = bas; 4 = droite
-        int nbBateau = Bateau.getFlotte().size();
+        int nbBateau = Plateau.getFlotte().size();
         for (int i = 0; i < nbBateau; i++) {
-            Bateau bateauxAPlacer = Bateau.getFlotte().get(i);
+            Bateau bateauxAPlacer = Plateau.getFlotte().get(i);
             // génération aléatoire des positions x et y des bateaux
             nbrRandX = random.nextInt(plateau.getDimX());
             coordBateauX = coordPossible.charAt(nbrRandX);
@@ -137,37 +137,37 @@ public class BatailleNavale {
             // placer le bateau i; PENSER A LA DIRECTION !
             switch(direction) {
             case 1:
-                if (coordBateauY - bateauxAPlacer.getTaille() > 0 ) {
-                    System.out.println(" bateau : " + Bateau.getFlotte().get(i).getTaille());
-                    placementHaut(i, coordBateauX, coordBateauY);
-                } else {
-                    placementBas(i, coordBateauX, coordBateauY);
-                }
-                break;
+            	if (coordBateauY - bateauxAPlacer.getTaille() > 0 ) {
+            		System.out.println(" bateau : " + Plateau.getFlotte().get(i).getTaille());
+            		placementHaut(i, coordBateauX, coordBateauY);
+            	} else {
+            		placementBas(i, coordBateauX, coordBateauY);
+            	}
+            	break;
             case 2:
-                if (nbrRandX + bateauxAPlacer.getTaille() <= plateau.getDimX()) {
-                    System.out.println(" bateau : " + Bateau.getFlotte().get(i).getTaille());
-                    placementDroite(i, coordBateauX, coordBateauY);
-                } else {
-                    placementGauche(i, coordBateauX, coordBateauY);
-                }
-                break;
+            	if (nbrRandX + bateauxAPlacer.getTaille() <= plateau.getDimX()) {
+            		System.out.println(" bateau : " + Plateau.getFlotte().get(i).getTaille());
+            		placementDroite(i, coordBateauX, coordBateauY);
+            	} else {
+            		placementGauche(i, coordBateauX, coordBateauY);
+            	}
+            	break;
             case 3:
-                if (coordBateauY + bateauxAPlacer.getTaille() <= plateau.getDimY()) {
-                    System.out.println(" bateau : " + Bateau.getFlotte().get(i).getTaille());
-                    placementBas(i, coordBateauX, coordBateauY);
-                } else {
-                    placementHaut(i, coordBateauX, coordBateauY);
-                }
-                break;
+            	if (coordBateauY + bateauxAPlacer.getTaille() <= plateau.getDimY()) {
+            		System.out.println(" bateau : " + Plateau.getFlotte().get(i).getTaille());
+            		placementBas(i, coordBateauX, coordBateauY);
+            	} else {
+            		placementHaut(i, coordBateauX, coordBateauY);
+            	}
+            	break;
             case 4:
-                if (nbrRandX - bateauxAPlacer.getTaille() > 0) {
-                    System.out.println(" bateau : " + Bateau.getFlotte().get(i).getTaille());
-                    placementGauche(i, coordBateauX, coordBateauY);
-                } else {
-                    placementDroite(i, coordBateauX, coordBateauY);
-                }
-                break;
+            	if (nbrRandX - bateauxAPlacer.getTaille() > 0) {
+            		System.out.println(" bateau : " + Plateau.getFlotte().get(i).getTaille());
+            		placementGauche(i, coordBateauX, coordBateauY);
+            	} else {
+            		placementDroite(i, coordBateauX, coordBateauY);
+            	}
+            	break;
             }
             bateauxAPlacer.afficherPositions();
         }
@@ -183,7 +183,7 @@ public class BatailleNavale {
      */
     private static void placementHaut(int index, char coordBateauX, int coordBateauY) {
         Bateau bateauActuel;
-        bateauActuel = Bateau.getFlotte().get(index);
+        bateauActuel = Plateau.getFlotte().get(index);
 
         /* placement des coordonnées en décrémentant y pour allez vers le haut */
         for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
@@ -204,7 +204,7 @@ public class BatailleNavale {
      */
     private static void placementDroite(int index, char coordBateauX, int coordBateauY) {
         Bateau bateauActuel;
-        bateauActuel = Bateau.getFlotte().get(index);
+        bateauActuel = Plateau.getFlotte().get(index);
         /* placement des coordonnées en incrémentant x pour allez vers la droite */
         for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
             System.out.println("char à placer : " + (char) (coordBateauX + iterat));
@@ -224,7 +224,7 @@ public class BatailleNavale {
      */
     private static void placementBas(int index, char coordBateauX, int coordBateauY) {
         Bateau bateauActuel;
-        bateauActuel = Bateau.getFlotte().get(index);
+        bateauActuel = Plateau.getFlotte().get(index);
         /* placement des coordonnées en incrémentant y pour allez vers le bas */
         for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
             System.out.println("char à placer : " + (coordBateauY + iterat));
@@ -244,7 +244,7 @@ public class BatailleNavale {
      */
     private static void placementGauche(int index, char coordBateauX, int coordBateauY) {
         Bateau bateauActuel;
-        bateauActuel = Bateau.getFlotte().get(index);
+        bateauActuel = Plateau.getFlotte().get(index);
         /* placement des coordonnées en décrémentant x pour allez vers la gauche */
         for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
             System.out.println("char à placer : " + (char) (coordBateauX - iterat));
@@ -324,7 +324,7 @@ public class BatailleNavale {
         indexBateau = Bateau.verifTir(x, y);
            
         if (indexBateau >= 0) {
-            bateauActuel = Bateau.getFlotte().get(indexBateau);
+            bateauActuel = Plateau.getFlotte().get(indexBateau);
             if (bateauActuel.toucher()) {
                 System.out.println("Bateau : " + bateauActuel.getNom() +" coulé !");
             } else {
@@ -359,12 +359,13 @@ public class BatailleNavale {
         /* affichage des infos du plateau pour le joueur */
         System.out.println("\n" + plateauJeu.toString() + "\n");
         placement(plateauJeu);
+        
         // TODO placer les bateaux
 
         /* affichage des infos de chaque bateau pour le joueur */
-        for (int aAfficher = 0; aAfficher < Bateau.getFlotte().size(); aAfficher++) {
+        for (int aAfficher = 0; aAfficher < Plateau.getFlotte().size(); aAfficher++) {
             System.out.printf("%d) %s", aAfficher+1,
-                    Bateau.getFlotte().get(aAfficher).toString());
+            		Plateau.getFlotte().get(aAfficher).toString());
         }
         // TODO afficher informations de la partie en cours avant 
         // la demande des coordonnées -> méthode.

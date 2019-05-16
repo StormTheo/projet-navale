@@ -4,6 +4,10 @@
 
 package files;
 
+import java.util.ArrayList;
+import java.util.List;
+import files.Bateau;
+
 /**
  * Classe qui initialise une plateau de jeu pour la bataille navale.
  * Le plateau est un repère ayant en abscisse des lettres (de A à Z max)
@@ -40,6 +44,9 @@ public class Plateau {
 	/** Dimension en ordonnée */
 	private int dimY;
 	
+    /** Liste contenant tous les bateaux, composant une flotte */
+    private static List<Bateau> flotte = new ArrayList<Bateau>();
+    
 	/**
 	 * Constructeur par défaut qui initialise les dimensions
 	 * avec la valeur par défaut
@@ -91,7 +98,7 @@ public class Plateau {
 		}
 		return plateau;
 	}
-		
+	
 	/**
 	 * Accesseur sur la dimension en abscisse
 	 * @return un entier égal à la dimension en abscisse
@@ -108,6 +115,29 @@ public class Plateau {
 		return this.dimY;
 	}
 	
+	
+	
+	/**
+     * retourne la liste contenant tout les objets Bateau créés
+     * 
+     * @return flotte
+     */
+    public static List<Bateau> getFlotte() {
+        return new ArrayList<>(flotte);
+    }
+    
+    public static void setFlotte(Bateau bateau) {
+    	Plateau.flotte.add(bateau);
+    }
+    
+    /**
+     * vide la liste des objets créés
+     */
+    public static void clearFlotte() {
+        flotte.clear();
+    }
+    
+    
 	/**
 	 * Renvoie les dimensions du plateau de jeu sous la forme d'une
 	 * chaîne de caractères.
