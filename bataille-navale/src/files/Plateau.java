@@ -126,6 +126,10 @@ public class Plateau {
         return new ArrayList<>(flotte);
     }
     
+    /**
+     * permet d'ajouter un bateau.
+     * @param bateau
+     */
     public static void setFlotte(Bateau bateau) {
     	Plateau.flotte.add(bateau);
     }
