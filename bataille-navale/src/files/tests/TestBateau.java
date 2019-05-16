@@ -7,6 +7,7 @@ package files.tests;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import files.Plateau;
 
 import files.Bateau;
 /**
@@ -24,7 +25,7 @@ public class TestBateau {
      */
     private static void continuer() {
         System.out.println("\n\n\nAppuyez sur entrée pour continuer les tests.") ;
-        Bateau.clearFlotte();
+        Plateau.clearFlotte();
         entree.nextLine();
         System.out.println("\n\n");
         
@@ -50,18 +51,18 @@ public class TestBateau {
             /* création de chaque bateau avec les informations des tableaux */
             new Bateau(BATEAU_NOM[numero], BATEAU_TAILLE[numero]);
         }
-        for (int liste = 0; liste < Bateau.getFlotte().size()-1; liste++) {
+        for (int liste = 0; liste < Plateau.getFlotte().size()-1; liste++) {
             System.out.println("Bateau supposé : " + BATEAU_NOM[liste] 
                     + ", taille : " + BATEAU_TAILLE[liste] + "\n");
 
-            System.out.println("==> nom : " + Bateau.getFlotte().get(liste+1).getNom()
-                    + ", taille : " + Bateau.getFlotte().get(liste+1).getTaille()
+            System.out.println("==> nom : " + Plateau.getFlotte().get(liste+1).getNom()
+                    + ", taille : " + Plateau.getFlotte().get(liste+1).getTaille()
                     + "\n");
         }
         /* affichage du bateau créer avec les valeurs par défaut */
         System.out.println("Par défaut : \nBateau supposé : Vedette , taille : 2\n");
-        System.out.println("==> nom : " + Bateau.getFlotte().get(0).getNom() 
-                + " taille : " + Bateau.getFlotte().get(0).getTaille()
+        System.out.println("==> nom : " + Plateau.getFlotte().get(0).getNom() 
+                + " taille : " + Plateau.getFlotte().get(0).getTaille()
                 + "\n");
         continuer();
     }
@@ -74,15 +75,15 @@ public class TestBateau {
         new Bateau("Test", 4);
         new Bateau();
         /* Le nombre de bateau dans la liste */
-        for (int nbateau = 0; nbateau < Bateau.getFlotte().size(); nbateau++) {
-            System.out.println("bateau : " + Bateau.getFlotte().get(nbateau).getNom()
-                                + " taille : " + Bateau.getFlotte().get(nbateau).getTaille());
+        for (int nbateau = 0; nbateau < Plateau.getFlotte().size(); nbateau++) {
+            System.out.println("bateau : " + Plateau.getFlotte().get(nbateau).getNom()
+                                + " taille : " + Plateau.getFlotte().get(nbateau).getTaille());
             /* la taille de chacun ( leur vies restante ) */
             for (int nbvie = 0;
-                     nbvie < Bateau.getFlotte().get(nbateau).getTaille();
+                     nbvie < Plateau.getFlotte().get(nbateau).getTaille();
                      nbvie++) {
                 /* si le bateau est coulé */
-                if (Bateau.getFlotte().get(nbateau).toucher()) {
+                if (Plateau.getFlotte().get(nbateau).toucher()) {
                    System.out.println("coulé !\n"); 
                 }
                 /* si il est seulement touché */
