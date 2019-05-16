@@ -44,6 +44,5 @@ public class Coordonnees {
         this.coordY = coordY;
         this.coordX = coordX;
     }
-
-    
+       
 }
