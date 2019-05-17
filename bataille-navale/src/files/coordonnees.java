@@ -23,7 +23,20 @@ public class coordonnees {
     /** une table contenant X et Y */
     private String[][] coordTable;
     
-    /**
+    
+    public String getCoordX() {
+		return coordX;
+	}
+
+	public String getCoordY() {
+		return coordY;
+	}
+
+	public String[][] getCoordTable() {
+		return coordTable;
+	}
+
+	/**
      * Constructeur par défaut 
      */
     public coordonnees() {
