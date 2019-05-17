@@ -9,7 +9,7 @@ package files;
  * @author INFO1
  *
  */
-public class coordonnees {
+public class Coordonnees {
     
     /** Valeur par défaut d'une coordonnée dans le tableau  */
     private static final String COORD_DEFAUT = null;
@@ -26,7 +26,7 @@ public class coordonnees {
     /**
      * Constructeur par défaut 
      */
-    public coordonnees() {
+    public Coordonnees() {
         this.coordTable[0][0] = COORD_DEFAUT;
         this.coordTable[1][0] = COORD_DEFAUT;
         this.coordY = COORD_DEFAUT;
@@ -38,12 +38,11 @@ public class coordonnees {
      * @param coordX String contenant une lettre, pour la position en abscisse
      * @param coordY String contenant un nombre, pour la position en ordonnée
      */
-    public coordonnees(String coordX, String coordY) {
+    public Coordonnees(String coordX, String coordY) {
         this.coordTable[0][0] = coordX;
         this.coordTable[1][0] = coordY;
         this.coordY = coordY;
         this.coordX = coordX;
     }
-
-    
+       
 }
