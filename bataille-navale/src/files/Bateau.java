@@ -139,7 +139,7 @@ public class Bateau {
      * 
      * @param position Un point contenant d'abcisse du bateau
      */
-    public void SetPositionHorizontale(char position) {
+    public void setPositionHorizontale(char position) {
         if (i < vie) {
             pos[0][i] = Character.toString(position);
             i++;
@@ -155,7 +155,7 @@ public class Bateau {
      * 
      * @param position
      */
-    public void SetPositionVerticale(int position) {
+    public void setPositionVerticale(int position) {
         /* Le nombre de point doit être inférieur à la taille du bateau */
         if (j < vie) {
             pos[1][j] = Integer.toString(position);

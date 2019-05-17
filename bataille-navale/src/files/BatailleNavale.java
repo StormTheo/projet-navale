@@ -8,7 +8,6 @@ package files;
 import java.util.Random;
 import java.util.Scanner;
 
-import files.Direction;
 import files.Affichage;
 import files.Bateau;
 import files.Plateau;
@@ -125,135 +124,49 @@ public class BatailleNavale {
         char coordBateauX;
         int nbrRandX; // sauvegarde du nombre affecté à une lettre
         int coordBateauY;
-        Direction direction; // direction du bateau comprise entre 1 et 4
+        int alignement;
+        int direction; // direction du bateau comprise entre 1 et 4
         // 1 = haut; 2 = gauche; 3 = bas; 4 = droite
         int nbBateau = Plateau.getFlotte().size();
         for (int i = 0; i < nbBateau; i++) {
-            Bateau bateauxAPlacer = Plateau.getFlotte().get(i);
             // génération aléatoire des positions x et y des bateaux
             nbrRandX = random.nextInt(plateau.getDimX());
             coordBateauX = coordPossible.charAt(nbrRandX);
             System.out.println("X = " + coordBateauX); // DEBUG
             coordBateauY = random.nextInt(plateau.getDimY()) + 1;
             System.out.println("Y = " + coordBateauY); // DEBUG
+            alignement = random.nextInt(2)+1;
             // direction du bateau aléatoire
-            direction = Direction.directionAleatoire();
+            direction = random.nextInt(2)*2-1;
             
-            System.out.println("direction : " + direction); // debug
+            System.out.println("direction : " + direction 
+            					+ "\nalignement : " + alignement); // debug
+            System.out.println();
+            placement(direction, alignement, coordBateauX, coordBateauY, i);
             // placer le bateau i; PENSER A LA DIRECTION !
-            switch (direction) {
-            case haut:
-                if (coordBateauY - bateauxAPlacer.getTaille() > 0) {
-                    System.out.println(" bateau : " + Plateau.getFlotte().get(i).getTaille());
-                    placementHaut(i, coordBateauX, coordBateauY);
-                } else {
-                    placementBas(i, coordBateauX, coordBateauY);
-                }
-                break;
-            case gauche:
-                if (nbrRandX + bateauxAPlacer.getTaille() <= plateau.getDimX()) {
-                    System.out.println(" bateau : " + Plateau.getFlotte().get(i).getTaille());
-                    placementDroite(i, coordBateauX, coordBateauY);
-                } else {
-                    placementGauche(i, coordBateauX, coordBateauY);
-                }
-                break;
-            case bas:
-                if (coordBateauY + bateauxAPlacer.getTaille() <= plateau.getDimY()) {
-                    System.out.println(" bateau : " + Plateau.getFlotte().get(i).getTaille());
-                    placementBas(i, coordBateauX, coordBateauY);
-                } else {
-                    placementHaut(i, coordBateauX, coordBateauY);
-                }
-                break;
-            case droite:
-                if (nbrRandX - bateauxAPlacer.getTaille() > 0) {
-                    System.out.println(" bateau : " + Plateau.getFlotte().get(i).getTaille());
-                    placementGauche(i, coordBateauX, coordBateauY);
-                } else {
-                    placementDroite(i, coordBateauX, coordBateauY);
-                }
-                break;
-            }
-            bateauxAPlacer.afficherPositions();
+            Plateau.getFlotte().get(i).afficherPositions();
         }
+        
     }
-
-    /**
-     * Effectue le placement d'un bateau dans le plateau. Partant de (coordBateauX,
-     * coordBateauY) jusqu'a (coordBateauX, coordBateauY - bateau.getTaille())
-     * 
-     * @param index        l'index du bateau dans la liste
-     * @param coordBateauX la coordonnée en abscisse du bateau a placer
-     * @param coordBateauY la coordonnée en ordonnée du bateau a placer
-     */
-    private static void placementHaut(int index, char coordBateauX, int coordBateauY) {
-        Bateau bateauActuel;
-        bateauActuel = Plateau.getFlotte().get(index);
-
-        /* placement des coordonnées en décrémentant y pour allez vers le haut */
-        for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
-            System.out.println("char à placer : " + (coordBateauY - iterat));
-            bateauActuel.SetPositionHorizontale((char) (coordBateauX));
-            bateauActuel.SetPositionVerticale(coordBateauY - iterat);
-        }
-    }
-
-    /**
-     * Effectue le placement d'un bateau dans le plateau. Partant de (coordBateauX,
-     * coordBateauY) jusqu'a (coordBateauX + bateau.getTaille(), coordBateauY)
-     * 
-     * @param index        l'index du bateau dans la liste
-     * @param coordBateauX la coordonnée en abscisse du bateau a placer
-     * @param coordBateauY la coordonnée en ordonnée du bateau a placer
-     */
-    private static void placementDroite(int index, char coordBateauX, int coordBateauY) {
-        Bateau bateauActuel;
-        bateauActuel = Plateau.getFlotte().get(index);
-        /* placement des coordonnées en incrémentant x pour allez vers la droite */
-        for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
-            System.out.println("char à placer : " + (char) (coordBateauX + iterat));
-            bateauActuel.SetPositionHorizontale((char) (coordBateauX + iterat));
-            bateauActuel.SetPositionVerticale(coordBateauY);
-        }
-    }
-
-    /**
-     * Effectue le placement d'un bateau dans le plateau. Partant de (coordBateauX,
-     * coordBateauY) jusqu'a (coordBateauX, coordBateauY + bateau.getTaille())
-     * 
-     * @param index        l'index du bateau dans la liste
-     * @param coordBateauX la coordonnée en abscisse du bateau a placer
-     * @param coordBateauY la coordonnée en ordonnée du bateau a placer
-     */
-    private static void placementBas(int index, char coordBateauX, int coordBateauY) {
-        Bateau bateauActuel;
-        bateauActuel = Plateau.getFlotte().get(index);
-        /* placement des coordonnées en incrémentant y pour allez vers le bas */
-        for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
-            System.out.println("char à placer : " + (coordBateauY + iterat));
-            bateauActuel.SetPositionHorizontale((char) (coordBateauX));
-            bateauActuel.SetPositionVerticale(coordBateauY + iterat);
-        }
-    }
-
-    /**
-     * Effectue le placement d'un bateau dans le plateau. Partant de (coordBateauX,
-     * coordBateauY) jusqu'a (coordBateauX - bateau.getTaille(), coordBateauY)
-     * 
-     * @param index        l'index du bateau dans la liste
-     * @param coordBateauX la coordonnée en abscisse du bateau a placer
-     * @param coordBateauY la coordonnée en ordonnée du bateau a placer
-     */
-    private static void placementGauche(int index, char coordBateauX, int coordBateauY) {
-        Bateau bateauActuel;
-        bateauActuel = Plateau.getFlotte().get(index);
-        /* placement des coordonnées en décrémentant x pour allez vers la gauche */
-        for (int iterat = 0; iterat < bateauActuel.getTaille(); iterat++) {
-            System.out.println("char à placer : " + (char) (coordBateauX - iterat));
-            bateauActuel.SetPositionHorizontale((char) (coordBateauX - iterat));
-            bateauActuel.SetPositionVerticale(coordBateauY);
-        }
+    
+    public static void placement(int direction, int alignement,
+    							char coordBateauX, int coordBateauY, int i) {
+    	int directionBoucle = 0;
+    	Bateau bateauActuel;
+    	bateauActuel = Plateau.getFlotte().get(i);
+    	bateauActuel.setPositionHorizontale(coordBateauX);
+    	bateauActuel.setPositionVerticale(coordBateauY);
+    	for (int index = 1; index < bateauActuel.getTaille(); index++) {
+    		if(alignement == 1) {
+    			directionBoucle += direction;
+    			bateauActuel.setPositionHorizontale((char) (coordBateauX+directionBoucle));
+    			bateauActuel.setPositionVerticale(coordBateauY);
+    		} else if (alignement == 2) {
+    			directionBoucle+=direction;
+    			bateauActuel.setPositionHorizontale(coordBateauX);
+    			bateauActuel.setPositionVerticale(coordBateauY+directionBoucle);
+    		}
+    	}
     }
 
     /**
