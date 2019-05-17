@@ -12,98 +12,89 @@ package files;
  */
 public class Affichage {
 
-	/**
-	 * Texte de titre pour le menu principal
-	 */
-	private static final String TITRE_MENU_PRINCIPAL = 
-			"------------------------------------------------------------------\n"
-			+ "|                      MENU PRINCIPAL                            |\n"
-			+ "------------------------------------------------------------------\n";
+    /**
+     * Texte de titre pour le menu principal
+     */
+    private static final String TITRE_MENU_PRINCIPAL = "------------------------------------------------------------------\n"
+                                                     + "|                      MENU PRINCIPAL                            |\n"
+                                                     + "------------------------------------------------------------------\n";
 
-	/**
-	 * Liste des options possibles (caractères) pour le menu principal
-	 */
-	private static final char[] OPTION_MENU_PRINCIPAL = { 'j', 'a', 'q'};
+    /**
+     * Liste des options possibles (caractères) pour le menu principal
+     */
+    private static final char[] OPTION_MENU_PRINCIPAL = { 'j', 'a', 'q' };
 
-	/**
-	 * Liste des options possible (textes) pour le menu principal
-	 */
-	private static final String[] LIBELLE_MENU_PRINCIPAL = {"Jouer",
-								"Aide",
-								"Quitter"};
+    /**
+     * Liste des options possible (textes) pour le menu principal
+     */
+    private static final String[] LIBELLE_MENU_PRINCIPAL = { "Jouer", "Aide", "Quitter" };
 
-	/**
-	 * Affichage du menu principal
-	 */
-	public static void menuPrincipal() {
-		System.out.println(TITRE_MENU_PRINCIPAL);
+    /**
+     * Affichage du menu principal
+     */
+    public static void menuPrincipal() {
+        System.out.println(TITRE_MENU_PRINCIPAL);
 
-		// on affiche toutes les options et les libellés
-		for(int i = 0; i < OPTION_MENU_PRINCIPAL.length; i++) {
-			System.out.print("   => " + OPTION_MENU_PRINCIPAL[i] 
-					+ " - " + LIBELLE_MENU_PRINCIPAL[i] + "\n");
-		}
-	}
+        // on affiche toutes les options et les libellés
+        for (int i = 0; i < OPTION_MENU_PRINCIPAL.length; i++) {
+            System.out.print("   => " + OPTION_MENU_PRINCIPAL[i] + " - " + LIBELLE_MENU_PRINCIPAL[i] + "\n");
+        }
+    }
 
-	/**
-	 * @param aTester 
-	 * @return un boolean vrai si le character est valide, faux sinon.
-	 */
-	public static boolean reponseValide(String aTester) {
-	    boolean valide;
-	    
-	    //  la réponse ne contient pas un caractère unique ==> true
-	    valide = !(aTester == null || aTester.length() != 1);  
-	    if (valide) {
-	        /* Pour la premiere itération de la boucle */
-	        valide = false; 
-	        
-	        for (int index = 0; index < OPTION_MENU_PRINCIPAL.length 
-	                && !valide; index++) {
-	            valide = aTester.charAt(0) == OPTION_MENU_PRINCIPAL[index]
-	                     || aTester.charAt(0)+32 == OPTION_MENU_PRINCIPAL[index];
-	        }
-	        
-	    }
-	    return valide;
-	}
-	
-	/**
-	 * méthode contenant la String pour l'aide
-	 */
-	public static final String AIDE = 
-			"\n------------------------------------------------------------------------\n\n"
-			+ "======== Bienvenue dans notre jeu de Bataille navale ! =========\n\n"
-			+ "Le but du jeu est de couler les différents bateaux présents \n"
-			+ "sur le plateau en entrant des coordonnées à chaque tour.\n\n"
-			+ "Il existe différents types de bateaux qui ont des tailles \n"
-			+ "différentes. Ils se situent au minimum à une case l'un de l'autre\n"
-			+ "A chaque tour sont affichées les différentes informations sur la partie\n"
-			+ "en cours.\n"
-			+ "------------------------------------------------------------------------\n";
+    /**
+     * @param aTester
+     * @return un boolean vrai si le character est valide, faux sinon.
+     */
+    public static boolean reponseValide(String aTester) {
+        boolean valide;
 
-	/**
-	 * Option disponible pour l'aide
-	 */
-	private static final char[] OPTION_AIDE = { 'j', 'q'};
+        // la réponse ne contient pas un caractère unique ==> true
+        valide = !(aTester == null || aTester.length() != 1);
+        if (valide) {
+            /* Pour la premiere itération de la boucle */
+            valide = false;
 
-	/**
-	 * Liste des options possible (textes) pour le menu principal
-	 */ 
-	private static final String[] LIBELLE_AIDE = {"Jouer",
-						      "Quitter"};
-	
-	/**
-	 * Affichage de l'aide
-	 */
-	public static void afficherAide() {
-		System.out.println(AIDE);
+            for (int index = 0; index < OPTION_MENU_PRINCIPAL.length && !valide; index++) {
+                valide = aTester.charAt(0) == OPTION_MENU_PRINCIPAL[index]
+                        || aTester.charAt(0) + 32 == OPTION_MENU_PRINCIPAL[index];
+            }
 
-		// on affiche toutes les options et les libellés
-		for(int i = 0; i < OPTION_AIDE.length; i++) {
-			System.out.print("   => " + OPTION_AIDE[i] 
-					+ " - " + LIBELLE_AIDE[i] + "\n");
-		}
-	}
+        }
+        return valide;
+    }
+
+    /**
+     * méthode contenant la String pour l'aide
+     */
+    public static final String AIDE = "\n------------------------------------------------------------------------\n\n"
+                                    + "======== Bienvenue dans notre jeu de Bataille navale ! =========\n\n"
+                                    + "Le but du jeu est de couler les différents bateaux présents \n"
+                                    + "sur le plateau en entrant des coordonnées à chaque tour.\n\n"
+                                    + "Il existe différents types de bateaux qui ont des tailles \n"
+                                    + "différentes. Ils se situent au minimum à une case l'un de l'autre\n"
+                                    + "A chaque tour sont affichées les différentes informations sur la partie\n" + "en cours.\n"
+                                    + "------------------------------------------------------------------------\n";
+
+    /**
+     * Option disponible pour l'aide
+     */
+    private static final char[] OPTION_AIDE = { 'j', 'q' };
+
+    /**
+     * Liste des options possible (textes) pour le menu principal
+     */
+    private static final String[] LIBELLE_AIDE = { "Jouer", "Quitter" };
+
+    /**
+     * Affichage de l'aide
+     */
+    public static void afficherAide() {
+        System.out.println(AIDE);
+
+        // on affiche toutes les options et les libellés
+        for (int i = 0; i < OPTION_AIDE.length; i++) {
+            System.out.print("   => " + OPTION_AIDE[i] + " - " + LIBELLE_AIDE[i] + "\n");
+        }
+    }
 
 }

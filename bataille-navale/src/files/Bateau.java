@@ -8,17 +8,18 @@ package files;
 import files.Plateau;
 
 /**
- * Classe Bateau permettant de créer des bateaux de 
+ * Classe Bateau permettant de créer des bateaux de
+ * 
  * @author INFO 1
  */
 public class Bateau {
-    
+
     /** nom par défaut d'un navire */
-    private static final String NOM_DEFAUT =  "Vedette";
-    
+    private static final String NOM_DEFAUT = "Vedette";
+
     /** taille par défaut de ce navire */
     private static final int TAILLE_DEFAUT = 2;
-    
+
     /** Nom du bateau (ex : Sous-marin, porte-avions, destroyer etc...) */
     private String nom;
 
@@ -28,19 +29,17 @@ public class Bateau {
     /** Vie restante du bateau */
     private int vie;
 
-
     /** Positions du bateau */
     private String pos[][];
-    
+
     /** Servira pour placer les bateaux et parcourir horizontalement la mer */
     private int i;
     /** Servira pour placer les bateaux et parcourir verticalement la mer */
     private int j;
-    
+
     /** true si le bateau est en vie, false si sa vie <= 0 */
     private boolean etat;
- 
-    
+
     /**
      * constructeurs de l'objet bateau avec les informations par défaut.
      */
@@ -56,7 +55,8 @@ public class Bateau {
     }
 
     /**
-     *  constructeur de l'objet bateau, avec les informations nom et taille
+     * constructeur de l'objet bateau, avec les informations nom et taille
+     * 
      * @param nom
      * @param taille
      */
@@ -71,10 +71,9 @@ public class Bateau {
         this.etat = true;
     }
 
-
-    
     /**
      * Retourne le nom du bateau
+     * 
      * @return nom
      */
     public String getNom() {
@@ -83,6 +82,7 @@ public class Bateau {
 
     /**
      * Retourne la taille du bateau.
+     * 
      * @return taille
      */
     public int getTaille() {
@@ -91,13 +91,13 @@ public class Bateau {
 
     /**
      * Renvoie le nombre de point de vie restant d'un bateau.
+     * 
      * @return un int représentant le nbr de points de vie.
      */
     public int getVie() {
         return this.vie;
     }
-    
-    
+
     /**
      * @return la valeur de état
      */
@@ -114,6 +114,7 @@ public class Bateau {
 
     /**
      * Ajoute une touche au bateau et teste s'il est seulement "touché" ou "coulé"
+     * 
      * @return true s'il est coulé ou false s'il est simplement touché
      */
     public boolean toucher() {
@@ -122,10 +123,9 @@ public class Bateau {
             this.vie--;
         }
         /* vas être détruit */
-        else if(this.vie == 1 && this.getEtat()) {
-            /* 
-             * on enlève sa dernière vie et on "l'élimine" 
-             * en passant son état à false
+        else if (this.vie == 1 && this.getEtat()) {
+            /*
+             * on enlève sa dernière vie et on "l'élimine" en passant son état à false
              */
             this.vie--;
             this.setEtat(false);
@@ -133,48 +133,48 @@ public class Bateau {
         return this.vie == 0;
     }
 
-    
     /**
-     * Place un point donné dans le tableau 
-     * contenant les positions de ce bateau.
+     * Place un point donné dans le tableau contenant les positions de ce bateau.
      * Ici le point x ( abscisse ).
-     * @param position Un point contenant d'abcisse du bateau 
+     * 
+     * @param position Un point contenant d'abcisse du bateau
      */
-    public void SetPositionHorizontale(char position) {
+    public void setPositionHorizontale(char position) {
         if (i < vie) {
             pos[0][i] = Character.toString(position);
             i++;
-        } 
+        }
         if (i >= vie) {
             i = 0;
         }
     }
 
     /**
-     * Place un point donné dans le tableau 
-     * contenant les positions de ce bateau.
+     * Place un point donné dans le tableau contenant les positions de ce bateau.
      * Ici le point y ( ordonnée ).
+     * 
      * @param position
      */
-    public void SetPositionVerticale(int position) {
+    public void setPositionVerticale(int position) {
         /* Le nombre de point doit être inférieur à la taille du bateau */
-        if(j < vie) {
+        if (j < vie) {
             pos[1][j] = Integer.toString(position);
             j++;
         }
-        if(j >= vie) {
+        if (j >= vie) {
             j = 0;
         }
     }
 
     /**
      * Retourne le tableau des différentes positions des cases du bateau
+     * 
      * @return pos
      */
     public String[][] getPositions() {
         return this.pos;
     }
-    
+
     /**
      * affiche la position des bateaux placés
      */
@@ -183,21 +183,22 @@ public class Bateau {
         for (int x = 0; x < pos.length; x++) {
             for (int y = 0; y < pos[x].length; y++) {
                 System.out.print(pos[x][y] + ',');
-                //if(x == pos.length - 1) {
-                    //System.out.println();
-                //}
+                // if(x == pos.length - 1) {
+                // System.out.println();
+                // }
             }
         }
         System.out.println("\nfin\n");
     }
-    
+
     /**
-     * verifie si les coordonnées arguments correspondent 
-     * aux coordonnées d'un bateau
+     * verifie si les coordonnées arguments correspondent aux coordonnées d'un
+     * bateau
+     * 
      * @param x char coordonnée
      * @param y int coordonnée
-     * @return indexBateau, l'index du bateau qui a été touché, 
-     *                      -1 si aucun bateau n'a été touché.
+     * @return indexBateau, l'index du bateau qui a été touché, -1 si aucun bateau
+     *         n'a été touché.
      */
     public static int verifTir(char x, int y) {
         Bateau bateauActuel = null;
@@ -210,17 +211,15 @@ public class Bateau {
             posBateau = bateauActuel.getPositions();
             coordTrouve = false;
             /* compare chaque position à l'argument */
-            for (int indexPos = 0; !coordTrouve && indexPos < posBateau[0].length
-                    ; indexPos++) {
+            for (int indexPos = 0; !coordTrouve && indexPos < posBateau[0].length; indexPos++) {
                 /* si coordonnées correspondent */
-                if ( posBateau[0][indexPos] != null
-                        && (x == posBateau[0][indexPos].charAt(0))
-                        && ( y == Integer.parseInt(posBateau[1][indexPos]) )
-                        && bateauActuel.getEtat()) {
-                    
+                if (posBateau[0][indexPos] != null && (x == posBateau[0][indexPos].charAt(0))
+                        && (y == Integer.parseInt(posBateau[1][indexPos])) && bateauActuel.getEtat()) {
+
                     coordTrouve = true;
-                    /* coordonnées modifiées pour éviter de repasser dans la boucle
-                     * ou de retomber sur ces coordonnées.
+                    /*
+                     * coordonnées modifiées pour éviter de repasser dans la boucle ou de retomber
+                     * sur ces coordonnées.
                      */
                     posBateau[0][indexPos] = null;
                     posBateau[1][indexPos] = null;
@@ -232,11 +231,12 @@ public class Bateau {
             indexBateau = 0;
         }
         /* -1 de décalage par rapport à l'incrémentation de la boucle */
-        return indexBateau-1;
+        return indexBateau - 1;
     }
-    
+
     /**
      * recherche si il reste dans bateau étant encore en vie ( vie > 0 )
+     * 
      * @return true si il reste des bateaux, false sinon
      */
     public static boolean bateauRestant() {
@@ -246,16 +246,12 @@ public class Bateau {
         }
         return reste;
     }
-    
-    
-    
+
     /**
-     * Renvoie une chaîne de caractère avec le nom et 
-     * la taille de ce bateau
+     * Renvoie une chaîne de caractère avec le nom et la taille de ce bateau
      */
     public String toString() {
-        return "Nom : " + this.getNom() 
-        		+ ", Taille : " + this.getTaille() + "\n";  
-    } 
-    
+        return "Nom : " + this.getNom() + ", Taille : " + this.getTaille() + "\n";
+    }
+
 }
