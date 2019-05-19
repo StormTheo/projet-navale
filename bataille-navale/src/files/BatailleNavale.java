@@ -130,10 +130,9 @@ public class BatailleNavale {
         	do {
         		// génération aléatoire des positions x et y des bateaux
         		coordBateauX = random.nextInt(plateau.getDimX());
-        		//coordBateauX = coordPossible.charAt(nbrRandX);
-        		//System.out.println("X = " + coordBateauX); // DEBUG
+        		
         		coordBateauY = random.nextInt(plateau.getDimY());
-        		//System.out.println("Y = " + coordBateauY); // DEBUG
+
         		alignement = random.nextInt(2)+1;
         		// direction du bateau aléatoire
         		direction = random.nextInt(2)*2-1;
