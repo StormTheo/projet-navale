@@ -26,7 +26,7 @@ public class Plateau {
     /**
      * Dimension par défaut attribuée aux dimensions en abscisse et en ordonnée.
      */
-    private static final int DIM_DEFAUT = 13;
+    private static final int DIM_DEFAUT = 12;
 
     /** Dimension minimale */
     private static final int DIM_MIN = 2; // Minimum requis pour avoir au moins une case de jeu sur le plateau.
@@ -42,7 +42,9 @@ public class Plateau {
     private int dimY;
 
     /** Liste contenant tous les bateaux, composant une flotte */
-    private static List<Bateau> flotte = new ArrayList<Bateau>();
+    private List<Bateau> flotte = new ArrayList<Bateau>();
+    
+    private int[][] grille;
 
     /**
      * Constructeur par défaut qui initialise les dimensions avec la valeur par
@@ -51,6 +53,12 @@ public class Plateau {
     public Plateau() {
         dimX = DIM_DEFAUT;
         dimY = DIM_DEFAUT;
+        grille = new int[dimY][dimX];
+        for (int tailleX = 0; tailleX < dimX; tailleX++) {
+        	for(int tailleY = 0; tailleY < dimY; tailleY++) {
+        		grille[tailleX][tailleY] = -1;
+        	}
+        }
     }
 
     /**
@@ -62,48 +70,40 @@ public class Plateau {
     public Plateau(int xDim, int yDim) {
         this();
         /* Vérification des paramètres */
-        if (yDim >= DIM_MIN && yDim <= DIM_MAX && xDim >= DIM_MIN && xDim <= DIM_MAX) {
+        if (	yDim >= DIM_MIN && yDim <= DIM_MAX 
+        	&& 	xDim >= DIM_MIN && xDim <= DIM_MAX) {
 
-            this.dimX = xDim;
-            this.dimY = yDim;
+            dimX = xDim;
+            dimY = yDim;
+            grille = new int[dimY][dimX];
+            for (int tailleX = 0; tailleX < dimX; tailleX++) {
+            	for(int tailleY = 0; tailleY < dimY; tailleY++) {
+            		grille[tailleX][tailleY] = -1;
+            	}
+            }
         }
     }
-
+    
     /**
-     * Méthodes pour la construction du plateau à partir d'un tableau
-     * 
-     * @return le tableau qui fait office de plateau
+     * Permet d'ajouter les coordonnées d'un bateau sur le plateau.
+     * @param colonne N° de la colonne 
+     * @param ligne   N° de la ligne
      */
-    public String[][] constructPlateau() {
-        String[][] plateau = new String[this.dimY][this.dimX]; // création du tableau pour former le plateau
-        plateau[0][0] = "  "; // Première case vide
-
-        /* Insertion des lettres sur la première ligne */
-        for (int i = 0; i < plateau[0].length - 1; i++) {
-            plateau[0][i + 1] = Character.toString((char) ('A' + i));
-        }
-
-        /* Insertion des chiffes sur la première colonne de chaque lignes */
-        for (int i = 0; i < plateau.length - 1; i++) {
-            if (i + 1 < 10) {
-                plateau[i + 1][0] = Integer.toString(i + 1);
-            } else {
-                plateau[i + 1][0] = Integer.toString(i + 1);
-            }
-            for (int j = 1; j < plateau[0].length; j++) {
-                plateau[i + 1][j] = " "; // Pour les éléments vides sur la même ligne que le chiffre
-            }
-        }
-        return plateau;
+    public void setGrille(int colonne, int ligne, int idBateau) {
+    	grille[ligne][colonne] = idBateau;
     }
-
+    
+    public int getGrille(int colonne, int ligne) {
+    	return grille[ligne][colonne];
+    }
+    
     /**
      * Accesseur sur la dimension en abscisse
      * 
      * @return un entier égal à la dimension en abscisse
      */
     public int getDimX() {
-        return this.dimX;
+        return dimX;
     }
 
     /**
@@ -112,7 +112,7 @@ public class Plateau {
      * @return un entier égal à la dimension en ordonnée
      */
     public int getDimY() {
-        return this.dimY;
+        return dimY;
     }
 
     /**
@@ -120,8 +120,8 @@ public class Plateau {
      * 
      * @return flotte
      */
-    public static List<Bateau> getFlotte() {
-        return new ArrayList<>(flotte);
+    public List<Bateau> getFlotte() {
+        return flotte;
     }
 
     /**
@@ -129,15 +129,30 @@ public class Plateau {
      * 
      * @param bateau
      */
-    public static void setFlotte(Bateau bateau) {
-        Plateau.flotte.add(bateau);
+    public void setFlotte(Bateau bateau) {
+        flotte.add(bateau);
     }
 
     /**
      * vide la liste des objets créés
      */
-    public static void clearFlotte() {
+    public void clearFlotte() {
         flotte.clear();
+    }
+    
+    public void afficherGrille() {
+    	//System.out.print("[");
+    	for (int tailleX = 0; tailleX < dimX; tailleX++) {
+        	for(int tailleY = 0; tailleY < dimY; tailleY++) {
+        		if (grille[tailleX][tailleY] != -1) {
+        			System.out.print("X|");
+        		} else {
+        			System.out.print(" |");
+        		}
+        	}
+        	System.out.println();
+        } 
+    	System.out.println();
     }
 
     /**
@@ -147,10 +162,8 @@ public class Plateau {
      * @return Une chaîne contenant la dimension en abscisse et en ordonnée
      */
     public String toString() {
-        return "Dimension en abscisse (dimX) : " + this.dimX + "\nDimension en ordonnée (dimY) : " + this.dimY;
+        return "Dimension en abscisse (dimX) : " + (dimX)
+        		+ "\nDimension en ordonnée (dimY) : " + (dimY) + " (0 - " + (dimY-1) + ")";
     }
-
-    // TODO rework la classe afin qu'elle utilise un tableau de Bateau pour stocker
-    // les bateaux
-
+    
 }

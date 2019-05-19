@@ -4,6 +4,8 @@
 
 package files;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * 
  * @author INFO1
@@ -15,7 +17,13 @@ public class Affichage {
     /**
      * Texte de titre pour le menu principal
      */
-    private static final String TITRE_MENU_PRINCIPAL = "------------------------------------------------------------------\n"
+    private static final String TITRE_MENU_PRINCIPAL = "__________         __         .__.__  .__            _______                      .__          \n"  
+    												 + "\\______   \\_____ _/  |______  |__|  | |  |   ____    \\      \\ _____ ___  _______  |  |   ____  \n"  
+    												 + " |    |  _/\\__  \\\\   __\\__  \\ |  |  | |  | _/ __ \\   /   |   \\\\__  \\\\  \\/ /\\__  \\ |  | _/ __ \\ \n"  
+    												 + " |    |   \\ / __ \\|  |  / __ \\|  |  |_|  |_\\  ___/  /    |    \\/ __ \\\\   /  / __ \\|  |_\\  ___/ \n"  
+    												 + " |______  /(____  /__| (____  /__|____/____/\\___  > \\____|__  (____  /\\_/  (____  /____/\\___  >\n"  
+    												 + "        \\/      \\/          \\/                  \\/          \\/     \\/           \\/          \\/ "
+    												 + "\n\n------------------------------------------------------------------\n"
                                                      + "|                      MENU PRINCIPAL                            |\n"
                                                      + "------------------------------------------------------------------\n";
 
@@ -33,7 +41,18 @@ public class Affichage {
      * Affichage du menu principal
      */
     public static void menuPrincipal() {
-        System.out.println(TITRE_MENU_PRINCIPAL);
+    	/* on split le string à chaque retour à la ligne */
+    	String[] words = TITRE_MENU_PRINCIPAL.split("\n");
+    	/* on affiche chaque morceau avec un interval de 200 ms */
+    	for (int part = 0; part < words.length; part++) {
+    		System.out.println(words[part]);
+    		try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+    	}
+        
 
         // on affiche toutes les options et les libellés
         for (int i = 0; i < OPTION_MENU_PRINCIPAL.length; i++) {
