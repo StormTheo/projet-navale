@@ -141,8 +141,18 @@ public class Plateau {
     }
     
     public void afficherGrille() {
-    	//System.out.print("[");
+    	String abscisse = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    	System.out.print("  |");
+    	for (int taille = 0; taille < dimX; taille++) {
+    		System.out.print(abscisse.substring(taille,taille+1) + "|");
+    	}
+    	System.out.println();
     	for (int tailleX = 0; tailleX < dimX; tailleX++) {
+    		if (tailleX < 10) {
+    			System.out.print(tailleX + " |");
+    		} else {
+    			System.out.print(tailleX + "|");
+    		}
         	for(int tailleY = 0; tailleY < dimY; tailleY++) {
         		if (grille[tailleX][tailleY] != -1) {
         			System.out.print("X|");

@@ -247,7 +247,6 @@ public class BatailleNavale {
     public static void tir(int x, int y) {
         int indexBateau;
         Bateau bateauActuel;
-        System.out.println("x entré : " + x + " y entré : " + y);
         indexBateau = Bateau.verifTir(x, y, plateauJeu);
 
         if (indexBateau >= 0) {
