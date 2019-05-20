@@ -130,16 +130,12 @@ public class BatailleNavale {
         	do {
         		// génération aléatoire des positions x et y des bateaux
         		coordBateauX = random.nextInt(plateau.getDimX());
-        		
         		coordBateauY = random.nextInt(plateau.getDimY());
-
+        		/* placement horizontal / vertical */
         		alignement = random.nextInt(2)+1;
         		// direction du bateau aléatoire
         		direction = random.nextInt(2)*2-1;
 
-        		/*System.out.println("direction : " + direction 
-            					+ "\nalignement : " + alignement); // debug
-            	System.out.println();*/
         	} while (!(placement(direction, alignement, coordBateauX, coordBateauY, i)));
             
         }
@@ -160,18 +156,12 @@ public class BatailleNavale {
     		return false;
     	}
     	plateauJeu.setGrille(coordBateauX, coordBateauY, i);   	
-    	//bateauActuel.setPositionHorizontale(coordBateauX);
-    	//bateauActuel.setPositionVerticale(coordBateauY);
     	for (int index = 1; index < bateauActuel.getTaille(); index++) {
     		if(alignement == 1) {
     			directionBoucle += direction;
-    			//bateauActuel.setPositionHorizontale((char) (coordBateauX+directionBoucle));
-    			//bateauActuel.setPositionVerticale(coordBateauY);
     			plateauJeu.setGrille(coordBateauX+directionBoucle, coordBateauY, i);
     		} else if (alignement == 2) {
     			directionBoucle+=direction;
-    			//bateauActuel.setPositionHorizontale(coordBateauX);
-    			//bateauActuel.setPositionVerticale(coordBateauY+directionBoucle);
     			plateauJeu.setGrille(coordBateauX, coordBateauY+directionBoucle, i);
     		}
     	}
@@ -251,14 +241,17 @@ public class BatailleNavale {
 
         if (indexBateau >= 0) {
             bateauActuel = plateauJeu.getFlotte().get(indexBateau);
+            plateauJeu.setGrille(x, y, -2);
             if (bateauActuel.toucher()) {
                 System.out.println("Bateau : " + bateauActuel.getNom() + " coulé !");
             } else {
                 System.out.println("touché !");
             }
         } else {
+        	plateauJeu.setGrille(x, y, -3);
             System.out.println("aucun bateau touché :(");
         }
+        plateauJeu.afficherGrille();
         if (Bateau.bateauRestant(plateauJeu)) {
             recupCoord(plateauJeu);
         } else {

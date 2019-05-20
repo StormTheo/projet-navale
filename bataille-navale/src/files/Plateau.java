@@ -154,10 +154,13 @@ public class Plateau {
     			System.out.print(tailleX + "|");
     		}
         	for(int tailleY = 0; tailleY < dimY; tailleY++) {
-        		if (grille[tailleX][tailleY] != -1) {
+        		if (grille[tailleX][tailleY] >= -1) {
+        			System.out.print(" |");
+        			
+        		} else if (grille[tailleX][tailleY] == -2) {
         			System.out.print("X|");
         		} else {
-        			System.out.print(" |");
+        			System.out.print("O|");
         		}
         	}
         	System.out.println();
