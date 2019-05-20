@@ -43,7 +43,8 @@ public class Plateau {
 
     /** Liste contenant tous les bateaux, composant une flotte */
     private List<Bateau> flotte = new ArrayList<Bateau>();
-    
+
+    /** TODO commenter le rôle du champ (attribut, rôle associatif...) */
     private int[][] grille;
 
     /**
@@ -55,9 +56,9 @@ public class Plateau {
         dimY = DIM_DEFAUT;
         grille = new int[dimY][dimX];
         for (int tailleX = 0; tailleX < dimX; tailleX++) {
-        	for(int tailleY = 0; tailleY < dimY; tailleY++) {
-        		grille[tailleX][tailleY] = -1;
-        	}
+            for (int tailleY = 0; tailleY < dimY; tailleY++) {
+                grille[tailleX][tailleY] = -1;
+            }
         }
     }
 
@@ -70,33 +71,41 @@ public class Plateau {
     public Plateau(int xDim, int yDim) {
         this();
         /* Vérification des paramètres */
-        if (	yDim >= DIM_MIN && yDim <= DIM_MAX 
-        	&& 	xDim >= DIM_MIN && xDim <= DIM_MAX) {
+        if (yDim >= DIM_MIN && yDim <= DIM_MAX && xDim >= DIM_MIN && xDim <= DIM_MAX) {
 
             dimX = xDim;
             dimY = yDim;
             grille = new int[dimY][dimX];
             for (int tailleX = 0; tailleX < dimX; tailleX++) {
-            	for(int tailleY = 0; tailleY < dimY; tailleY++) {
-            		grille[tailleX][tailleY] = -1;
-            	}
+                for (int tailleY = 0; tailleY < dimY; tailleY++) {
+                    grille[tailleX][tailleY] = -1;
+                }
             }
         }
     }
-    
+
     /**
      * Permet d'ajouter les coordonnées d'un bateau sur le plateau.
-     * @param colonne N° de la colonne 
-     * @param ligne   N° de la ligne
+     * 
+     * @param colonne  N° de la colonne
+     * @param ligne    N° de la ligne
+     * @param idBateau id du bateau dans la Liste
      */
     public void setGrille(int colonne, int ligne, int idBateau) {
-    	grille[ligne][colonne] = idBateau;
+        grille[ligne][colonne] = idBateau;
     }
-    
+
+    /**
+     * TODO commenter le rôle de cette méthode
+     * 
+     * @param colonne
+     * @param ligne
+     * @return l'id du bateau si il y en a un de placé, sinon, renvoie
+     */
     public int getGrille(int colonne, int ligne) {
-    	return grille[ligne][colonne];
+        return grille[ligne][colonne];
     }
-    
+
     /**
      * Accesseur sur la dimension en abscisse
      * 
@@ -139,37 +148,57 @@ public class Plateau {
     public void clearFlotte() {
         flotte.clear();
     }
+
     /* cheat permet d'afficher la map avec les bateaux apparents */
+    /**
+     * Affiche le plateau de jeu dans la console quand le joueur tape "cheat" au
+     * lieu des coordonnées
+     * 
+     * @param cheat détermine si on doit afficher la position des bateaux ou non
+     */
     public void afficherGrille(boolean cheat) {
-    	String abscisse = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    	System.out.print("  |");
-    	for (int taille = 0; taille < dimX; taille++) {
-    		System.out.print(abscisse.substring(taille,taille+1) + "|");
-    	}
-    	System.out.println();
-    	for (int tailleX = 0; tailleX < dimX; tailleX++) {
-    		if (tailleX < 10) {
-    			System.out.print(tailleX + " |");
-    		} else {
-    			System.out.print(tailleX + "|");
-    		}
-        	for(int tailleY = 0; tailleY < dimY; tailleY++) {
-        		if (!cheat && grille[tailleX][tailleY] >= -1) {
-        			System.out.print(" |");	
-        		} else if (!cheat && grille[tailleX][tailleY] == -2 ) {
-        			System.out.print("X|");
-        		} else if (cheat && (grille[tailleX][tailleY] >= 0 
-        						 ||  grille[tailleX][tailleY] <=-2)) {
-        			System.out.print("X|");
-        		} else if (!cheat) {
-        			System.out.print("O|");
-        		} else {
-        			System.out.print(" |");	
-        		}
-        	}
-        	System.out.println();
-        } 
-    	System.out.println();
+        String abscisse = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        System.out.print("  |");
+        for (int taille = 0; taille < dimX; taille++) {
+            System.out.print(abscisse.substring(taille, taille + 1) + "|");
+        }
+        System.out.println();
+        for (int tailleX = 0; tailleX < dimX; tailleX++) {
+            if (tailleX < 10) {
+                System.out.print(tailleX + " |");
+            } else {
+                System.out.print(tailleX + "|");
+            }
+            for (int tailleY = 0; tailleY < dimY; tailleY++) {
+                if (!cheat && grille[tailleX][tailleY] >= -1) {
+                    System.out.print(" |");
+                } else if (!cheat && grille[tailleX][tailleY] == -2) {
+                    System.out.print("X|");
+                } else if (cheat && (grille[tailleX][tailleY] >= 0 || grille[tailleX][tailleY] <= -2)) {
+                    System.out.print("X|");
+                } else if (!cheat) {
+                    System.out.print("O|");
+                } else {
+                    System.out.print(" |");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    /**
+     * Vérifie la disponibilité d'une case et de ses alentours.
+     * 
+     * @param coordX l'abscisse du point à vérifier
+     * @param coordY l'ordonnée du point à vérifier
+     * @return true si la case et ses alentours sont libres
+     */
+    public boolean verifierCoords(int coordX, int coordY) {
+        
+        // TODO faire la méthode de vérification des coordonnées.
+        
+        return false; //STUB
     }
 
     /**
@@ -179,8 +208,8 @@ public class Plateau {
      * @return Une chaîne contenant la dimension en abscisse et en ordonnée
      */
     public String toString() {
-        return "Dimension en abscisse (dimX) : " + (dimX)
-        		+ "\nDimension en ordonnée (dimY) : " + (dimY) + " (0 - " + (dimY-1) + ")";
+        return "Dimension en abscisse (dimX) : " + (dimX) + "\nDimension en ordonnée (dimY) : " + (dimY) + " (0 - "
+                + (dimY - 1) + ")";
     }
-    
+
 }

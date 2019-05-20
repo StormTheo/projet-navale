@@ -107,65 +107,129 @@ public class BatailleNavale {
     }
 
     /**
-     * Effectue le placement d'un nombre donné de bateaux de taille aléatoire
-     * (comprise entre 1 et 4) sur le plateau de jeu.
+     * Effectue le placement des bateaux dans la liste sur le plateau de jeu.
      * 
      * @param plateau le plateau sur lequel placer les bateaux
-     * @throws IllegalArgumentException si il est impossible de placer les bateaux
+     * @throws Exception si il est impossible de placer les bateaux
      *                                  (ex: plateau trop petit)
      */
-    public static void placement(Plateau plateau) throws IllegalArgumentException {
+    public static void effectuerPlacement(Plateau plateau) throws Exception {
         Random random = new Random();
-        /*
-         * Chaîne comprenant les coordonnées possibles choix d'un au hasard pour placer
-         * un bateau
-         */
+        int nbEssais;
         int coordBateauX;
         int coordBateauY;
-        int alignement;
-        int direction; // direction du bateau comprise entre 1 et 4
-        // 1 = haut; 2 = gauche; 3 = bas; 4 = droite
+        int sens; // 1 = haut/gauche; 2 = bas/droite
+        int direction; // direction du bateau comprise entre 1 et 2
+        // 1 = haut-bas; 2 = gauche-droite
         int nbBateau = plateauJeu.getFlotte().size();
         for (int i = 0; i < nbBateau; i++) {
-        	do {
-        		// génération aléatoire des positions x et y des bateaux
-        		coordBateauX = random.nextInt(plateau.getDimX());
-        		coordBateauY = random.nextInt(plateau.getDimY());
-        		/* placement horizontal / vertical */
-        		alignement = random.nextInt(2)+1;
-        		// direction du bateau aléatoire
-        		direction = random.nextInt(2)*2-1;
-
-        	} while (!(placement(direction, alignement, coordBateauX, coordBateauY, i)));
-            
+            nbEssais = 0;
+            do {
+                // génération aléatoire des positions x et y des bateaux
+                coordBateauX = random.nextInt(plateau.getDimX());
+                coordBateauY = random.nextInt(plateau.getDimY());
+                /* placement horizontal / vertical */
+                direction = random.nextInt(2) + 1;
+                // sens du bateau aléatoire
+                sens = random.nextInt(2) + 1;
+                nbEssais++;
+            } while (!(placementButBetter(direction, sens, coordBateauX, coordBateauY, i)) || nbEssais == 5);
+            if (nbEssais == 5) {
+                throw new Exception("Placement du bateau immpossible");
+            }
         }
         plateauJeu.afficherGrille(false);
     }
-    
-    public static boolean placement(int direction, int alignement,
-    							int coordBateauX, int coordBateauY, int i) {
-    	int directionBoucle = 0;
-    	Bateau bateauActuel;
-    	bateauActuel = plateauJeu.getFlotte().get(i);
-    	if (alignement == 1 && (bateauActuel.getTaille()*direction+coordBateauX < 0
-    						||  bateauActuel.getTaille()*direction+coordBateauX >= plateauJeu.getDimX())) {
-    		return false;
-    	}
-    	if (alignement == 2 && (bateauActuel.getTaille()*direction+coordBateauY < 0
-    						||  bateauActuel.getTaille()*direction+coordBateauY >= plateauJeu.getDimY())) {
-    		return false;
-    	}
-    	plateauJeu.setGrille(coordBateauX, coordBateauY, i);   	
-    	for (int index = 1; index < bateauActuel.getTaille(); index++) {
-    		if(alignement == 1) {
-    			directionBoucle += direction;
-    			plateauJeu.setGrille(coordBateauX+directionBoucle, coordBateauY, i);
-    		} else if (alignement == 2) {
-    			directionBoucle+=direction;
-    			plateauJeu.setGrille(coordBateauX, coordBateauY+directionBoucle, i);
-    		}
-    	}
-		return true;
+
+    /**
+     * Effectue le placement des bateaux sur le plateau de jeu
+     * 
+     * @param direction
+     * @param sens
+     * @param coordX
+     * @param coordY      l'ordonnée du bateau à placer
+     * @param indexBateau l'index du bateau dans la liste
+     * @return true si le bateau a pu être placé, false sinon
+     */
+    public static boolean placementButBetter(int direction, int sens, int coordX, int coordY, int indexBateau) {
+        boolean placeLibre = false;
+        
+        if (direction == 1 && sens == 1) {
+            for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
+                placeLibre = plateauJeu.verifierCoords(coordX - i, coordY);
+            }
+            if(placeLibre) {
+                for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
+                    plateauJeu.setGrille(coordX - i, coordY, indexBateau);
+                }
+            }
+        } else if (direction == 1 && sens == 2) {
+            for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
+                placeLibre = plateauJeu.verifierCoords(coordX + i, coordY);
+            }
+            if(placeLibre) {
+                for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
+                    plateauJeu.setGrille(coordX + i, coordY, indexBateau);
+                }
+            }
+        } else if (direction == 2 && sens == 1) {
+            for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
+                placeLibre = plateauJeu.verifierCoords(coordX, coordY + i );
+            }
+            if(placeLibre) {
+                for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
+                    plateauJeu.setGrille(coordX, coordY + i, indexBateau);
+                }
+            }
+        } else if (direction == 2 && sens == 2) {
+            for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
+                placeLibre = plateauJeu.verifierCoords(coordX, coordY - i );
+            }
+            if(placeLibre) {
+                for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
+                    plateauJeu.setGrille(coordX, coordY - i, indexBateau);
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+    /**
+     * TODO commenter le rôle de cette méthode
+     * 
+     * @param direction
+     * @param sens         le sens dans lequel est placé le bateau (1 = haut ou
+     *                     gauche; 2 = bas ou droite)
+     * @param coordBateauX
+     * @param coordBateauY
+     * @param i
+     * @return true si le bateau a pu être placé
+     */
+    public static boolean placement(int direction, int sens, int coordBateauX, int coordBateauY, int i) {
+        int directionBoucle = 0;
+        Bateau bateauActuel;
+        bateauActuel = plateauJeu.getFlotte().get(i);
+        if (sens == 1 && (bateauActuel.getTaille() * direction + coordBateauX < 0
+                || bateauActuel.getTaille() * direction + coordBateauX >= plateauJeu.getDimX())) {
+            return false;
+        }
+        if (sens == 2 && (bateauActuel.getTaille() * direction + coordBateauY < 0
+                || bateauActuel.getTaille() * direction + coordBateauY >= plateauJeu.getDimY())) {
+            return false;
+        }
+        plateauJeu.setGrille(coordBateauX, coordBateauY, i);
+        for (int index = 1; index < bateauActuel.getTaille(); index++) {
+            if (sens == 1) {
+                directionBoucle += direction;
+                plateauJeu.setGrille(coordBateauX + directionBoucle, coordBateauY, i);
+            } else if (sens == 2) {
+                directionBoucle += direction;
+                plateauJeu.setGrille(coordBateauX, coordBateauY + directionBoucle, i);
+            }
+        }
+        return true;
     }
 
     /**
@@ -182,12 +246,12 @@ public class BatailleNavale {
         String chaineY = null;
         /* permet de mettre la condition de chaine valide */
         boolean verification;
-        
+
         System.out.print("\nEntrez les coordonnés sous la forme : caractère," + " nombre (ex : A, 11 ou A11)");
         coordonnees = entreeUtilisateur();
         if (coordonnees.equals("cheat")) {
-        	plateauJeu.afficherGrille(true);
-        	recupCoord(plateauJeu);
+            plateauJeu.afficherGrille(true);
+            recupCoord(plateauJeu);
         }
         for (int placement = 0; placement < coordonnees.length(); placement++) {
             /* on cherche le caractère minuscule ou majuscule */
@@ -208,13 +272,13 @@ public class BatailleNavale {
                 }
             }
         }
-              
+
         verification = (x != '0' && chaineY != null);
         if (verification) {
-        	/* les positions en nombre pour vérifier dans le plateau */
-        	int posX=x-'A';
-        	int posY=Integer.parseInt(chaineY);
-        	
+            /* les positions en nombre pour vérifier dans le plateau */
+            int posX = x - 'A';
+            int posY = Integer.parseInt(chaineY);
+
             /* Si x et y sont existant dans le plateau. */
             verification = (x <= plateauJeu.getDimX() + 'A' && x >= 'A') && (posY >= 0 && posY < plateauJeu.getDimY());
             if (verification) {
@@ -222,7 +286,7 @@ public class BatailleNavale {
                 tir(posX, posY);
             }
         }
-        
+
         if (!verification) {
             System.out.println("Coordonnées incorrect, votre plateau a une dimension x = " + plateauJeu.getDimX()
                     + " y = " + plateauJeu.getDimY());
@@ -251,15 +315,15 @@ public class BatailleNavale {
                 System.out.println("touché !");
             }
         } else {
-        	if (indexBateau == -2) {
-        		plateauJeu.setGrille(x, y, -2);
-        	} else {
-        		plateauJeu.setGrille(x, y, -3);
-        	}
-        	plateauJeu.afficherGrille(false);
+            if (indexBateau == -2) {
+                plateauJeu.setGrille(x, y, -2);
+            } else {
+                plateauJeu.setGrille(x, y, -3);
+            }
+            plateauJeu.afficherGrille(false);
             System.out.println("aucun bateau touché :(");
         }
-        
+
         if (Bateau.bateauRestant(plateauJeu)) {
             recupCoord(plateauJeu);
         } else {
@@ -286,8 +350,12 @@ public class BatailleNavale {
         plateauJeu.setFlotte(new Bateau("aeroglisseur", 1));
         /* affichage des infos du plateau pour le joueur */
         System.out.println("\n" + plateauJeu.toString() + "\n");
-        placement(plateauJeu);
-        
+        try {
+            effectuerPlacement(plateauJeu);
+        } catch (Exception e) {
+            System.err.println("Impossible de placer les bateaux !");
+        }
+
         /* affichage des infos de chaque bateau pour le joueur */
         for (int aAfficher = 0; aAfficher < plateauJeu.getFlotte().size(); aAfficher++) {
             System.out.printf("%d) %s", aAfficher + 1, plateauJeu.getFlotte().get(aAfficher).toString());

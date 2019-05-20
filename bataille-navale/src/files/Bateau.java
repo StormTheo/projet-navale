@@ -123,6 +123,7 @@ public class Bateau {
      * 
      * @param x char coordonnée
      * @param y int coordonnée
+     * @param plateauJouer le plateau de jeu
      * @return indexBateau, l'index du bateau qui a été touché, -1 si aucun bateau
      *         n'a été touché.
      */
@@ -136,6 +137,7 @@ public class Bateau {
 
     /**
      * recherche si il reste dans bateau étant encore en vie ( vie > 0 )
+     * @param plateauJouer le plateau de jeu
      * 
      * @return true si il reste des bateaux, false sinon
      */
