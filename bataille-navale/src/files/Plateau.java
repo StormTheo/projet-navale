@@ -139,8 +139,8 @@ public class Plateau {
     public void clearFlotte() {
         flotte.clear();
     }
-    
-    public void afficherGrille() {
+    /* cheat permet d'afficher la map avec les bateaux apparents */
+    public void afficherGrille(boolean cheat) {
     	String abscisse = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     	System.out.print("  |");
     	for (int taille = 0; taille < dimX; taille++) {
@@ -154,13 +154,17 @@ public class Plateau {
     			System.out.print(tailleX + "|");
     		}
         	for(int tailleY = 0; tailleY < dimY; tailleY++) {
-        		if (grille[tailleX][tailleY] >= -1) {
-        			System.out.print(" |");
-        			
-        		} else if (grille[tailleX][tailleY] == -2) {
+        		if (!cheat && grille[tailleX][tailleY] >= -1) {
+        			System.out.print(" |");	
+        		} else if (!cheat && grille[tailleX][tailleY] == -2 ) {
         			System.out.print("X|");
-        		} else {
+        		} else if (cheat && (grille[tailleX][tailleY] >= 0 
+        						 ||  grille[tailleX][tailleY] <=-2)) {
+        			System.out.print("X|");
+        		} else if (!cheat) {
         			System.out.print("O|");
+        		} else {
+        			System.out.print(" |");	
         		}
         	}
         	System.out.println();

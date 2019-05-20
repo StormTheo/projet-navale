@@ -139,7 +139,7 @@ public class BatailleNavale {
         	} while (!(placement(direction, alignement, coordBateauX, coordBateauY, i)));
             
         }
-        plateauJeu.afficherGrille();
+        plateauJeu.afficherGrille(false);
     }
     
     public static boolean placement(int direction, int alignement,
@@ -185,7 +185,10 @@ public class BatailleNavale {
         
         System.out.print("\nEntrez les coordonnés sous la forme : caractère," + " nombre (ex : A, 11 ou A11)");
         coordonnees = entreeUtilisateur();
-        
+        if (coordonnees.equals("cheat")) {
+        	plateauJeu.afficherGrille(true);
+        	recupCoord(plateauJeu);
+        }
         for (int placement = 0; placement < coordonnees.length(); placement++) {
             /* on cherche le caractère minuscule ou majuscule */
             if ((coordonnees.charAt(placement) >= 'a' && coordonnees.charAt(placement) <= 'z')
@@ -238,20 +241,25 @@ public class BatailleNavale {
         int indexBateau;
         Bateau bateauActuel;
         indexBateau = Bateau.verifTir(x, y, plateauJeu);
-
         if (indexBateau >= 0) {
             bateauActuel = plateauJeu.getFlotte().get(indexBateau);
             plateauJeu.setGrille(x, y, -2);
+            plateauJeu.afficherGrille(false);
             if (bateauActuel.toucher()) {
                 System.out.println("Bateau : " + bateauActuel.getNom() + " coulé !");
             } else {
                 System.out.println("touché !");
             }
         } else {
-        	plateauJeu.setGrille(x, y, -3);
+        	if (indexBateau == -2) {
+        		plateauJeu.setGrille(x, y, -2);
+        	} else {
+        		plateauJeu.setGrille(x, y, -3);
+        	}
+        	plateauJeu.afficherGrille(false);
             System.out.println("aucun bateau touché :(");
         }
-        plateauJeu.afficherGrille();
+        
         if (Bateau.bateauRestant(plateauJeu)) {
             recupCoord(plateauJeu);
         } else {
@@ -279,13 +287,11 @@ public class BatailleNavale {
         /* affichage des infos du plateau pour le joueur */
         System.out.println("\n" + plateauJeu.toString() + "\n");
         placement(plateauJeu);
-
+        
         /* affichage des infos de chaque bateau pour le joueur */
         for (int aAfficher = 0; aAfficher < plateauJeu.getFlotte().size(); aAfficher++) {
             System.out.printf("%d) %s", aAfficher + 1, plateauJeu.getFlotte().get(aAfficher).toString());
         }
-        // TODO afficher informations de la partie en cours avant
-        // la demande des coordonnées -> méthode.
         recupCoord(plateauJeu);
     }
 
