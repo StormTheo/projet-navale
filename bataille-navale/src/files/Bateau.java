@@ -126,10 +126,10 @@ public class Bateau {
      * @return indexBateau, l'index du bateau qui a été touché, -1 si aucun bateau
      *         n'a été touché.
      */
-    public static int verifTir(int x, int y, Plateau plateauJouer) {
+    public static int verifTir(int x, int y, Plateau plateau) {
         Bateau bateauActuel = null;
         int indexBateau;
-        indexBateau = plateauJouer.getGrille(x,y);
+        indexBateau = plateau.getGrille(x,y);
         
         return indexBateau;
     }
@@ -139,10 +139,12 @@ public class Bateau {
      * 
      * @return true si il reste des bateaux, false sinon
      */
-    public static boolean bateauRestant(Plateau plateauJouer) {
+    public static boolean bateauRestant(Plateau plateau) {
         boolean reste = false;
-        for (int index = 0; !reste && index < plateauJouer.getFlotte().size(); index++) {
-            reste = plateauJouer.getFlotte().get(index).getEtat();
+        
+        /* TODO */
+        for (int index = 0; !reste && index < plateau.getFlotte/*Joueur ou IA*/().size(); index++) {
+            reste = plateau.getFlotte/*Joueur ou IA*/().get(index).getEtat();
         }
         return reste;
     }

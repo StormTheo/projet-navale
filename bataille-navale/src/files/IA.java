@@ -7,6 +7,8 @@ package files;
 
 import java.util.Random;
 
+import files.BatailleNavale;
+
 /**
  * Classe permettant de créer une IA qui jouera contre le joueur.
  * @author INFO1
@@ -17,9 +19,6 @@ public class IA {
 	/** Niveau par défaut de l'ordinateur */
 	int NIVEAU_DEFAUT = 1;
 	
-	/** Plateau de l'ordinateur */
-    private static Plateau plateauIA = new Plateau();
-    
     /** Niveau de l'ordinateur */
     private static int niveau;
 	
@@ -100,15 +99,8 @@ public class IA {
     	}
     	*/
 
-    	/* ATTENTION IL FAUT TIRER SUR LE PLATEAU DU JOUEUR */
-    	/* 
-    	 * TODO adapter méthode de tir
-    	 * En mettant en paramètre le plateau sur lequel on veut tirer 
-    	 */
-    	BatailleNavale.tir(x, y);
+    	BatailleNavale.tir(x, y, plateauJoueur);
     }
-    
-    
     
     /* TODO Adapter BatailleNavale pour faire jouer tour à tour le joueur et l'IA */
     

@@ -45,7 +45,7 @@ public class Plateau {
     private List<Bateau> flotte = new ArrayList<Bateau>();
     
     private int[][] grille;
-
+    
     /**
      * Constructeur par défaut qui initialise les dimensions avec la valeur par
      * défaut
@@ -115,10 +115,11 @@ public class Plateau {
         return dimY;
     }
 
+    
     /**
      * retourne la liste contenant tout les objets Bateau créés
      * 
-     * @return flotte
+     * @return flotteJoueur
      */
     public List<Bateau> getFlotte() {
         return flotte;
@@ -130,16 +131,18 @@ public class Plateau {
      * @param bateau
      */
     public void setFlotte(Bateau bateau) {
-        flotte.add(bateau);
+    	flotte.add(bateau);
     }
 
     /**
      * vide la liste des objets créés
      */
     public void clearFlotte() {
-        flotte.clear();
+    	flotte.clear();
     }
-    /* cheat permet d'afficher la map avec les bateaux apparents */
+    
+    
+    /* cheat permet d'afficher la mer avec les bateaux apparents */
     public void afficherGrille(boolean cheat) {
     	String abscisse = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     	System.out.print("  |");
