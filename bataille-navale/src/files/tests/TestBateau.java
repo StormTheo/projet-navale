@@ -19,13 +19,16 @@ public class TestBateau {
 
     /** Objet Scanner pour effectuer les saisies au clavier */
     private static Scanner entree = new Scanner(System.in);
+    
+    /** TODO commenter le rôle du champ (attribut, rôle associatif...) */
+    private static Plateau plateau = new Plateau();
 
     /**
      * Demande à l'utilisateur d'appuyer sur entrée pour continuer
      */
     private static void continuer() {
         System.out.println("\n\n\nAppuyez sur entrée pour continuer les tests.") ;
-        Plateau.clearFlotte();
+        plateau.clearFlotte();
         entree.nextLine();
         System.out.println("\n\n");
         
@@ -51,18 +54,18 @@ public class TestBateau {
             /* création de chaque bateau avec les informations des tableaux */
             new Bateau(BATEAU_NOM[numero], BATEAU_TAILLE[numero]);
         }
-        for (int liste = 0; liste < Plateau.getFlotte().size()-1; liste++) {
+        for (int liste = 0; liste < plateau.getFlotte().size()-1; liste++) {
             System.out.println("Bateau supposé : " + BATEAU_NOM[liste] 
                     + ", taille : " + BATEAU_TAILLE[liste] + "\n");
 
-            System.out.println("==> nom : " + Plateau.getFlotte().get(liste+1).getNom()
-                    + ", taille : " + Plateau.getFlotte().get(liste+1).getTaille()
+            System.out.println("==> nom : " + plateau.getFlotte().get(liste+1).getNom()
+                    + ", taille : " + plateau.getFlotte().get(liste+1).getTaille()
                     + "\n");
         }
         /* affichage du bateau créer avec les valeurs par défaut */
         System.out.println("Par défaut : \nBateau supposé : Vedette , taille : 2\n");
-        System.out.println("==> nom : " + Plateau.getFlotte().get(0).getNom() 
-                + " taille : " + Plateau.getFlotte().get(0).getTaille()
+        System.out.println("==> nom : " + plateau.getFlotte().get(0).getNom() 
+                + " taille : " + plateau.getFlotte().get(0).getTaille()
                 + "\n");
         continuer();
     }
@@ -75,15 +78,15 @@ public class TestBateau {
         new Bateau("Test", 4);
         new Bateau();
         /* Le nombre de bateau dans la liste */
-        for (int nbateau = 0; nbateau < Plateau.getFlotte().size(); nbateau++) {
-            System.out.println("bateau : " + Plateau.getFlotte().get(nbateau).getNom()
-                                + " taille : " + Plateau.getFlotte().get(nbateau).getTaille());
+        for (int nbateau = 0; nbateau < plateau.getFlotte().size(); nbateau++) {
+            System.out.println("bateau : " + plateau.getFlotte().get(nbateau).getNom()
+                                + " taille : " + plateau.getFlotte().get(nbateau).getTaille());
             /* la taille de chacun ( leur vies restante ) */
             for (int nbvie = 0;
-                     nbvie < Plateau.getFlotte().get(nbateau).getTaille();
+                     nbvie < plateau.getFlotte().get(nbateau).getTaille();
                      nbvie++) {
                 /* si le bateau est coulé */
-                if (Plateau.getFlotte().get(nbateau).toucher()) {
+                if (plateau.getFlotte().get(nbateau).toucher()) {
                    System.out.println("coulé !\n"); 
                 }
                 /* si il est seulement touché */

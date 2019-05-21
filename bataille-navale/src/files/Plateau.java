@@ -174,8 +174,7 @@ public class Plateau {
                     System.out.print(" |");
                 } else if (!cheat && grille[tailleX][tailleY] == -2) {
                     System.out.print("X|");
-                } else if (cheat && (grille[tailleX][tailleY] >= 0 
-                				 ||  grille[tailleX][tailleY] == -2)) {
+                } else if (cheat && (grille[tailleX][tailleY] >= 0 || grille[tailleX][tailleY] == -2)) {
                     System.out.print("X|");
                 } else if (!cheat) {
                     System.out.print("O|");
@@ -194,12 +193,97 @@ public class Plateau {
      * @param coordX l'abscisse du point à vérifier
      * @param coordY l'ordonnée du point à vérifier
      * @return true si la case et ses alentours sont libres
+     * @throws IllegalArgumentException quand l'une des coordonnées est hors du plateau
      */
-    public boolean verifierCoords(int coordX, int coordY) {
+    public boolean verifierCoordsLibres(int coordX, int coordY) throws IllegalArgumentException {
         
-        // TODO faire la méthode de vérification des coordonnées.
+        if (coordX >= grille.length || coordY >= grille[coordX].length) {
+            throw new IllegalArgumentException("Coordonnées hors du plateau");
+        }
+
+        boolean resultat = true;
+
+        /* Vérification du point en haut a gauche */
+        if ((coordX <= 0 || coordY <= 0) && grille[coordX][coordY] == -1) {
+            resultat = resultat && true;
+        } else if ((coordX > 0 && coordY > 0) && grille[coordX][coordY] == -1
+                && grille[coordX - 1][coordY - 1] == -1) {
+            resultat = resultat && true;
+        } else {
+            resultat = resultat && false;
+        }
         
-        return false; //STUB
+        /* Vérification du point en haut à droite */
+        if ((coordX >= grille.length - 1 && coordY <= 0) && grille[coordX][coordY] == -1) {
+            resultat = resultat && true;
+        } else if ((coordX < grille.length - 1 && coordY > 0) 
+                && grille[coordX][coordY] == 0 && grille[coordX + 1][coordY - 1] == -1) {
+            resultat = resultat && true;
+        } else {
+            resultat = resultat && false;
+        }
+        
+        /* vérification du point en bas a gauche */
+        if ((coordX <= 0 && coordY >= grille[coordX].length - 1) && grille[coordX][coordY] == -1) {
+            resultat = resultat && true;
+        } else if ((coordX > 0 && coordY < grille[coordX].length - 1)
+                && grille[coordX][coordY] == -1 && grille[coordX - 1][coordY + 1] == -1) {
+            resultat = resultat && true;
+        } else {
+            resultat = resultat && false;
+        }
+        
+        /* vérification du point en bas à droite */
+        if ((coordX >= grille.length - 1 && coordY >= grille[coordX].length - 1) 
+                && grille[coordX][coordY] == -1) {
+            resultat = resultat && true;
+        } else if ((coordX < grille.length - 1 && coordY < grille[coordX].length - 1)
+                && grille[coordX][coordY] == -1 && grille[coordX + 1][coordY + 1] == -1) {
+            resultat = resultat && true;
+        } else {
+            resultat = resultat && false;
+        }
+        
+        /* vérification du point au dessus */
+        if (coordX == 0 && grille[coordX][coordY] == -1) {
+            resultat = resultat && true;
+        } else if (coordX > 0 && grille[coordX][coordY] == -1 && grille[coordX-1][coordY] == -1) {
+            resultat = resultat && true;
+        } else {
+            resultat = resultat && false;
+        }
+        
+        /* vérification du point au dessous */
+        if (coordX == grille.length - 1 && grille[coordX][coordY] == -1) {
+            resultat = resultat && true;
+        } else if (coordX < grille.length - 1 && grille[coordX][coordY] == -1 
+                && grille[coordX+1][coordY] == -1) {
+            resultat = resultat && true;
+        } else {
+            resultat = resultat && false;
+        }
+        
+        /* vérification du point à gauche */
+        if (coordY == 0 && grille[coordX][coordY] == -1) {
+            resultat = resultat && true;
+        } else if (coordX > 0 && grille[coordX][coordY] == -1 
+                && grille[coordX][coordY - 1] == -1) {
+            resultat = resultat && true;
+        } else {
+            resultat = resultat && false;
+        }
+        
+        /* vérification du point à droite */
+        if (coordY == grille[coordX].length - 1 && grille[coordX][coordY] == -1) {
+            resultat = resultat && true;
+        } else if (coordX < grille[coordX].length - 1 && grille[coordX][coordY] == -1 
+                && grille[coordX][coordY + 1] == -1) {
+            resultat = resultat && true;
+        } else {
+            resultat = resultat && false;
+        }
+        
+        return resultat;
     }
 
     /**

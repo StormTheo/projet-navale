@@ -110,10 +110,8 @@ public class BatailleNavale {
      * Effectue le placement des bateaux dans la liste sur le plateau de jeu.
      * 
      * @param plateau le plateau sur lequel placer les bateaux
-     * @throws Exception si il est impossible de placer les bateaux
-     *                                  (ex: plateau trop petit)
      */
-    public static void effectuerPlacement(Plateau plateau) throws Exception {
+    public static void effectuerPlacement(Plateau plateau) {
         Random random = new Random();
         int nbEssais;
         int coordBateauX;
@@ -133,10 +131,7 @@ public class BatailleNavale {
                 // sens du bateau aléatoire
                 sens = random.nextInt(2) + 1;
                 nbEssais++;
-            } while (!(placementButBetter(direction, sens, coordBateauX, coordBateauY, i)) || nbEssais == 5);
-            if (nbEssais == 5) {
-                throw new Exception("Placement du bateau immpossible");
-            }
+            } while (!(placementButBetter(direction, sens, coordBateauX, coordBateauY, i)));
         }
         plateauJeu.afficherGrille(false);
     }
@@ -156,7 +151,7 @@ public class BatailleNavale {
         
         if (direction == 1 && sens == 1) {
             for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
-                placeLibre = placeLibre && plateauJeu.verifierCoords(coordX - i, coordY);
+                placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX - i, coordY);
             }
             if(placeLibre) {
                 for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
@@ -165,7 +160,7 @@ public class BatailleNavale {
             }
         } else if (direction == 1 && sens == 2) {
             for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
-                placeLibre = placeLibre && plateauJeu.verifierCoords(coordX + i, coordY);
+                placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX + i, coordY);
             }
             if(placeLibre) {
                 for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
@@ -174,7 +169,7 @@ public class BatailleNavale {
             }
         } else if (direction == 2 && sens == 1) {
             for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
-                placeLibre = placeLibre && plateauJeu.verifierCoords(coordX, coordY + i );
+                placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX, coordY + i );
             }
             if(placeLibre) {
                 for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
@@ -183,7 +178,7 @@ public class BatailleNavale {
             }
         } else if (direction == 2 && sens == 2) {
             for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
-                placeLibre = placeLibre && plateauJeu.verifierCoords(coordX, coordY - i );
+                placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX, coordY - i );
             }
             if(placeLibre) {
                 for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
