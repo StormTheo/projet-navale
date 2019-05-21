@@ -174,7 +174,8 @@ public class Plateau {
                     System.out.print(" |");
                 } else if (!cheat && grille[tailleX][tailleY] == -2) {
                     System.out.print("X|");
-                } else if (cheat && (grille[tailleX][tailleY] >= 0 || grille[tailleX][tailleY] <= -2)) {
+                } else if (cheat && (grille[tailleX][tailleY] >= 0 
+                				 ||  grille[tailleX][tailleY] == -2)) {
                     System.out.print("X|");
                 } else if (!cheat) {
                     System.out.print("O|");
