@@ -138,7 +138,7 @@ public class Plateau {
      * 
      * @param bateau
      */
-    public void setFlotte(Bateau bateau) {
+    public void ajouterBateau(Bateau bateau) {
         flotte.add(bateau);
     }
 
@@ -190,78 +190,78 @@ public class Plateau {
     /**
      * Vérifie la disponibilité d'une case et de ses alentours.
      * 
-     * @param coordX l'abscisse du point à vérifier
      * @param coordY l'ordonnée du point à vérifier
+     * @param coordX l'abscisse du point à vérifier
      * @return true si la case et ses alentours sont libres
      * @throws IllegalArgumentException quand l'une des coordonnées est hors du
      *                                  plateau
      */
     public boolean verifierCoordsLibres(int coordX, int coordY) throws IllegalArgumentException {
 
-        if (coordX >= grille.length || coordY >= grille[coordX].length) {
+        if (coordY >= dimX || coordX >= dimY) {
             throw new IllegalArgumentException("Coordonnées hors du plateau");
         }
 
         boolean resultat = false;
 
         /* vérification de la case voulue */
-        if (grille[coordX][coordY] == -1) {
+        if (grille[coordY][coordX] == -1) {
             resultat = true;
         } else {
             return false; // pas besoin de continuer
         }
 
         /* Vérification du point en haut a gauche */
-        if (coordX > 0 && coordY > 0 && grille[coordX - 1][coordY - 1] == -1) {
+        if (coordY > 0 && coordX > 0 && grille[coordY - 1][coordX - 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
         /* Vérification du point en haut à droite */        
-        if (coordX < grille.length - 1 && coordY > 0 && grille[coordX + 1][coordY - 1] == -1) {
+        if (coordY < dimX - 1 && coordX > 0 && grille[coordY + 1][coordX - 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
         /* vérification du point en bas a gauche */
-        if (coordX > 0 && coordY < grille[coordX].length - 1 && grille[coordX][coordY] == -1) {
+        if (coordY > 0 && coordX < dimY - 1 && grille[coordY - 1][coordX + 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
         /* vérification du point en bas à droite */
-        if (coordX < grille.length - 1 && coordY < grille[coordX].length - 1 && grille[coordX + 1][coordY + 1] == -1) {
+        if (coordY < dimX - 1 && coordX < dimY - 1 && grille[coordY + 1][coordX + 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
         /* vérification du point au dessus */
-        if (coordX > 0 && grille[coordX - 1][coordY] == -1) {
+        if (coordX > 0 && grille[coordY][coordX - 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
         /* vérification du point au dessous */
-        if (coordX < grille.length - 1 && grille[coordX + 1][coordY] == -1) {
+        if (coordX < dimY - 1 && grille[coordY][coordX + 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
         /* vérification du point à gauche */
-        if (coordY > 0 && grille[coordX][coordY - 1] == -1) {
+        if (coordY > 0 && grille[coordY - 1][coordX] == -1) {
             resultat = false;
         } else {
             return false;
         }
 
         /* vérification du point à droite */
-        if (coordY == grille[coordX].length - 1 && grille[coordX][coordY + 1] == -1) {
+        if (coordY < dimX - 1 && grille[coordY + 1][coordX] == -1) {
             resultat = true;
         } else {
             return false;

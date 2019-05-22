@@ -114,24 +114,28 @@ public class BatailleNavale {
     public static void effectuerPlacement(Plateau plateau) {
         Random random = new Random();
         int nbEssais;
+        final int MAX_ESSAIS = 20000;
         int coordBateauX;
         int coordBateauY;
-        int sens; // 1 = haut/gauche; 2 = bas/droite
         int direction; // direction du bateau comprise entre 1 et 2
         // 1 = haut-bas; 2 = gauche-droite
+        int sens; // 1 = haut/gauche; 2 = bas/droite
+        boolean resultatPlacement;
         int nbBateau = plateauJeu.getFlotte().size();
         for (int i = 0; i < nbBateau; i++) {
             nbEssais = 0;
             do {
                 // génération aléatoire des positions x et y des bateaux
-                coordBateauX = random.nextInt(plateau.getDimX() - 1) + 1;
-                coordBateauY = random.nextInt(plateau.getDimY() - 1) + 1;
+                coordBateauX = random.nextInt(plateau.getDimX());
+                coordBateauY = random.nextInt(plateau.getDimY());
                 /* placement horizontal / vertical */
                 direction = random.nextInt(2) + 1;
                 // sens du bateau aléatoire
                 sens = random.nextInt(2) + 1;
+                resultatPlacement = placement(direction, sens, coordBateauX, coordBateauY, i);
+                plateauJeu.afficherGrille(true);
                 nbEssais++;
-            } while (!(placement(direction, sens, coordBateauX, coordBateauY, i)));
+            } while (!resultatPlacement || nbEssais == MAX_ESSAIS);
         }
         plateauJeu.afficherGrille(false);
     }
@@ -149,45 +153,47 @@ public class BatailleNavale {
     public static boolean placement(int direction, int sens, int coordX, int coordY, int indexBateau) {
         boolean placeLibre = true;
         
+        int tailleBateau = plateauJeu.getFlotte().get(indexBateau).getTaille();
+
         if (direction == 1 && sens == 1) {
-            for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
-                placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX - i, coordY);
+            for (int i = 0; i < tailleBateau; i++) {
+                placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX, coordY - i);
             }
-            if(placeLibre) {
-                for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
-                    plateauJeu.setGrille(coordX - i, coordY, indexBateau);
+            if (placeLibre) {
+                for (int i = 0; i < tailleBateau; i++) {
+                    plateauJeu.setGrille(coordX, coordY - i, indexBateau);
                 }
             }
         } else if (direction == 1 && sens == 2) {
-            for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
-                placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX + i, coordY);
+            for (int i = 0; i < tailleBateau; i++) {
+                placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX, coordY + i);
             }
-            if(placeLibre) {
-                for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
-                    plateauJeu.setGrille(coordX + i, coordY, indexBateau);
-                }
-            }
-        } else if (direction == 2 && sens == 1) {
-            for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
-                placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX, coordY + i );
-            }
-            if(placeLibre) {
-                for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
+            if (placeLibre) {
+                for (int i = 0; i < tailleBateau; i++) {
                     plateauJeu.setGrille(coordX, coordY + i, indexBateau);
                 }
             }
-        } else if (direction == 2 && sens == 2) {
-            for(int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
-                placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX, coordY - i );
+        } else if (direction == 2 && sens == 1) {
+            for (int i = 0; i < tailleBateau; i++) {
+                placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX - i, coordY);
             }
-            if(placeLibre) {
-                for (int i = 0; i < plateauJeu.getFlotte().get(indexBateau).getTaille(); i++) {
-                    plateauJeu.setGrille(coordX, coordY - i, indexBateau);
+            if (placeLibre) {
+                for (int i = 0; i < tailleBateau; i++) {
+                    plateauJeu.setGrille(coordX - i, coordY, indexBateau);
+                }
+            }
+        } else if (direction == 2 && sens == 2) {
+            for (int i = 0; i < tailleBateau; i++) {
+                placeLibre =  placeLibre && plateauJeu.verifierCoordsLibres(coordX + i, coordY);
+            }
+            if (placeLibre) {
+                for (int i = 0; i < tailleBateau; i++) {
+                    plateauJeu.setGrille(coordX + i, coordY, indexBateau);
                 }
             }
         }
 
-        return false;
+        return placeLibre;
 
     }
 
@@ -303,17 +309,19 @@ public class BatailleNavale {
         plateauJeu = new Plateau();
 
         /* Liste des bateaux à placer sur le plateau */
-        plateauJeu.setFlotte(new Bateau("Chocapic", 4));
-        plateauJeu.setFlotte(new Bateau("sous-marineLePen", 3));
-        plateauJeu.setFlotte(new Bateau());
-        plateauJeu.setFlotte(new Bateau("aeroglisseur", 1));
+        plateauJeu.ajouterBateau(new Bateau("Chocapic", 4));
+        plateauJeu.ajouterBateau(new Bateau("sous-marineLePen", 3));
+        plateauJeu.ajouterBateau(new Bateau());
+        plateauJeu.ajouterBateau(new Bateau("aeroglisseur", 1));
+        plateauJeu.ajouterBateau(new Bateau("bernard", 3));
+        plateauJeu.ajouterBateau(new Bateau("jean-marc", 2));
+        plateauJeu.ajouterBateau(new Bateau("marie", 2));
+        plateauJeu.ajouterBateau(new Bateau("jacqueline", 1));
+        plateauJeu.ajouterBateau(new Bateau("miel", 1));
+        plateauJeu.ajouterBateau(new Bateau("pops", 1));
         /* affichage des infos du plateau pour le joueur */
         System.out.println("\n" + plateauJeu.toString() + "\n");
-        try {
-            effectuerPlacement(plateauJeu);
-        } catch (Exception e) {
-            System.err.println("Impossible de placer les bateaux !");
-        }
+        effectuerPlacement(plateauJeu);
 
         /* affichage des infos de chaque bateau pour le joueur */
         for (int aAfficher = 0; aAfficher < plateauJeu.getFlotte().size(); aAfficher++) {
