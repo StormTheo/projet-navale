@@ -133,7 +133,6 @@ public class BatailleNavale {
                 // sens du bateau aléatoire
                 sens = random.nextInt(2) + 1;
                 resultatPlacement = placement(direction, sens, coordBateauX, coordBateauY, i);
-                plateauJeu.afficherGrille(true);
                 nbEssais++;
             } while (!resultatPlacement || nbEssais == MAX_ESSAIS);
         }
