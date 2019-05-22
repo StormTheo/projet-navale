@@ -11,7 +11,7 @@ import java.util.Scanner;
 import files.Affichage;
 import files.Bateau;
 import files.Plateau;
-import files.IA;
+
 
 /**
  * Classe principale du jeu
@@ -280,8 +280,9 @@ public class BatailleNavale {
         if (Bateau.bateauRestant(plateau) && tourJoueur) {
             tourJoueur = false;
             recupCoord(plateauIA);
-        } else if (!tourJoueur) {
+        } else if (Bateau.bateauRestant(plateau) && !tourJoueur) {
         	/* Si c'est au tour de l'IA */
+        	tourJoueur = true;
         	Random random = new Random();
         	do {
         		x = random.nextInt(plateau.getDimX());
@@ -292,6 +293,7 @@ public class BatailleNavale {
         	tir(x, y, plateauJoueur);
         } else {
             System.out.println("\n====>Partie terminée ! tous les bateaux ont été coulés !");
+            System.exit(0);
         }
     }
     
