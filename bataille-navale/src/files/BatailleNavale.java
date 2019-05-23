@@ -24,8 +24,8 @@ public class BatailleNavale {
     private static Plateau plateauJeu;
 
     /**
-     * Affiche le Menu principal et en fonction du choix, renvoie ‡ la mÈthode
-     * appropriÈe
+     * Affiche le Menu principal et en fonction du choix, renvoie √† la m√©thode
+     * appropri√©e
      */
     public static void menu() {
 
@@ -45,14 +45,14 @@ public class BatailleNavale {
             aide();
             break;
         case 'Q':
-            System.out.println("Vous avez quittÈ le jeu.");
+            System.out.println("Vous avez quitt√© le jeu.");
             System.exit(0);
             break;
         }
     }
 
     /**
-     * Affiche l'aide et effectue l'action appropriÈe en fonction du choix de
+     * Affiche l'aide et effectue l'action appropri√©e en fonction du choix de
      * l'utilisateur
      */
     public static void aide() {
@@ -70,7 +70,7 @@ public class BatailleNavale {
         if (reponseChar == 'A') {
             aide();
         } else if (reponseChar == 'Q') {
-            System.out.println("Vous avez quittÈ le jeu.");
+            System.out.println("Vous avez quitt√© le jeu.");
             System.exit(0);
         }
 
@@ -78,13 +78,13 @@ public class BatailleNavale {
     }
 
     /**
-     * rÈcupËre la chaÓne de caractËres entrÈe par l'utilisateur
+     * r√©cup√®re la cha√Æne de caract√®res entr√©e par l'utilisateur
      * 
-     * @return la chaÓne de caractËres que l'utilisateur a entrÈe
+     * @return la cha√Æne de caract√®res que l'utilisateur a entr√©e
      */
     public static String entreeUtilisateur() {
         /*
-         * scanner rÈcupÈrant les choix et rÈponses de l'utilisateur
+         * scanner r√©cup√©rant les choix et r√©ponses de l'utilisateur
          */
         Scanner entree = new Scanner(System.in);
 
@@ -94,7 +94,7 @@ public class BatailleNavale {
 
         nok = false;
         do {
-            /* raz de la rÈponse */
+            /* raz de la r√©ponse */
             reponse = "";
             System.out.print("\n       ====> ");
 
@@ -125,12 +125,12 @@ public class BatailleNavale {
         for (int i = 0; i < nbBateau; i++) {
             nbEssais = 0;
             do {
-                // gÈnÈration alÈatoire des positions x et y des bateaux
+                // g√©n√©ration al√©atoire des positions x et y des bateaux
                 coordBateauX = random.nextInt(plateau.getDimX());
                 coordBateauY = random.nextInt(plateau.getDimY());
                 /* placement horizontal / vertical */
                 direction = random.nextInt(2) + 1;
-                // sens du bateau alÈatoire
+                // sens du bateau al√©atoire
                 sens = random.nextInt(2) + 1;
                 resultatPlacement = placement(direction, sens, coordBateauX, coordBateauY, i);
                 nbEssais++;
@@ -142,18 +142,19 @@ public class BatailleNavale {
     /**
      * Effectue le placement des bateaux sur le plateau de jeu
      * 
-     * @param direction
-     * @param sens
-     * @param coordX
-     * @param coordY      l'ordonnÈe du bateau ‡ placer
+     * @param direction   la direction dans laquel placer le bateau : H-B (1) ou G-D (2)
+     * @param sens        le sens dans lequel est plac√© le bateau : 1 = H/G; 2 = B/D
+     * @param coordX      l'abscisse du bateau √† placer
+     * @param coordY      l'ordonn√©e du bateau √† placer
      * @param indexBateau l'index du bateau dans la liste
-     * @return true si le bateau a pu Ítre placÈ, false sinon
+     * @return true si le bateau a pu √™tre plac√©, false sinon
      */
     public static boolean placement(int direction, int sens, int coordX, int coordY, int indexBateau) {
         boolean placeLibre = true;
         
         int tailleBateau = plateauJeu.getFlotte().get(indexBateau).getTaille();
-
+        
+        // Vers le haut
         if (direction == 1 && sens == 1) {
             for (int i = 0; i < tailleBateau; i++) {
                 placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX, coordY - i);
@@ -163,6 +164,7 @@ public class BatailleNavale {
                     plateauJeu.setGrille(coordX, coordY - i, indexBateau);
                 }
             }
+        // Vers le bas
         } else if (direction == 1 && sens == 2) {
             for (int i = 0; i < tailleBateau; i++) {
                 placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX, coordY + i);
@@ -172,6 +174,7 @@ public class BatailleNavale {
                     plateauJeu.setGrille(coordX, coordY + i, indexBateau);
                 }
             }
+        // Vers la gauche
         } else if (direction == 2 && sens == 1) {
             for (int i = 0; i < tailleBateau; i++) {
                 placeLibre = placeLibre && plateauJeu.verifierCoordsLibres(coordX - i, coordY);
@@ -181,6 +184,7 @@ public class BatailleNavale {
                     plateauJeu.setGrille(coordX - i, coordY, indexBateau);
                 }
             }
+        // Vers la droite
         } else if (direction == 2 && sens == 2) {
             for (int i = 0; i < tailleBateau; i++) {
                 placeLibre =  placeLibre && plateauJeu.verifierCoordsLibres(coordX + i, coordY);
@@ -192,43 +196,43 @@ public class BatailleNavale {
             }
         }
 
-        return placeLibre;
+        return placeLibre; // Si la place est libre, alors on a pu placer le bateau
 
     }
 
     /**
-     * rÈcupÈration des coordonnÈes qu'entre le joueur et placement de celles-ci
+     * r√©cup√©ration des coordonn√©es qu'entre le joueur et placement de celles-ci
      * dans deux variables x et y de type String.
      * 
      * @param plateauJeu
      */
     public static void recupCoord(Plateau plateauJeu) {
         String coordonnees;
-        /* coordonnÈes sÈparÈs en abscisse et ordonnÈe */
+        /* coordonn√©es s√©par√©s en abscisse et ordonn√©e */
         char x = '0';
         int y;
         String chaineY = null;
-        /* permet de mettre la condition de chaÓne valide */
+        /* permet de mettre la condition de cha√Æne valide */
         boolean verification;
 
-        System.out.print("\nEntrez les coordonnÈs sous la forme : caractËre," + " nombre (ex : A, 11 ou A11)");
+        System.out.print("\nEntrez les coordonn√©s sous la forme : caract√®re," + " nombre (ex : A, 11 ou A11)");
         coordonnees = entreeUtilisateur();
         if (coordonnees.equals("cheat")) {
             plateauJeu.afficherGrille(true);
             recupCoord(plateauJeu);
         }
         for (int placement = 0; placement < coordonnees.length(); placement++) {
-            /* on cherche le caractËre minuscule ou majuscule */
+            /* on cherche le caract√®re minuscule ou majuscule */
             if ((coordonnees.charAt(placement) >= 'a' && coordonnees.charAt(placement) <= 'z')
                     || (coordonnees.charAt(placement) >= 'A' && coordonnees.charAt(placement) <= 'Z')) {
 
-                /* x = morceau de chaÓne avec le caractËre */
+                /* x = morceau de cha√Æne avec le caract√®re */
                 x = coordonnees.charAt(placement);
-                /* mise en majuscule du caractËre */
+                /* mise en majuscule du caract√®re */
                 x = (char) (x >= 'a' ? (x - 32) : x);
             }
             if (coordonnees.charAt(placement) >= '0' && coordonnees.charAt(placement) <= '9') {
-                /* y = valeur numÈrique */
+                /* y = valeur num√©rique */
                 if (chaineY == null) {
                     chaineY = coordonnees.substring(placement, placement + 1);
                 } else {
@@ -239,7 +243,7 @@ public class BatailleNavale {
 
         verification = (x != '0' && chaineY != null);
         if (verification) {
-            /* les positions en nombre pour vÈrifier dans le plateau */
+            /* les positions en nombre pour v√©rifier dans le plateau */
             int posX = x - 'A';
             int posY = Integer.parseInt(chaineY);
 
@@ -252,17 +256,17 @@ public class BatailleNavale {
         }
 
         if (!verification) {
-            System.out.println("CoordonnÈes incorrect, votre plateau a une dimension x = " + plateauJeu.getDimX()
+            System.out.println("Coordonn√©es incorrect, votre plateau a une dimension x = " + plateauJeu.getDimX()
                     + " y = " + plateauJeu.getDimY());
             recupCoord(plateauJeu);
         }
     }
 
     /**
-     * Lance la vÈrification des coordonnÈes entrÈes, et affiche le rÈsultat du tir.
+     * Lance la v√©rification des coordonn√©es entr√©es, et affiche le r√©sultat du tir.
      * 
-     * @param x coordonnÈe entrÈe par l'utilisateur pour l'abscisse
-     * @param y coordonnÈe entrÈe par l'utilisateur pour l'ordonnÈe
+     * @param x coordonn√©e entr√©e par l'utilisateur pour l'abscisse
+     * @param y coordonn√©e entr√©e par l'utilisateur pour l'ordonn√©e
      * 
      */
     public static void tir(int x, int y) {
@@ -274,9 +278,9 @@ public class BatailleNavale {
             plateauJeu.setGrille(x, y, -2);
             plateauJeu.afficherGrille(false);
             if (bateauActuel.toucher()) {
-                System.out.println("Bateau : " + bateauActuel.getNom() + " coulÈ !");
+                System.out.println("Bateau : " + bateauActuel.getNom() + " coul√© !");
             } else {
-                System.out.println("touchÈ !");
+                System.out.println("touch√© !");
             }
         } else {
             if (indexBateau == -2) {
@@ -285,29 +289,29 @@ public class BatailleNavale {
                 plateauJeu.setGrille(x, y, -3);
             }
             plateauJeu.afficherGrille(false);
-            System.out.println("aucun bateau touchÈ :(");
+            System.out.println("aucun bateau touch√© :(");
         }
 
         if (Bateau.bateauRestant(plateauJeu)) {
             recupCoord(plateauJeu);
         } else {
-            System.out.println("\n====>Partie terminÈe ! tous les bateaux ont ÈtÈ coulÈs !");
+            System.out.println("\n====>Partie termin√©e ! tous les bateaux ont √©t√© coul√©s !");
         }
     }
 
     /**
-     * Lancement des principales fonctions et crÈations des objets
+     * Lancement des principales fonctions et cr√©ations des objets
      * 
-     * @param args non utilisÈ
+     * @param args non utilis√©
      *
      */
     public static void main(String[] args) {
         menu();
 
-        /* crÈation du plateau de jeu */
+        /* cr√©ation du plateau de jeu */
         plateauJeu = new Plateau();
 
-        /* Liste des bateaux ‡ placer sur le plateau */
+        /* Liste des bateaux √† placer sur le plateau */
         plateauJeu.ajouterBateau(new Bateau("Chocapic", 4));
         plateauJeu.ajouterBateau(new Bateau("sous-marineLePen", 3));
         plateauJeu.ajouterBateau(new Bateau());
