@@ -5,39 +5,49 @@
 package files;
 
 /**
- * Classe coordonnÈes permettant de crÈÈe les coordonnÈes des bateaux.
+ * Classe coordonn√©es permettant de cr√©√©e les coordonn√©es des bateaux.
  * @author INFO1
- *
  */
 public class Coordonnees {
-    
-    /** Valeur par dÈfaut d'une coordonnÈe dans le tableau  */
+
+    /** Valeur par d√©faut d'une coordonn√©e dans le tableau */
     private static final String COORD_DEFAUT = null;
-    
-    /** une coordonnÈe en abscisse  */
+
+    /** une coordonn√©e en abscisse */
     private String coordX;
-    
-    /** une coordonnÈe en ordonnÈe */
+
+    /** une coordonn√©e en ordonn√©e */
     private String coordY;
-    
+
     /** une table contenant X et Y */
     private String[][] coordTable;
-    
-    
+
+    /**
+     * TODO commenter le r√¥le de cette m√©thode
+     * @return coordX
+     */
     public String getCoordX() {
-		return coordX;
-	}
+        return coordX;
+    }
 
-	public String getCoordY() {
-		return coordY;
-	}
+    /**
+     * TODO commenter le r√¥le de cette m√©thode
+     * @return coordY
+     */
+    public String getCoordY() {
+        return coordY;
+    }
 
-	public String[][] getCoordTable() {
-		return coordTable;
-	}
+    /**
+     * TODO commenter le r√¥le de cette m√©thode
+     * @return coordTable
+     */
+    public String[][] getCoordTable() {
+        return coordTable;
+    }
 
-	/**
-     * Constructeur par dÈfaut 
+    /**
+     * Constructeur par d√©faut
      */
     public Coordonnees() {
         this.coordTable[0][0] = COORD_DEFAUT;
@@ -45,11 +55,12 @@ public class Coordonnees {
         this.coordY = COORD_DEFAUT;
         this.coordX = COORD_DEFAUT;
     }
-    
+
     /**
-     * constructeur de l'objet coordonnÈes avec les paramËtres.
+     * constructeur de l'objet coordonn√©es avec les param√®tres.
+     * 
      * @param coordX String contenant une lettre, pour la position en abscisse
-     * @param coordY String contenant un nombre, pour la position en ordonnÈe
+     * @param coordY String contenant un nombre, pour la position en ordonn√©e
      */
     public Coordonnees(String coordX, String coordY) {
         this.coordTable[0][0] = coordX;
@@ -57,5 +68,4 @@ public class Coordonnees {
         this.coordY = coordY;
         this.coordX = coordX;
     }
-       
 }
