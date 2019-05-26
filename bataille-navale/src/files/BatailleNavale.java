@@ -31,7 +31,7 @@ public class BatailleNavale {
 
 
     /**
-     * Affiche le Menu principal et en fonction du choix, renvoie Ã  la méthode
+     * Affiche le Menu principal et en fonction du choix, renvoie à la méthode
      * appropriée
      */
     public static void menu() {

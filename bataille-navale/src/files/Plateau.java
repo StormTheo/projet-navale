@@ -276,12 +276,12 @@ public class Plateau {
     /**
      * Effectue le placement des bateaux sur le plateau de jeu
      * 
-     * @param direction   la direction dans laquel placer le bateau : H-B (1) ou G-D (2)
+     * @param direction   la direction dans laquelle placer le bateau : H-B (1) ou G-D (2)
      * @param sens        le sens dans lequel est placé le bateau : 1 = H/G; 2 = B/D
      * @param coordX      l'abscisse du bateau Ã  placer
      * @param coordY      l'ordonnée du bateau Ã  placer
      * @param indexBateau l'index du bateau dans la liste
-     * @return true si le bateau a pu Ãªtre placé, false sinon
+     * @return true si le bateau a pu être placé, false sinon
      */
     public boolean placement(int direction, int sens, int coordX, int coordY, int indexBateau) {
         boolean placeLibre = true;
