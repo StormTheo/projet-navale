@@ -10,8 +10,8 @@ import files.Bateau;
 
 /**
  * Classe qui initialise une plateau de jeu pour la bataille navale. Le plateau
- * est un repère ayant en abscisse des lettres (de A Ã  Z max) et en ordonnée des
- * chiffres (de 1 Ã  26 max). On peut donc voir la formation de cases qui
+ * est un repère ayant en abscisse des lettres (de A à  Z max) et en ordonnée des
+ * chiffres (de 1 à  26 max). On peut donc voir la formation de cases qui
  * servirons de coordonnées (ex : C14). Les principales opérations sont : - Deux
  * constructeurs dont l'un pour l'initialisation par défaut - Une méthode pour
  * construire le plateau - Un accesseur sur la dimension en abscisse - Un
@@ -44,7 +44,7 @@ public class Plateau {
     /** Liste contenant tous les bateaux, composant une flotte */
     private List<Bateau> flotte = new ArrayList<Bateau>();
 
-    /** TODO commenter le rÃ´le du champ (attribut, rÃ´le associatif...) */
+    /** TODO commenter le rà´le du champ (attribut, rà´le associatif...) */
     private int[][] grille;
 
     /**
@@ -96,7 +96,7 @@ public class Plateau {
     }
 
     /**
-     * TODO commenter le rÃ´le de cette méthode
+     * TODO commenter le rà´le de cette méthode
      * 
      * @param colonne
      * @param ligne
@@ -109,7 +109,7 @@ public class Plateau {
     /**
      * Accesseur sur la dimension en abscisse
      * 
-     * @return un entier égal Ã  la dimension en abscisse
+     * @return un entier égal à  la dimension en abscisse
      */
     public int getDimX() {
         return dimX;
@@ -118,7 +118,7 @@ public class Plateau {
     /**
      * Accesseur sur la dimension en ordonnée
      * 
-     * @return un entier égal Ã  la dimension en ordonnée
+     * @return un entier égal à  la dimension en ordonnée
      */
     public int getDimY() {
         return dimY;
@@ -191,8 +191,8 @@ public class Plateau {
     /**
      * Vérifie la disponibilité d'une case et de ses alentours.
      * 
-     * @param coordY l'abscisse du point Ã  vérifier
-     * @param coordX l'ordonnée du point Ã  vérifier
+     * @param coordY l'abscisse du point à  vérifier
+     * @param coordX l'ordonnée du point à  vérifier
      * @return true si la case et ses alentours sont libres
      * @throws IllegalArgumentException quand l'une des coordonnées est hors du
      *                                  plateau
@@ -219,7 +219,7 @@ public class Plateau {
             return false;
         }
 
-        /* Vérification du point en haut Ã  droite */        
+        /* Vérification du point en haut à  droite */        
         if (coordY < dimX - 1 && coordX > 0 && grille[coordY + 1][coordX - 1] == -1) {
             resultat = true;
         } else {
@@ -233,7 +233,7 @@ public class Plateau {
             return false;
         }
 
-        /* vérification du point en bas Ã  droite */
+        /* vérification du point en bas à  droite */
         if (coordY < dimX - 1 && coordX < dimY - 1 && grille[coordY + 1][coordX + 1] == -1) {
             resultat = true;
         } else {
@@ -254,14 +254,14 @@ public class Plateau {
             return false;
         }
 
-        /* vérification du point Ã  gauche */
+        /* vérification du point à  gauche */
         if (coordY > 0 && grille[coordY - 1][coordX] == -1) {
             resultat = false;
         } else {
             return false;
         }
 
-        /* vérification du point Ã  droite */
+        /* vérification du point à  droite */
         if (coordY < dimX - 1 && grille[coordY + 1][coordX] == -1) {
             resultat = true;
         } else {
@@ -278,8 +278,8 @@ public class Plateau {
      * 
      * @param direction   la direction dans laquelle placer le bateau : H-B (1) ou G-D (2)
      * @param sens        le sens dans lequel est placé le bateau : 1 = H/G; 2 = B/D
-     * @param coordX      l'abscisse du bateau Ã  placer
-     * @param coordY      l'ordonnée du bateau Ã  placer
+     * @param coordX      l'abscisse du bateau à  placer
+     * @param coordY      l'ordonée du bateau à placer
      * @param indexBateau l'index du bateau dans la liste
      * @return true si le bateau a pu être placé, false sinon
      */
