@@ -10,12 +10,12 @@ import files.Bateau;
 
 /**
  * Classe qui initialise une plateau de jeu pour la bataille navale. Le plateau
- * est un repÃ¨re ayant en abscisse des lettres (de A Ã  Z max) et en ordonnÃ©e des
+ * est un repère ayant en abscisse des lettres (de A Ã  Z max) et en ordonnée des
  * chiffres (de 1 Ã  26 max). On peut donc voir la formation de cases qui
- * servirons de coordonnÃ©es (ex : C14). Les principales opÃ©rations sont : - Deux
- * constructeurs dont l'un pour l'initialisation par dÃ©faut - Une mÃ©thode pour
+ * servirons de coordonnées (ex : C14). Les principales opérations sont : - Deux
+ * constructeurs dont l'un pour l'initialisation par défaut - Une méthode pour
  * construire le plateau - Un accesseur sur la dimension en abscisse - Un
- * accesseur sur la dimension en ordonnÃ©e - Une mÃ©thode toString
+ * accesseur sur la dimension en ordonnée - Une méthode toString
  * 
  * @author Nicolas Couffin
  * @version 1.O
@@ -24,7 +24,7 @@ import files.Bateau;
 public class Plateau {
 
     /**
-     * Dimension par dÃ©faut attribuÃ©e aux dimensions en abscisse et en ordonnÃ©e.
+     * Dimension par défaut attribuée aux dimensions en abscisse et en ordonnée.
      */
     private static final int DIM_DEFAUT = 12;
 
@@ -32,13 +32,13 @@ public class Plateau {
     private static final int DIM_MIN = 2; // Minimum requis pour avoir au moins une case de jeu sur le plateau.
 
     /** Dimension maximale */
-    private static final int DIM_MAX = 27; // Maximum par rapport au nombre de lettres dans l'alphabet + la premiÃ¨re
+    private static final int DIM_MAX = 27; // Maximum par rapport au nombre de lettres dans l'alphabet + la première
                                            // case vide
 
     /** Dimension en abscisse */
     private int dimX;
 
-    /** Dimension en ordonnÃ©e */
+    /** Dimension en ordonnée */
     private int dimY;
 
     /** Liste contenant tous les bateaux, composant une flotte */
@@ -48,8 +48,8 @@ public class Plateau {
     private int[][] grille;
 
     /**
-     * Constructeur par dÃ©faut qui initialise les dimensions avec la valeur par
-     * dÃ©faut
+     * Constructeur par défaut qui initialise les dimensions avec la valeur par
+     * défaut
      */
     public Plateau() {
         dimX = DIM_DEFAUT;
@@ -66,11 +66,11 @@ public class Plateau {
      * Constructeur pour initialiser avec les valeurs en arguments.
      * 
      * @param xDim entier contenant la dimension en abscisse
-     * @param yDim entier contenant la dimension en ordonnÃ©e
+     * @param yDim entier contenant la dimension en ordonnée
      */
     public Plateau(int xDim, int yDim) {
         this();
-        /* VÃ©rification des paramÃ¨tres */
+        /* Vérification des paramètres */
         if (yDim >= DIM_MIN && yDim <= DIM_MAX && xDim >= DIM_MIN && xDim <= DIM_MAX) {
 
             dimX = xDim;
@@ -85,7 +85,7 @@ public class Plateau {
     }
 
     /**
-     * Permet d'ajouter les coordonnÃ©es d'un bateau sur le plateau.
+     * Permet d'ajouter les coordonnées d'un bateau sur le plateau.
      * 
      * @param colonne  NÂ° de la colonne
      * @param ligne    NÂ° de la ligne
@@ -96,11 +96,11 @@ public class Plateau {
     }
 
     /**
-     * TODO commenter le rÃ´le de cette mÃ©thode
+     * TODO commenter le rÃ´le de cette méthode
      * 
      * @param colonne
      * @param ligne
-     * @return l'id du bateau si il y en a un de placÃ©, sinon, renvoie
+     * @return l'id du bateau si il y en a un de placé, sinon, renvoie
      */
     public int getGrille(int colonne, int ligne) {
         return grille[ligne][colonne];
@@ -109,23 +109,23 @@ public class Plateau {
     /**
      * Accesseur sur la dimension en abscisse
      * 
-     * @return un entier Ã©gal Ã  la dimension en abscisse
+     * @return un entier égal Ã  la dimension en abscisse
      */
     public int getDimX() {
         return dimX;
     }
 
     /**
-     * Accesseur sur la dimension en ordonnÃ©e
+     * Accesseur sur la dimension en ordonnée
      * 
-     * @return un entier Ã©gal Ã  la dimension en ordonnÃ©e
+     * @return un entier égal Ã  la dimension en ordonnée
      */
     public int getDimY() {
         return dimY;
     }
   
     /**
-     * retourne la liste contenant tout les objets Bateau crÃ©Ã©s
+     * retourne la liste contenant tout les objets Bateau créés
      * 
      * @return flotte
      */
@@ -144,7 +144,7 @@ public class Plateau {
     }
 
     /**
-     * vide la liste des objets crÃ©Ã©s
+     * vide la liste des objets créés
      */
     public void clearFlotte() {
         flotte.clear();
@@ -153,9 +153,9 @@ public class Plateau {
     /* cheat permet d'afficher la map avec les bateaux apparents */
     /**
      * Affiche le plateau de jeu dans la console quand le joueur tape "cheat" au
-     * lieu des coordonnÃ©es
+     * lieu des coordonnées
      * 
-     * @param cheat dÃ©termine si on doit afficher la position des bateaux ou non
+     * @param cheat détermine si on doit afficher la position des bateaux ou non
      */
     public void afficherGrille(boolean cheat) {
         String abscisse = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -189,79 +189,79 @@ public class Plateau {
     }
 
     /**
-     * VÃ©rifie la disponibilitÃ© d'une case et de ses alentours.
+     * Vérifie la disponibilité d'une case et de ses alentours.
      * 
-     * @param coordY l'abscisse du point Ã  vÃ©rifier
-     * @param coordX l'ordonnÃ©e du point Ã  vÃ©rifier
+     * @param coordY l'abscisse du point Ã  vérifier
+     * @param coordX l'ordonnée du point Ã  vérifier
      * @return true si la case et ses alentours sont libres
-     * @throws IllegalArgumentException quand l'une des coordonnÃ©es est hors du
+     * @throws IllegalArgumentException quand l'une des coordonnées est hors du
      *                                  plateau
      */
     public boolean verifierCoordsLibres(int coordX, int coordY) throws IllegalArgumentException {
 
         if (coordY >= dimX || coordX >= dimY) {
-            throw new IllegalArgumentException("CoordonnÃ©es hors du plateau");
+            throw new IllegalArgumentException("Coordonnées hors du plateau");
         }
 
         boolean resultat = false;
 
-        /* vÃ©rification de la case voulue */
+        /* vérification de la case voulue */
         if (grille[coordY][coordX] == -1) {
             resultat = true;
         } else {
             return false; // pas besoin de continuer
         }
 
-        /* VÃ©rification du point en haut a gauche */
+        /* Vérification du point en haut a gauche */
         if (coordY > 0 && coordX > 0 && grille[coordY - 1][coordX - 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
-        /* VÃ©rification du point en haut Ã  droite */        
+        /* Vérification du point en haut Ã  droite */        
         if (coordY < dimX - 1 && coordX > 0 && grille[coordY + 1][coordX - 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
-        /* vÃ©rification du point en bas a gauche */
+        /* vérification du point en bas a gauche */
         if (coordY > 0 && coordX < dimY - 1 && grille[coordY - 1][coordX + 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
-        /* vÃ©rification du point en bas Ã  droite */
+        /* vérification du point en bas Ã  droite */
         if (coordY < dimX - 1 && coordX < dimY - 1 && grille[coordY + 1][coordX + 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
-        /* vÃ©rification du point au dessus */
+        /* vérification du point au dessus */
         if (coordX > 0 && grille[coordY][coordX - 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
-        /* vÃ©rification du point au dessous */
+        /* vérification du point au dessous */
         if (coordX < dimY - 1 && grille[coordY][coordX + 1] == -1) {
             resultat = true;
         } else {
             return false;
         }
 
-        /* vÃ©rification du point Ã  gauche */
+        /* vérification du point Ã  gauche */
         if (coordY > 0 && grille[coordY - 1][coordX] == -1) {
             resultat = false;
         } else {
             return false;
         }
 
-        /* vÃ©rification du point Ã  droite */
+        /* vérification du point Ã  droite */
         if (coordY < dimX - 1 && grille[coordY + 1][coordX] == -1) {
             resultat = true;
         } else {
@@ -270,15 +270,78 @@ public class Plateau {
 
         return resultat;
     }
+    
+
 
     /**
-     * Renvoie les dimensions du plateau de jeu sous la forme d'une chaÃ®ne de
-     * caractÃ¨res.
+     * Effectue le placement des bateaux sur le plateau de jeu
      * 
-     * @return Une chaÃ®ne contenant la dimension en abscisse et en ordonnÃ©e
+     * @param direction   la direction dans laquel placer le bateau : H-B (1) ou G-D (2)
+     * @param sens        le sens dans lequel est placé le bateau : 1 = H/G; 2 = B/D
+     * @param coordX      l'abscisse du bateau Ã  placer
+     * @param coordY      l'ordonnée du bateau Ã  placer
+     * @param indexBateau l'index du bateau dans la liste
+     * @return true si le bateau a pu Ãªtre placé, false sinon
+     */
+    public boolean placement(int direction, int sens, int coordX, int coordY, int indexBateau) {
+        boolean placeLibre = true;
+        
+        int tailleBateau = this.getFlotte().get(indexBateau).getTaille();
+        
+        // Vers le haut
+        if (direction == 1 && sens == 1) {
+            for (int i = 0; i < tailleBateau; i++) {
+                placeLibre = placeLibre && this.verifierCoordsLibres(coordX, coordY - i);
+            }
+            if (placeLibre) {
+                for (int i = 0; i < tailleBateau; i++) {
+                    this.setGrille(coordX, coordY - i, indexBateau);
+                }
+            }
+        // Vers le bas
+        } else if (direction == 1 && sens == 2) {
+            for (int i = 0; i < tailleBateau; i++) {
+                placeLibre = placeLibre && this.verifierCoordsLibres(coordX, coordY + i);
+            }
+            if (placeLibre) {
+                for (int i = 0; i < tailleBateau; i++) {
+                    this.setGrille(coordX, coordY + i, indexBateau);
+                }
+            }
+        // Vers la gauche
+        } else if (direction == 2 && sens == 1) {
+            for (int i = 0; i < tailleBateau; i++) {
+                placeLibre = placeLibre && this.verifierCoordsLibres(coordX - i, coordY);
+            }
+            if (placeLibre) {
+                for (int i = 0; i < tailleBateau; i++) {
+                    this.setGrille(coordX - i, coordY, indexBateau);
+                }
+            }
+        // Vers la droite
+        } else if (direction == 2 && sens == 2) {
+            for (int i = 0; i < tailleBateau; i++) {
+                placeLibre =  placeLibre && this.verifierCoordsLibres(coordX + i, coordY);
+            }
+            if (placeLibre) {
+                for (int i = 0; i < tailleBateau; i++) {
+                    this.setGrille(coordX + i, coordY, indexBateau);
+                }
+            }
+        }
+
+        return placeLibre; // Si la place est libre, alors on a pu placer le bateau
+
+    }
+
+    /**
+     * Renvoie les dimensions du plateau de jeu sous la forme d'une chaîne de
+     * caractères.
+     * 
+     * @return Une chaîne contenant la dimension en abscisse et en ordonnée
      */
     public String toString() {
-        return "Dimension en abscisse (dimX) : " + (dimX) + "\nDimension en ordonnÃ©e (dimY) : " + (dimY) + " (0 - "
+        return "Dimension en abscisse (dimX) : " + (dimX) + "\nDimension en ordonnée (dimY) : " + (dimY) + " (0 - "
                 + (dimY - 1) + ")";
     }
 }

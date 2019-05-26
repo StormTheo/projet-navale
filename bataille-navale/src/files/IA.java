@@ -99,7 +99,7 @@ public class IA {
     	}
     	*/
 
-    	BatailleNavale.tir(x, y, plateauJoueur);
+//    	BatailleNavale.tir(x, y, plateauJoueur);
     }
     
     /* TODO Adapter BatailleNavale pour faire jouer tour à tour le joueur et l'IA */
