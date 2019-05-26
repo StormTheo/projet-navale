@@ -8,16 +8,16 @@ package files;
 import files.Plateau;
 
 /**
- * Classe Bateau permettant de créer des bateaux de
+ * Classe Bateau permettant de crÃ©er des bateaux de
  * 
  * @author INFO 1
  */
 public class Bateau {
 
-    /** nom par défaut d'un navire */
+    /** nom par dÃ©faut d'un navire */
     private static final String NOM_DEFAUT = "Vedette";
 
-    /** taille par défaut de ce navire */
+    /** taille par dÃ©faut de ce navire */
     private static final int TAILLE_DEFAUT = 2;
 
     /** Nom du bateau (ex : Sous-marin, porte-avions, destroyer etc...) */
@@ -33,7 +33,7 @@ public class Bateau {
     private boolean etat;
 
     /**
-     * constructeurs de l'objet bateau avec les informations par défaut.
+     * constructeurs de l'objet bateau avec les informations par dÃ©faut.
      */
     public Bateau() {
         this.nom = NOM_DEFAUT;
@@ -76,14 +76,14 @@ public class Bateau {
     /**
      * Renvoie le nombre de point de vie restant d'un bateau.
      * 
-     * @return un int représentant le nbr de points de vie.
+     * @return un int reprÃ©sentant le nbr de points de vie.
      */
     public int getVie() {
         return vie;
     }
 
     /**
-     * @return la valeur de état
+     * @return la valeur de Ã©tat
      */
     public boolean getEtat() {
         return etat;
@@ -97,19 +97,19 @@ public class Bateau {
     }
 
     /**
-     * Ajoute une touche au bateau et teste s'il est seulement "touché" ou "coulé"
+     * Ajoute une touche au bateau et teste s'il est seulement "touchÃ©" ou "coulÃ©"
      * 
-     * @return true s'il est coulé ou false s'il est simplement touché
+     * @return true s'il est coulÃ© ou false s'il est simplement touchÃ©
      */
     public boolean toucher() {
-        /* n'est pas sur le point d'être détruit */
+        /* n'est pas sur le point d'Ãªtre dÃ©truit */
         if (vie >= 2) {
             vie--;
         }
-        /* vas être détruit */
+        /* vas Ãªtre dÃ©truit */
         else if (vie == 1 && getEtat()) {
             /*
-             * on enlève sa dernière vie et on "l'élimine" en passant son état à false
+             * on enlÃ¨ve sa derniÃ¨re vie et on "l'Ã©limine" en passant son Ã©tat Ã  false
              */
             vie--;
             setEtat(false);
@@ -118,14 +118,14 @@ public class Bateau {
     }
     
     /**
-     * verifie si les coordonnées arguments correspondent aux coordonnées d'un
+     * verifie si les coordonnÃ©es arguments correspondent aux coordonnÃ©es d'un
      * bateau
      * 
-     * @param x char coordonnée
-     * @param y int coordonnée
+     * @param x char coordonnÃ©e
+     * @param y int coordonnÃ©e
      * @param plateauJouer le plateau de jeu
-     * @return indexBateau, l'index du bateau qui a été touché, -1 si aucun bateau
-     *         n'a été touché.
+     * @return indexBateau, l'index du bateau qui a Ã©tÃ© touchÃ©, -1 si aucun bateau
+     *         n'a Ã©tÃ© touchÃ©.
      */
     public static int verifTir(int x, int y, Plateau plateauJouer) {
         Bateau bateauActuel = null;
@@ -136,7 +136,7 @@ public class Bateau {
     }
 
     /**
-     * recherche si il reste dans bateau étant encore en vie ( vie > 0 )
+     * recherche si il reste dans bateau Ã©tant encore en vie ( vie > 0 )
      * @param plateauJouer le plateau de jeu
      * 
      * @return true si il reste des bateaux, false sinon
@@ -150,7 +150,7 @@ public class Bateau {
     }
 
     /**
-     * Renvoie une chaîne de caractère avec le nom et la taille de ce bateau
+     * Renvoie une chaÃ®ne de caractÃ¨re avec le nom et la taille de ce bateau
      */
     public String toString() {
         return "Nom : " + getNom() + ", Taille : " + getTaille() + "\n";

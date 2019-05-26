@@ -123,7 +123,7 @@ public class Plateau {
     public int getDimY() {
         return dimY;
     }
-
+  
     /**
      * retourne la liste contenant tout les objets Bateau créés
      * 
@@ -138,6 +138,7 @@ public class Plateau {
      * 
      * @param bateau
      */
+
     public void ajouterBateau(Bateau bateau) {
         flotte.add(bateau);
     }
@@ -280,5 +281,4 @@ public class Plateau {
         return "Dimension en abscisse (dimX) : " + (dimX) + "\nDimension en ordonnée (dimY) : " + (dimY) + " (0 - "
                 + (dimY - 1) + ")";
     }
-
 }
