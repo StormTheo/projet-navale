@@ -99,9 +99,9 @@ public class IA {
     	}
     	*/
 
-//    	BatailleNavale.tir(x, y, plateauJoueur);
+    	BatailleNavale.tir(x, y, plateauJoueur);
     }
     
-    /* TODO Adapter BatailleNavale pour faire jouer tour à tour le joueur et l'IA */
+    /* TODO Adapter BatailleNavale pour que dès que quelqu'un touche, il rejoue, faire ça vec le boolean tourJoueur */
     
 }
