@@ -258,7 +258,7 @@ public class BatailleNavale {
             verification = (x <= plateau.getDimX() + 'A' && x >= 'A') && (posY >= 0 && posY < plateau.getDimY());
             if (verification) {
                 System.out.println("x = " + x + "\ny = " + posY);
-                tir(posX, posY);
+                tir(posX, posY, plateau);
             }
         }
 
@@ -276,7 +276,7 @@ public class BatailleNavale {
      * @param y coordonnée entrée par l'utilisateur pour l'ordonnée
      * 
      */
-    public static void tir(int x, int y) {
+    public static void tir(int x, int y, Plateau plateau) {
         int indexBateau;
         Bateau bateauActuel;
         indexBateau = Bateau.verifTir(x, y, plateau);
@@ -368,7 +368,7 @@ public class BatailleNavale {
 
         /* affichage des infos du plateau de l'IA */
         System.out.println("\n" + plateauIA.toString() + "\n");
-        placement(plateauIA);
+        effectuerPlacement(plateauIA);
         System.out.println("Bateaux présents sur le plateau de l'IA");
 
 
