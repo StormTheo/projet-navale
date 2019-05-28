@@ -87,8 +87,8 @@ public class Plateau {
     /**
      * Permet d'ajouter les coordonnées d'un bateau sur le plateau.
      * 
-     * @param colonne  NÂ° de la colonne
-     * @param ligne    NÂ° de la ligne
+     * @param colonne  N° de la colonne
+     * @param ligne    N° de la ligne
      * @param idBateau id du bateau dans la Liste
      */
     public void setGrille(int colonne, int ligne, int idBateau) {
