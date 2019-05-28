@@ -11,6 +11,7 @@ import java.util.Scanner;
 import files.Affichage;
 import files.Bateau;
 import files.Plateau;
+import files.Direction;
 
 /**
  * Classe principale du jeu
@@ -121,10 +122,12 @@ public class BatailleNavale {
     public static void effectuerPlacement(Plateau plateau) {
         Random random = new Random();
         int nbEssais;
-        final int MAX_ESSAIS = 20000;
+        final int MAX_ESSAIS = 8;
         int coordBateauX;
         int coordBateauY;
-        int direction; // direction du bateau comprise entre 1 et 2
+        int[] placementJoueur;
+        Direction directionJoueur = new Direction();
+        int direction = -1; // direction du bateau comprise entre 1 et 2
         // 1 = haut-bas; 2 = gauche-droite
         int sens; // 1 = haut/gauche; 2 = bas/droite
         boolean resultatPlacement;
@@ -132,28 +135,71 @@ public class BatailleNavale {
         for (int i = 0; i < nbBateau; i++) {
             nbEssais = 0;
             do {
-                // génération aléatoire des positions x et y des bateaux
-                coordBateauX = random.nextInt(plateau.getDimX());
-                coordBateauY = random.nextInt(plateau.getDimY());
-                /* placement horizontal / vertical */
-                direction = random.nextInt(2) + 1;
-                // sens du bateau aléatoire
-                sens = random.nextInt(2) + 1;
+            	/* placement par le joueur de ses bateaux */
+            	if (plateau == plateauJoueur) {
+            		System.out.println("Placement du bateau : " 
+            							+ plateau.getFlotte().get(i).getNom() 
+            							+ " de taille : " 
+            							+ plateau.getFlotte().get(i).getTaille());
+            		/* entrée de la ligne et colonne par le joueur */
+            		do {
+            			placementJoueur = recupCoord(plateau, true);
+            		}while (placementJoueur[0] == -1);
+            		coordBateauX = placementJoueur[0];
+            		coordBateauY = placementJoueur[1];
+            		/* 
+            		 * entrée de la direction ( n/s/o/e) par le joueur et attribution 
+            		 * des valeurs correspondantes aux bonnes variables pour le placement
+            		 */
+            		directionJoueur.directionChoisie(directionJoueur());
+            		direction = directionJoueur.getDirection();
+            		sens = directionJoueur.getSens();
+            	} else { // placement des bateaux de l'IA automatiquement 
+            		// génération aléatoire des positions x et y des bateaux
+            		coordBateauX = random.nextInt(plateau.getDimX());
+            		coordBateauY = random.nextInt(plateau.getDimY());
+            		/* placement horizontal / vertical */
+            		direction = random.nextInt(2) + 1;
+            		// sens du bateau aléatoire
+            		sens = random.nextInt(2) + 1;
+            	}
                 resultatPlacement = plateau.placement(direction, sens, coordBateauX, coordBateauY, i);
                 nbEssais++;
-            } while (!resultatPlacement || nbEssais == MAX_ESSAIS);
+            } while (!resultatPlacement || nbEssais == MAX_ESSAIS || direction == -1);
+            if (plateau == plateauJoueur) {
+            	plateau.afficherGrille(true);
+            }
         }
+        System.out.println("Début de la partie...");
         plateau.afficherGrille(false);
     }
 
+    public static String directionJoueur() {
+    	String direction;
+    	char[] dirPossible = {'o','O','n','N','e','E','s','S'};
+    	boolean valide = false;
+    	do {
+    		System.out.println("Veuillez entrer la direction (n,s,o,e)");
+    		direction = entreeUtilisateur();
+    		for (int index = 0; !valide && index < dirPossible.length;index++) {
+    			valide = direction.charAt(0) == dirPossible[index];
+    		}
+    		if (!valide) {
+    			System.out.println("entrée incorrect");
+    		}
+    	} while(!valide);
+		return direction;
+    }
+    
     /**
      * récupération des coordonnées qu'entre le joueur et placement de celles-ci
      * dans deux variables x et y de type String.
-     * 
+     * @param isPlacement permet de récupérer les coordonnées lorsqu'on place un bateau
      * @param plateau
      */
-    public static void recupCoord(Plateau plateau) {
+    public static int[] recupCoord(Plateau plateau, boolean isPlacement) {
         String coordonnees;
+        int[] TablePlacement = new int[2];
         /* coordonnées séparés en abscisse et ordonnée */
         char x = '0';
         int y;
@@ -165,7 +211,7 @@ public class BatailleNavale {
         coordonnees = entreeUtilisateur();
         if (coordonnees.equals("cheat")) {
             plateau.afficherGrille(true);
-            recupCoord(plateau);
+            recupCoord(plateau, false);
         }
         for (int placement = 0; placement < coordonnees.length(); placement++) {
             /* on cherche le caractère minuscule ou majuscule */
@@ -195,17 +241,29 @@ public class BatailleNavale {
 
             /* Si x et y sont existant dans le plateau. */
             verification = (x <= plateau.getDimX() + 'A' && x >= 'A') && (posY >= 0 && posY < plateau.getDimY());
-            if (verification) {
+            if (verification && isPlacement) {
+            	TablePlacement[0] = posX;
+            	TablePlacement[1] = posY;
+            }
+            else if (verification && !isPlacement) {
                 System.out.println("Colonne = " + x + "\nLigne = " + posY);
                 tir(posX, posY, plateau);
             }
         }
-
+        
         if (!verification) {
             System.out.println("Coordonnées incorrect, votre plateau a une dimension x = " + plateau.getDimX()
                     + " y = " + plateau.getDimY());
-            recupCoord(plateau);
+            /* recommence la saisie des coordonnées pour le placement */
+            if (isPlacement) {
+            	TablePlacement[0] = -1;
+            	TablePlacement[1] = -1;
+            } else {
+            	recupCoord(plateau, false);
+            }
         }
+		return TablePlacement;
+        
     }
     /**
      * Permet de créer une pause après que l'utilisateur ait joué.
@@ -253,7 +311,7 @@ public class BatailleNavale {
         }
         if (Bateau.bateauRestant(plateau) && tourJoueur) {
             tourJoueur = false;
-            recupCoord(plateauIA);
+            recupCoord(plateauIA, false);
         } else if (Bateau.bateauRestant(plateau) && !tourJoueur) {
             /* Si c'est au tour de l'IA */
         	System.out.println("\nTour de l'ordinateur ... \n");
@@ -330,7 +388,7 @@ public class BatailleNavale {
         for (int aAfficher = 0; aAfficher < plateauIA.getFlotte().size(); aAfficher++) {
             System.out.printf("%d) %s", aAfficher + 1, plateauIA.getFlotte().get(aAfficher).toString());
         }
-        recupCoord(plateauIA);
+        recupCoord(plateauIA, false);
     }
 
 }
