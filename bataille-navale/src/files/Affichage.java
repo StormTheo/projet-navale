@@ -4,8 +4,6 @@
 
 package files;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * 
  * @author INFO1
@@ -32,6 +30,8 @@ public class Affichage {
      */
     private static final char[] OPTION_MENU_PRINCIPAL = { 'j', 'a', 'q' };
 
+    // TODO ajouter une option pour charger une partie dans le menu
+    
     /**
      * Liste des options possible (textes) pour le menu principal
      */

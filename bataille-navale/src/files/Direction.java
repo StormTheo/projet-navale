@@ -6,59 +6,69 @@ package files;
 
 /**
  * Les quatre directions possibles et utilisées dans le jeu
+ * 
  * @author INFO1
  *
  */
 public class Direction {
-    
-	private int direction;
+
+    /** La direction dans laquelle placer le bateau : 1 = H/B 2 = G/D */
+    private int direction;
+    /** Le sens dans lequel placer le bateau : 1 = Vers H/G, 2 = Vers G/B */
     private int sens;
-	
+
     /**
-     * Renvoie les valeurs adéquates par rapport au caractère entré par l'utilisateur.
-     * Modifie la direction
-     * @return le sens
+     * Renvoie les valeurs adéquates par rapport au caractère entré par
+     * l'utilisateur. Modifie la direction
+     * @param dirChoisie la direction à vérifier
      */
     public void directionChoisie(String dirChoisie) {
-        switch(dirChoisie.charAt(0)) {
+        switch (dirChoisie.charAt(0)) {
         case 'n':
-        	
+
         case 'N':
-        	this.direction = 1;
-        	this.sens =  1;
-        	break;
+            this.direction = 1;
+            this.sens = 1;
+            break;
         case 'e':
-            
+
         case 'E':
-        	this.direction = 2;
-        	this.sens = 2;
-        	break;
+            this.direction = 2;
+            this.sens = 2;
+            break;
         case 's':
-        
-        case'S':
-        	this.direction = 1;
-        	this.sens = 2;
-        	break;
+
+        case 'S':
+            this.direction = 1;
+            this.sens = 2;
+            break;
         case 'o':
-        	
-        case 'O':	
-        	this.direction = 2;
-        	this.sens = 1;
-        	break;
+
+        case 'O':
+            this.direction = 2;
+            this.sens = 1;
+            break;
         default:
-        	this.direction = -1;
-        	this.sens = -1;
-        	break;
+            this.direction = -1;
+            this.sens = -1;
+            break;
         }
     }
 
-	public int getDirection() {
-		return direction;
-	}
+    /**
+     * Renvoie la direction
+     * @return direction
+     */
+    public int getDirection() {
+        return direction;
+    }
 
-	public int getSens() {
-		return sens;
-	}
-    
-    
+    /**
+     * Renvoie le sens
+     * @return sens
+     */
+    public int getSens() {
+        return sens;
+    }
+
 }

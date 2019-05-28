@@ -44,7 +44,7 @@ public class Plateau {
     /** Liste contenant tous les bateaux, composant une flotte */
     private List<Bateau> flotte = new ArrayList<Bateau>();
 
-    /** TODO commenter le rà´le du champ (attribut, rà´le associatif...) */
+    /** TODO commenter le rôle du champ (attribut, rôle associatif...) */
     private int[][] grille;
 
     /**
@@ -96,7 +96,7 @@ public class Plateau {
     }
 
     /**
-     * TODO commenter le rà´le de cette méthode
+     * TODO commenter le rôle de cette méthode
      * 
      * @param colonne
      * @param ligne
