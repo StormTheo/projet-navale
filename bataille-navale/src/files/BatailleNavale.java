@@ -283,7 +283,7 @@ public class BatailleNavale {
      * Permet de créer une pause après que l'utilisateur ait joué.
      */
     private static void continuer() {
-         entree = new Scanner(System.in);
+        Scanner entree = new Scanner(System.in);
         System.out.println("Appuyez sur entrée pour continuer...");
         entree.nextLine();
     }
