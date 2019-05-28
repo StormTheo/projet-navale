@@ -5,7 +5,7 @@
 package files;
 
 /**
- * Classe coordonn√©es permettant de cr√©√©e les coordonn√©es des bateaux.
+ * Classe coordonnÈes permettant de crÈer les coordonnÈes des bateaux.
  * @author INFO1
  */
 public class Coordonnees {
@@ -16,14 +16,14 @@ public class Coordonnees {
     /** une coordonn√©e en abscisse */
     private String coordX;
 
-    /** une coordonn√©e en ordonn√©e */
+    /** une coordonnÈe en ordonnÈe */
     private String coordY;
 
     /** une table contenant X et Y */
     private String[][] coordTable;
 
     /**
-     * TODO commenter le r√¥le de cette m√©thode
+     * TODO commenter le rÙle de cette mÈthode
      * @return coordX
      */
     public String getCoordX() {
@@ -31,7 +31,7 @@ public class Coordonnees {
     }
 
     /**
-     * TODO commenter le r√¥le de cette m√©thode
+     * TODO commenter le r√¥le de cette mÈthode
      * @return coordY
      */
     public String getCoordY() {

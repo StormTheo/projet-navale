@@ -196,7 +196,7 @@ public class BatailleNavale {
             /* Si x et y sont existant dans le plateau. */
             verification = (x <= plateau.getDimX() + 'A' && x >= 'A') && (posY >= 0 && posY < plateau.getDimY());
             if (verification) {
-                System.out.println("x = " + x + "\ny = " + posY);
+                System.out.println("Colonne = " + x + "\nLigne = " + posY);
                 tir(posX, posY, plateau);
             }
         }
@@ -206,6 +206,15 @@ public class BatailleNavale {
                     + " y = " + plateau.getDimY());
             recupCoord(plateau);
         }
+    }
+    /**
+     * Permet de créer une pause après que l'utilisateur ait joué.
+     */
+    private static void continuer() {
+    	Scanner entree = new Scanner(System.in);
+        System.out.println("Appuyez sur entrée pour continuer...") ;
+        entree.nextLine();
+        
     }
 
     /**
@@ -238,12 +247,16 @@ public class BatailleNavale {
             plateau.afficherGrille(false);
             System.out.println("aucun bateau touché :(");
         }
-
+        /* avant que ce ne soit l'IA qui tire on marque une pause */
+        if (!tourJoueur) {
+        	continuer();
+        }
         if (Bateau.bateauRestant(plateau) && tourJoueur) {
             tourJoueur = false;
             recupCoord(plateauIA);
         } else if (Bateau.bateauRestant(plateau) && !tourJoueur) {
             /* Si c'est au tour de l'IA */
+        	System.out.println("\nTour de l'ordinateur ... \n");
             tourJoueur = true;
             Random random = new Random();
             do {
@@ -251,7 +264,7 @@ public class BatailleNavale {
                 y = random.nextInt(plateau.getDimY());
             } while (   plateauJoueur.getGrille(x, y) == -2
                      || plateauJoueur.getGrille(x, y) == -3);
-            System.out.println("x : " + x + ", y : " + y);
+            System.out.println("Colonne = " + x + "\nLigne = " + y);
             tir(x, y, plateauJoueur);
         } else {
             System.out.println("\n====>Partie terminée ! tous les bateaux ont été coulés !");

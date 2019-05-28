@@ -4,51 +4,44 @@
  */
 package files;
 
-import java.util.Random;
-
 /**
  * Les quatre directions possibles et utilisées dans le jeu
- * @author lucas
+ * @author INFO1
  *
  */
-public enum Direction {
-    
-    /** Vers le haut */
-    haut, 
-    /** Vers la gauche */
-    gauche,
-    /** Vers le bas */
-    bas, 
-    /** Vers la droite */
-    droite;
+public class Direction {
     
     /**
-     * Choisis une direction aléatoire et la renvoie
-     * @return la direction choisie aléatoirement
+     * Renvoie les valeurs adéquates par rapport au caractère entré par l'utilisateur.
+     * Modifie la direction
+     * @return le sens
      */
-    public static Direction directionAleatoire() {
-        /* Le générateur de nombres pseudo aléatoires */
-        Random random = new Random();
-        /* Nombre représentant la direction choisie
-         * 1 = haut
-         * 2 = gauche
-         * 3 = bas
-         * 4 = droite
-         */
-        int dirChoisie;
-        
-        dirChoisie = random.nextInt(3) + 1;
+    public int directionChoisie(String dirChoisie, int direction) {
         
         switch(dirChoisie) {
-        case 1:
-            return haut;
-        case 2:
-            return gauche;
-        case 3:
-            return bas;
-        case 4:
+        case "n":
+        	
+        case "N":
+        	direction = 1;
+        	return 1;
+        case "e":
+            
+        case "E":
+        	direction = 2;
+        	return 2;
+        case "s":
+        
+        case"S":
+        	direction = 1;
+        	return 2;
+        case "o":
+        	
+        case "O":	
+            direction = 2;
+            return 1;
         default:
-            return droite;
+        	direction = -1;
+            return -1;
         }
     }
 }
