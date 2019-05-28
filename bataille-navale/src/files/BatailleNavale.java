@@ -110,7 +110,7 @@ public class BatailleNavale {
                 nok = true;
             }
         } while (!nok);
-        entree.close();
+        
         return reponse;
     }
 
@@ -283,10 +283,9 @@ public class BatailleNavale {
      * Permet de créer une pause après que l'utilisateur ait joué.
      */
     private static void continuer() {
-        Scanner entree = new Scanner(System.in);
+         entree = new Scanner(System.in);
         System.out.println("Appuyez sur entrée pour continuer...");
         entree.nextLine();
-        entree.close();
     }
 
     /**
