@@ -77,7 +77,9 @@ public class Affichage {
                 valide = aTester.charAt(0) == OPTION_MENU_PRINCIPAL[index]
                         || aTester.charAt(0) + 32 == OPTION_MENU_PRINCIPAL[index];
             }
-
+        }
+        if(!valide) {
+        	System.out.println("Réponse incorrect");
         }
         return valide;
     }

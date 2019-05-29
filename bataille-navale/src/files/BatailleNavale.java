@@ -81,7 +81,6 @@ public class BatailleNavale {
             System.exit(0);
         }
 
-        // else lance le jeu dans le main
     }
 
     /**
@@ -213,7 +212,6 @@ public class BatailleNavale {
         int[] TablePlacement = new int[2];
         /* coordonnées séparés en abscisse et ordonnée */
         char x = '0';
-        int y;
         String chaineY = null;
         /* permet de mettre la condition de chaîne valide */
         boolean verification;

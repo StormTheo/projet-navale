@@ -128,7 +128,6 @@ public class Bateau {
      *         n'a été touché.
      */
     public static int verifTir(int x, int y, Plateau plateauJouer) {
-        Bateau bateauActuel = null;
         int indexBateau;
         indexBateau = plateauJouer.getGrille(x,y);
         
