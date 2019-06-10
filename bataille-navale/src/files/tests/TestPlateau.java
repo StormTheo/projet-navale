@@ -47,7 +47,7 @@ public class TestPlateau {
      * Couples de dimensions valides (la dimension par défaut (13*13) est omise pour
      * vérifier si les dimensions sont considérées comme valides)
      */
-    public static final int[][] DIM_VALIDE = { { 13, 25 }, { 3, 4 }, { 2, 2 }, { 27, 27 }, { 6, 6 }, { 15, 6 } };
+    public static final int[][] DIM_VALIDE = { { 13, 25 }, { 3, 4 }, { 2, 2 }, { 26, 26 }, { 6, 6 }, { 15, 6 } };
 
     /**
      * test méthode de création par défaut du plateau 
@@ -56,11 +56,19 @@ public class TestPlateau {
     	Plateau plateauDef = new Plateau();
     	System.out.println("création et affichage d'un plateau par défaut, donc ayant une taille = 12  \n");
     	plateauDef.afficherGrille(false);
-    	System.out.println("Test de création du plateaux, avec des valeurs valides \n");
-    	for (int index = 0; index < DIM_VALIDE[1].length; index++) {
+    	System.out.println("Test de création de plateaux, avec des valeurs valides \n");
+    	for (int index = 0; index < DIM_VALIDE.length; index++) {
     		System.out.println("Plateau de taille : ligne = " + DIM_VALIDE[index][0] 
     				                          + " colonne = " + DIM_VALIDE[index][1]);
     		Plateau plateauTestValide = new Plateau(DIM_VALIDE[index][0], DIM_VALIDE[index][1]);
+    		plateauTestValide.afficherGrille(false);
+    	}
+    	continuer();
+    	System.out.println("TEST de création de plateaux, avec des valeurs invalides \n");
+    	for (int index = 0; index < DIM_INVALIDE.length; index++) {
+    		System.out.println("Plateau de taille : ligne = 12" 
+    				                          + " colonne = 12");
+    		Plateau plateauTestValide = new Plateau(DIM_INVALIDE[index][0], DIM_INVALIDE[index][1]);
     		plateauTestValide.afficherGrille(false);
     	}
     }
@@ -140,7 +148,7 @@ public class TestPlateau {
                 "---------------------------\n" + "Test de la méthode toString\n" + "---------------------------\n\n");
 
         for (int i = 0; i < DIM_VALIDE.length; i++) {
-            System.out.println("Test nÂ°" + (i + 1) + ":\n");
+            System.out.println("Test n°" + (i + 1) + ":\n");
             Plateau jeu = new Plateau(DIM_VALIDE[i][0], DIM_VALIDE[i][1]);
             System.out.println(jeu.toString() + "\n");
         }

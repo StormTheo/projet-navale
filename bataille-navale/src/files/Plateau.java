@@ -32,7 +32,7 @@ public class Plateau {
     private static final int DIM_MIN = 2; // Minimum requis pour avoir au moins une case de jeu sur le plateau.
 
     /** Dimension maximale */
-    private static final int DIM_MAX = 27; // Maximum par rapport au nombre de lettres dans l'alphabet + la première
+    private static final int DIM_MAX = 26; // Maximum par rapport au nombre de lettres dans l'alphabet + la première
                                            // case vide
 
     /** Dimension en abscisse */
