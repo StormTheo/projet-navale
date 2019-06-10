@@ -75,9 +75,9 @@ public class Plateau {
 
             dimX = xDim;
             dimY = yDim;
-            grille = new int[dimY][dimX];
-            for (int tailleX = 0; tailleX < dimX; tailleX++) {
-                for (int tailleY = 0; tailleY < dimY; tailleY++) {
+            grille = new int[dimX][dimY];
+            for (int tailleY = 0; tailleY < dimY; tailleY++) {
+                for (int tailleX = 0; tailleX < dimX; tailleX++) {
                     grille[tailleX][tailleY] = -1;
                 }
             }
@@ -160,7 +160,7 @@ public class Plateau {
     public void afficherGrille(boolean cheat) {
         String abscisse = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         System.out.print("  |");
-        for (int taille = 0; taille < dimX; taille++) {
+        for (int taille = 0; taille < dimY; taille++) {
             System.out.print(abscisse.substring(taille, taille + 1) + "|");
         }
         System.out.println();

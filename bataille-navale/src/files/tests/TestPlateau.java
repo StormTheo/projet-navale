@@ -9,34 +9,34 @@ import files.Plateau;
 import java.util.Scanner;
 
 /**
- * Tests unitaires des mÃ©thodes de la classe Plateau.java Tests unitaires : -
- * Construction d'un plateau avec l'initialisation par dÃ©faut - Construction
- * d'un plateau avec des paramÃ¨tres valide en entrÃ©e - Construction d'un plateau
- * avec des paramÃ¨tres invalide en entrÃ©e - Accesseur sur la dimension en
- * abscisse : getDimX - Accesseur sur la dimension en ordonnÃ©e : getDimY - La
- * mÃ©thode toString
+ * Tests unitaires des méthodes de la classe Plateau.java Tests unitaires : -
+ * Construction d'un plateau avec l'initialisation par défaut - Construction
+ * d'un plateau avec des paramètres valide en entrée - Construction d'un plateau
+ * avec des paramètres invalide en entrée - Accesseur sur la dimension en
+ * abscisse : getDimX - Accesseur sur la dimension en ordonnée : getDimY - La
+ * méthode toString
  *
  * @author Nicolas Couffin
  */
 public class TestPlateau {
-    // TODO VÃ©rification gÃ©nÃ©rale avant de le rendre
+     // TODO Vérification générale avant de le rendre
     /*
-     * ***************** MÃ©thodes outils pour gÃ©rer les tests ********************
+     * ***************** Méthodes outils pour gérer les tests ********************
      */
 
     /** Objet Scanner pour effectuer les saisies au clavier */
     private static Scanner entree = new Scanner(System.in);
 
     /**
-     * Demande Ã  l'utilisateur d'appuyer sur entrÃ©e pour continuer
+     * Demande Ã  l'utilisateur d'appuyer sur entrée pour continuer
      */
     private static void continuer() {
-        System.out.println("\n\n\nAppuyez sur entrÃ©e pour continuer les tests.");
+        System.out.println("\n\n\nAppuyez sur entrée pour continuer les tests.");
         entree.nextLine();
         System.out.println("\n\n");
     }
 
-    /* ********************** Tests Unitaires des mÃ©thodes ********************** */
+    /* ********************** Tests Unitaires des méthodes ********************** */
 
     /** Couples de dimensions invalides */
     public static final int[][] DIM_INVALIDE = { { -1, 7 }, { 14, 0 }, { 45, 478 }, { 44, -7 }, { -9, 85 }, { 1, 0 }
@@ -44,165 +44,65 @@ public class TestPlateau {
     };
 
     /**
-     * Couples de dimensions valides (la dimension par dÃ©faut (13*13) est omise pour
-     * vÃ©rifier si les dimensions sont considÃ©rÃ©es comme valides)
+     * Couples de dimensions valides (la dimension par défaut (13*13) est omise pour
+     * vérifier si les dimensions sont considérées comme valides)
      */
     public static final int[][] DIM_VALIDE = { { 13, 25 }, { 3, 4 }, { 2, 2 }, { 27, 27 }, { 6, 6 }, { 15, 6 } };
 
-//    /**
-//     * Test du constructeur par dÃ©faut pour l'initialisation (Plateau()) et la
-//     * construction du plateau (constructPlateau()) par dÃ©faut
-//     */
-//    public static void testPlateauDefaut() {
-//        System.out.println("------------------------------------------------------\n"
-//                + "Test de la mÃ©thode Plateau (initialisation par dÃ©faut)\n"
-//                + "------------------------------------------------------\n\n");
-//
-//        String[][] plateau; // plateau Ã  afficher
-//        Plateau jeu = new Plateau();
-//        plateau = jeu.constructPlateau();
-//
-//        /* affichage du plateau crÃ©er */
-//        System.out.println("Un plateau de 13*13 doit Ãªtre affichÃ© :\n" + "- La premiÃ¨re case doit Ãªtre vide\n"
-//                + "- La premiÃ¨re ligne va de A Ã  L\n" + "- La premiÃ¨re colonne va de 1 Ã  12\n"
-//                + "- Les autres cases doivent Ãªtre vides\n"
-//                + "- L'affichage du plateau est clair (pas de colonne dÃ©calÃ©e)" + "\n\n");
-//        continuer();
-//        for (int i = 0; i < plateau.length; i++) {
-//            for (String v : plateau[i]) {
-//                if (i < 10 && v.charAt(0) <= '9' && v.charAt(0) != ' ') {
-//                    System.out.print("| " + v + "|");// Rajout d'un espace avant le chiffre pour lisibilitÃ© du plateau
-//                } else {
-//                    System.out.print("|" + v + "|");
-//                }
-//            }
-//            System.out.println();
-//        }
-//        System.out.println("\n---- Fin testPlateauDefaut ----\n");
-//        continuer();
-//    }
-
-//    /**
-//     * Test du constructeur pour l'initialisation Ã  partir d'argument
-//     * (Plateau(int,int)) et la construction du plateau (constructPlateau()) Tests
-//     * avec dimensions valides.
-//     */
-//    public static void testPlateauValide() {
-//        System.out.println("--------------------------------------------------------------\n"
-//                + "Test de la mÃ©thode Plateau (initialisation par argument valide)\n"
-//                + "--------------------------------------------------------------\n\n");
-//
-//        /* Tests avec dimensions valides */
-//
-//        String[][] plateau; // plateau Ã  afficher
-//
-//        System.out.println("---- Tests avec dimensions valides ----\n"
-//                + "Le test doit afficher 6 plateaux aux dimensions valides indiquÃ©es.\n"
-//                + "Si un plateau a une dimension de 13*13 (= dimension par dÃ©faut), "
-//                + "il y a une erreur : La dimension a alors Ã©tÃ© considÃ©rÃ©e comme invalide.\n");
-//        continuer();
-//        for (int i = 0; i < DIM_VALIDE.length; i++) {
-//            Plateau jeu = new Plateau(DIM_VALIDE[i][0], DIM_VALIDE[i][1]);
-//            System.out.println("Plateau de dimension valide : " + DIM_VALIDE[i][0] + "*" + DIM_VALIDE[i][1]);
-//            System.out.println("Affichage du plateau :");
-//            plateau = jeu.constructPlateau();
-//            /* Affichage du plateau */
-//            for (int j = 0; j < plateau.length; j++) {
-//                for (String v : plateau[j]) {
-//                    if (j < 10 && v.charAt(0) <= '9' && v.charAt(0) != ' ') {
-//                        System.out.print("| " + v + "|"); // Rajout d'un espace avant le chiffre pour lisibilitÃ© du
-//                                                          // plateau
-//                    } else {
-//                        System.out.print("|" + v + "|");
-//                    }
-//                }
-//                System.out.println();
-//            }
-//            continuer();
-//        }
-//        System.out.println("\n---- Fin testPlateauValide ----\n");
-//        continuer();
-//    }
-
-//    /**
-//     * Test du constructeur pour l'initialisation Ã  partir d'argument
-//     * (Plateau(int,int)) et la construction du plateau (constructPlateau()) Test
-//     * avec dimensions invalides.
-//     */
-//    public static void testPlateauInvalide() {
-//        System.out.println("-----------------------------------------------------------------\n"
-//                + "Test de la mÃ©thode Plateau (initialisation par arguments invalides)\n"
-//                + "-----------------------------------------------------------------\n\n");
-//
-//        System.out.println("---- Tests avec dimensions invalides ----\n"
-//                + "Le test doit afficher uniquement des plateau de 13*13.\n"
-//                + "(Rappel : un plateau de 13*13 est le plateau par dÃ©faut crÃ©Ã© si les "
-//                + "dimensions sont invalides)\n");
-//
-//        /* Tests avec dimensions invalides */
-//        String[][] plateau; // plateau Ã  afficher
-//
-//        for (int i = 0; i < DIM_INVALIDE.length; i++) {
-//            Plateau jeu = new Plateau(DIM_INVALIDE[i][0], DIM_INVALIDE[i][1]);
-//            System.out.println("La dimension " + DIM_INVALIDE[i][0] + "*" + DIM_INVALIDE[i][1]
-//                    + " est considÃ©rÃ©e comme invalide" + " et doit afficher un tableau de 13*13");
-//            plateau = jeu.constructPlateau();
-//            /* Affichage du plateau */
-//            for (int j = 0; j < plateau.length; j++) {
-//                for (String v : plateau[j]) {
-//                    if (j < 10 && v.charAt(0) <= '9' && v.charAt(0) != ' ') {
-//                        System.out.print("| " + v + "|"); // Rajout d'un espace avant le chiffre pour lisibilitÃ© du
-//                                                          // plateau
-//                    } else {
-//                        System.out.print("|" + v + "|");
-//                    }
-//                }
-//                System.out.println();
-//            }
-//            continuer();
-//        }
-//        System.out.println("\n---- Fin testPlateauInvalide ----\n");
-//        continuer();
-//    }
+    /**
+     * test méthode de création par défaut du plateau 
+     */
+    public static void testPlateau() {
+    	Plateau plateauDef = new Plateau();
+    	System.out.println("création et affichage d'un plateau par défaut, donc ayant une taille = 12  \n");
+    	plateauDef.afficherGrille(false);
+    	System.out.println("Test de création du plateaux, avec des valeurs valides \n");
+    	for (int index = 0; index < DIM_VALIDE[1].length; index++) {
+    		System.out.println("Plateau de taille : ligne = " + DIM_VALIDE[index][0] 
+    				                          + " colonne = " + DIM_VALIDE[index][1]);
+    		Plateau plateauTestValide = new Plateau(DIM_VALIDE[index][0], DIM_VALIDE[index][1]);
+    		plateauTestValide.afficherGrille(false);
+    	}
+    }
 
     /**
-     * Test de la mÃ©thode getDimX
+     * Test de la méthode getDimX
      */
     public static void testGetDimX() {
         System.out.println(
-                "--------------------------\n" + "Test de la mÃ©thode getDimX\n" + "--------------------------\n\n");
+                "--------------------------\n" + "Test de la méthode getDimX\n" + "--------------------------\n\n");
         /* Tests avec valeurs valides */
         System.out
                 .println("---- Tout les tests doivent afficher la valeur de dimX :" + " Tests valeurs valides ----\n");
         continuer();
         for (int i = 0; i < DIM_VALIDE.length; i++) {
             Plateau jeu = new Plateau(DIM_VALIDE[i][0], DIM_VALIDE[i][1]);
-            System.out.println("La mÃ©thode doit renvoyer " + DIM_VALIDE[i][0] + " \n-> La mÃ©thode renvoit : "
+            System.out.println("La méthode doit renvoyer " + DIM_VALIDE[i][0] + " \n-> La méthode renvoit : "
                     + jeu.getDimX() + "\n");
         }
         continuer();
 
         /* Tests avec valeurs invalides */
         System.out.println(
-                "---- Tout les test doivent afficher la valeur de dimX par dÃ©faut :" + " Tests valeurs invalides ----\n"
-                        + "\n(Note : MÃªme si la valeur de dimX est valide, celle de dimY est invalide. De ce fait,"
-                        + " les deux dimensions sont remplacÃ©es par la dimension par dÃ©faut.\n");
+                "---- Tout les test doivent afficher la valeur de dimX par défaut :" + " Tests valeurs invalides ----\n"
+                        + "\n(Note : Même si la valeur de dimX est valide, celle de dimY est invalide. De ce fait,"
+                        + " les deux dimensions sont remplacées par la dimension par défaut.\n");
         continuer();
         for (int i = 0; i < DIM_INVALIDE.length; i++) {
             Plateau jeu = new Plateau(DIM_INVALIDE[i][0], DIM_INVALIDE[i][1]);
-            System.out.println("La valeur est " + DIM_INVALIDE[i][0] + " et la mÃ©thode doit renvoyer 13"
-                    + "\n-> La mÃ©thode renvoit " + jeu.getDimX() + "\n");
+            System.out.println("La valeur est " + DIM_INVALIDE[i][0] + " et la méthode doit renvoyer 13"
+                    + "\n-> La méthode renvoit " + jeu.getDimX() + "\n");
         }
         System.out.println("\n---- Fin testGetDimX ----\n");
         continuer();
     }
 
     /**
-     * Test de la mÃ©thode getDimY
+     * Test de la méthode getDimY
      */
     public static void testGetDimY() {
         System.out.println(
-                "--------------------------\n" + "Test de la mÃ©thode getDimY\n" + "--------------------------\n\n");
+                "--------------------------\n" + "Test de la méthode getDimY\n" + "--------------------------\n\n");
 
         /* Tests avec valeurs valides */
         System.out
@@ -211,33 +111,33 @@ public class TestPlateau {
 
         for (int i = 0; i < DIM_VALIDE.length; i++) {
             Plateau jeu = new Plateau(DIM_VALIDE[i][0], DIM_VALIDE[i][1]);
-            System.out.println("La mÃ©thode doit renvoyer " + DIM_VALIDE[i][1] + " \n-> La mÃ©thode renvoit : "
+            System.out.println("La méthode doit renvoyer " + DIM_VALIDE[i][1] + " \n-> La méthode renvoit : "
                     + jeu.getDimY() + "\n");
         }
         continuer();
 
         /* Tests avec valeurs invalides */
         System.out.println(
-                "---- Tout les test doivent afficher la valeur de dimY par dÃ©faut :" + " Tests valeurs invalides ----\n"
-                        + "\n(Note : MÃªme si la valeur de dimY est valide, celle de dimX est invalide. De ce fait,"
-                        + " les deux dimensions sont remplacÃ©es par la dimension par dÃ©faut.\n");
+                "---- Tout les test doivent afficher la valeur de dimY par défaut :" + " Tests valeurs invalides ----\n"
+                        + "\n(Note : Même si la valeur de dimY est valide, celle de dimX est invalide. De ce fait,"
+                        + " les deux dimensions sont remplacées par la dimension par défaut.\n");
         continuer();
 
         for (int i = 0; i < DIM_INVALIDE.length; i++) {
             Plateau jeu = new Plateau(DIM_INVALIDE[i][0], DIM_INVALIDE[i][1]);
-            System.out.println("La valeur est " + DIM_INVALIDE[i][1] + " et la mÃ©thode doit renvoyer 13"
-                    + "\n-> La mÃ©thode renvoit " + jeu.getDimY() + "\n");
+            System.out.println("La valeur est " + DIM_INVALIDE[i][1] + " et la méthode doit renvoyer 13"
+                    + "\n-> La méthode renvoit " + jeu.getDimY() + "\n");
         }
         System.out.println("\n---- Fin testGetDimY ----\n");
         continuer();
     }
 
     /**
-     * Test de la mÃ©thode toString
+     * Test de la méthode toString
      */
     public static void testToString() {
         System.out.println(
-                "---------------------------\n" + "Test de la mÃ©thode toString\n" + "---------------------------\n\n");
+                "---------------------------\n" + "Test de la méthode toString\n" + "---------------------------\n\n");
 
         for (int i = 0; i < DIM_VALIDE.length; i++) {
             System.out.println("Test nÂ°" + (i + 1) + ":\n");
@@ -249,17 +149,15 @@ public class TestPlateau {
     }
 
     /**
-     * Tests unitaires des mÃ©thodes
+     * Tests unitaires des méthodes
      * 
-     * @param args Non utilisÃ©
+     * @param args Non utilisé
      */
     public static void main(String[] args) {
-//        testPlateauDefaut();
-//        testPlateauValide();
-//        testPlateauInvalide();
-//        testGetDimX();
-//        testGetDimY();
-//        testToString();
+    	testPlateau();
+        testGetDimX();
+        testGetDimY();
+        testToString();
 
     }
 }
